@@ -1,16 +1,10 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+import React from 'react';
+import PropTypes from 'prop-types';
 
 const UsernamePlate = ({ username }) => {
-  return (
-    <div>
-      {username}
-    </div>
-  )
-}
+  return <div>{username}</div>;
+};
 
-UsernamePlate.propTypes = {
+UsernamePlate.propTypes = {};
 
-}
-
-export default UsernamePlate
+export default UsernamePlate;

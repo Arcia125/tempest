@@ -1,6 +1,6 @@
 .AnimatedSpinner {
   animation: spin infinite 1000ms linear;
-  background: #91C4F2;
+  background: #91c4f2;
   height: 100px;
   width: 100px;
   border-radius: 5px;
@@ -15,10 +15,9 @@
   }
 }
 
-
 .AnimatedSpinner::before {
-  content: " ";
-  background: #B3EFB2;
+  content: ' ';
+  background: #b3efb2;
   height: 25px;
   width: 25px;
   position: absolute;
@@ -31,10 +30,9 @@
   transform: translate(50%, 50%);
 }
 
-
 .AnimatedSpinner::after {
-  content: " ";
-  background: #7D5BA6;
+  content: ' ';
+  background: #7d5ba6;
   height: 50px;
   width: 50px;
   position: absolute;

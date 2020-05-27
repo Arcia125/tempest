@@ -1,7 +1,7 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+import React from 'react';
+import PropTypes from 'prop-types';
 
-const Logo = props => {
+const Logo = (props) => {
   return (
     <svg
       className="App-logo"
@@ -40,10 +40,8 @@ const Logo = props => {
       />
     </svg>
   );
-}
+};
 
-Logo.propTypes = {
-
-}
+Logo.propTypes = {};
 
 export { Logo };

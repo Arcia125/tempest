@@ -1,16 +1,10 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+import React from 'react';
+import PropTypes from 'prop-types';
 
-const MatchHistory = props => {
-  return (
-    <div>
-      
-    </div>
-  )
-}
+const MatchHistory = (props) => {
+  return <div></div>;
+};
 
-MatchHistory.propTypes = {
+MatchHistory.propTypes = {};
 
-}
-
-export default MatchHistory
+export default MatchHistory;

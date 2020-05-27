@@ -1,17 +1,17 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+import React from 'react';
+import PropTypes from 'prop-types';
+
+import './RankedBadge.css';
 
 const RankedBadge = ({ league, rank }) => {
   return (
-    <div>
+    <div className="RankedBadge">
       <p>{league}</p>
       <p>{rank}</p>
     </div>
-  )
-}
+  );
+};
 
-RankedBadge.propTypes = {
+RankedBadge.propTypes = {};
 
-}
-
-export default RankedBadge
+export default RankedBadge;

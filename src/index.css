@@ -1,6 +1,6 @@
 :root {
-  --rich-black: #001A23;
-  --eggshell: #E5EBEF;
+  --rich-black: #001a23;
+  --eggshell: #e5ebef;
 }
 
 body {
@@ -10,7 +10,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  color: var(--eggshell); 
+  color: var(--eggshell);
 }
 
 code {
