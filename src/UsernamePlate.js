@@ -1,8 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import './UsernamePlate.css';
+
 const UsernamePlate = ({ username }) => {
-  return <div>{username}</div>;
+  return <div className="UsernamePlate">{username}</div>;
 };
 
 UsernamePlate.propTypes = {};
