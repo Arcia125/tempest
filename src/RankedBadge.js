@@ -1,10 +1,11 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-const RankedBadge = props => {
+const RankedBadge = ({ league, rank }) => {
   return (
     <div>
-      
+      <p>{league}</p>
+      <p>{rank}</p>
     </div>
   )
 }
