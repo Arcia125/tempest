@@ -1,10 +1,10 @@
 import React from 'react';
-import { Profile } from './Profile';
+import ProfilePage from './ProfilePage';
 
 const Home = (props) => {
   return (
     <div className="Home">
-      <Profile />
+      <ProfilePage />
     </div>
   );
 };

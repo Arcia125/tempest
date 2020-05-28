@@ -1,9 +1,14 @@
-import React from 'react';
+import React, { FC } from 'react';
 import PropTypes from 'prop-types';
 
 import './UsernamePlate.css';
 
-const UsernamePlate = ({ username }) => {
+export interface Props {
+  username: String;
+  summonerLevel: String;
+}
+
+const UsernamePlate: FC<Props> = ({ username, summonerLevel }) => {
   return <div className="UsernamePlate">{username}</div>;
 };
 

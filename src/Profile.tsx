@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import PropTypes from 'prop-types';
 
 import './Profile.css';
@@ -6,12 +6,19 @@ import UsernamePlate from './UsernamePlate';
 import RankedBadge from './RankedBadge';
 import MatchHistory from './MatchHistory';
 
-const Profile = (props) => {
+export interface Props {
+  username: string;
+  league: string;
+  rank: string;
+  summonerLevel: string;
+}
+
+const Profile: FC<Props> = ({ username, league, rank, summonerLevel }) => {
   return (
     <div className="Profile">
       <div>
-        <UsernamePlate username="Arcia125" />
-        <RankedBadge league="Ranked Solo" rank="Silver 4" />
+        <UsernamePlate username={username} summonerLevel={summonerLevel} />
+        <RankedBadge league={league} rank={rank} />
       </div>
       <MatchHistory />
     </div>
