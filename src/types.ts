@@ -1,3 +1,7 @@
+export type Remapped<T extends {}> = {
+  [K in string | number]: T;
+};
+
 export type ErrorLike = Error | string | null;
 
 export interface MatchHistoryItem {
@@ -97,8 +101,4 @@ export interface ChampionDTO {
     attackspeedperlevel: Number;
     attackspeed: Number;
   };
-}
-
-export interface ChampionKeyMap {
-  [index: string]: ChampionDTO;
 }

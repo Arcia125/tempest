@@ -1,19 +1,14 @@
-import { ChampionKeyMap, ChampionDTO } from './types';
 import championJson from './champion.json';
+import { ChampionDTO } from './types';
+import { mapBy } from './utils';
 
-const getChampions = () => Object.values(championJson.data);
+// const championNames = Object.keys(championJson.data);
 
-/**
- * @description Maps champions by key (championJson.data is mapped by name);
- */
-const mapChampionsByKey = (champs: ChampionDTO[]): ChampionKeyMap => champs.reduce((acc, curr) => {
-  acc[curr.key] = curr;
-  return acc;
-}, {} as ChampionKeyMap);
+const champions: ChampionDTO[] = Object.values(championJson.data);
 
 /**
  * @description champions mapped by key.
  */
-const championsByKey = mapChampionsByKey(getChampions());
+const championsByKey = mapBy(champions, 'key');
 
 export { championJson, championsByKey };

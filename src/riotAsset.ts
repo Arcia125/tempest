@@ -1,4 +1,4 @@
-import { RiotImageType, ChampionKeyMap } from './types';
+import { RiotImageType } from './types';
 import { championsByKey } from './championData';
 
 const CDN_BASE_URL = 'http://ddragon.leagueoflegends.com/cdn/'
