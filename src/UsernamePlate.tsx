@@ -4,8 +4,8 @@ import PropTypes from 'prop-types';
 import './UsernamePlate.css';
 
 export interface Props {
-  username: String;
-  summonerLevel: String;
+  username: string;
+  summonerLevel: string;
 }
 
 const UsernamePlate: FC<Props> = ({ username, summonerLevel }) => {

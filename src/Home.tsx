@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { FC } from 'react';
 import ProfilePage from './ProfilePage';
 
-const Home = (props) => {
+const Home: FC = () => {
   return (
     <div className="Home">
       <ProfilePage />

@@ -1,24 +1,23 @@
-import React from 'react';
+import React, { FC } from 'react';
 import PropTypes from 'prop-types';
-import { useQuery } from '@apollo/react-hooks';
 import { gql } from 'apollo-boost';
 
 import { Profile } from './Profile';
 import AnimatedSpinner from './AnimatedSpinner';
-import { clearTimeout } from 'timers';
 import { useMockQuery } from './useMockQuery';
+import { mockSummoner } from './mockData/summoner';
 
 /*
   id: ID
   accountId: ID
   puuid: ID
-  name: String!
+  name: string!
   profileIconId: ID
-  revisionDate: String,
+  revisionDate: string,
   summonerLevel: Int
 */
-const GET_SUMMONER = gql`
-  query GetSummoner($username: String) {
+const GET_PROFILE = gql`
+  query GetProfile($username: string) {
     summoner(username: $username) {
       id
       accountId
@@ -26,34 +25,58 @@ const GET_SUMMONER = gql`
       profileIconId
       revisionDate
       summonerLevel
+
+      matchHistory {
+        totalGames
+        matches {
+          platformId
+          gameId
+          champion
+          queue
+          season
+          role
+          lane
+          timestamp
+        }
+      }
+
+      leagueEntries {
+        entries {
+          queueType
+          tier
+          rank
+          leaguePoints
+          wins
+          losses
+          veteran
+          inactive
+          freshBlood
+          hotStreak
+        }
+      }
     }
   }
 `;
 
-const ProfilePage = (props) => {
-  const hardCodedUserName = 'Arcia125';
-  const summonerQuery = useMockQuery({
-    id: 'DIDIaRatq8OMKvidt6JKDE4OT3u41pnrg8LfDrL9ca0eLAM',
-    accountId: 'OZ9T-2DxV4E5tyoxCMDfOwXdK5Gt1OSapBVmUVHgTxdiAw',
-    name: 'Arcia125',
-    profileIconId: '4576',
-    revisionDate: '1590624238000',
-    summonerLevel: 105,
-    __typename: 'Summoner',
-  });
-  // const { loading, error, data } = useQuery(GET_SUMMONER, {
-  //   variables: { username: hardCodedUserName },
+const ProfilePage: FC = () => {
+  const { loading, error, data } = useMockQuery(mockSummoner);
+  // const { loading, error, data } = useQuery(GET_PROFILE, {
+  //   variables: { username: 'Arcia125' },
   // });
-  if (summonerQuery.loading) return <AnimatedSpinner />;
-  if (summonerQuery.error)
-    return (
-      <p>
-        Something went wrong{' '}
-        {summonerQuery.error && summonerQuery.error.message}
-      </p>
-    );
-  const { summonerLevel, name } = summonerQuery.data;
-  return <Profile username={name} summonerLevel={summonerLevel} />;
+  if (loading) return <AnimatedSpinner />;
+  if (error) {
+    console.error(error);
+    return <p>Something went wrong</p>;
+  }
+  const { summonerLevel, name, matchHistory, leagueEntries } = data;
+  return (
+    <Profile
+      username={name}
+      summonerLevel={summonerLevel}
+      matchHistory={matchHistory}
+      leagueEntries={leagueEntries}
+    />
+  );
 };
 
 ProfilePage.propTypes = {};
