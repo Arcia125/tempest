@@ -5,7 +5,7 @@ import './UsernamePlate.css';
 
 export interface Props {
   username: string;
-  summonerLevel: string;
+  summonerLevel: string | number;
 }
 
 const UsernamePlate: FC<Props> = ({ username, summonerLevel }) => {

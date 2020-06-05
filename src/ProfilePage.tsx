@@ -6,6 +6,7 @@ import { Profile } from './Profile';
 import AnimatedSpinner from './AnimatedSpinner';
 import { useMockQuery } from './useMockQuery';
 import { mockSummoner } from './mockData/summoner';
+import { queueFromQueueType } from './rankedData';
 
 /*
   id: ID
@@ -68,13 +69,19 @@ const ProfilePage: FC = () => {
     console.error(error);
     return <p>Something went wrong</p>;
   }
-  const { summonerLevel, name, matchHistory, leagueEntries } = data;
+  const { summonerLevel, name, matchHistory, leagueEntries } = mockSummoner;
+  const [entry] = leagueEntries.entries;
+  console.log(entry);
   return (
     <Profile
       username={name}
       summonerLevel={summonerLevel}
       matchHistory={matchHistory}
-      leagueEntries={leagueEntries}
+      rankedBadgeProps={{
+        tier: entry.tier.toLowerCase(),
+        rank: entry.rank,
+        queue: queueFromQueueType(entry.queueType),
+      }}
     />
   );
 };

@@ -1,3 +1,7 @@
 .Profile {
   display: flex;
 }
+
+.Profile-left {
+  width: 156px;
+}

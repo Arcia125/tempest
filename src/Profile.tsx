@@ -3,31 +3,28 @@ import PropTypes from 'prop-types';
 
 import './Profile.css';
 import UsernamePlate from './UsernamePlate';
-import RankedBadge from './RankedBadge';
+import RankedBadge, { Props as RankedBadgeProps } from './RankedBadge';
 import MatchHistory from './MatchHistory';
-import { MatchHistory as IMatchHistory, LeagueEntries } from './types';
+import { MatchHistory as IMatchHistory } from './types';
 
 export interface Props {
   username: string;
-  league: string;
-  rank: string;
-  summonerLevel: string;
+  summonerLevel: string | number;
   matchHistory: IMatchHistory;
-  leagueEntries: LeagueEntries;
+  rankedBadgeProps: RankedBadgeProps;
 }
 
 const Profile: FC<Props> = ({
   username,
-  league,
-  rank,
   summonerLevel,
   matchHistory,
+  rankedBadgeProps,
 }) => {
   return (
     <div className="Profile">
-      <div>
+      <div className="Profile-left">
         <UsernamePlate username={username} summonerLevel={summonerLevel} />
-        <RankedBadge league={league} rank={rank} />
+        <RankedBadge {...rankedBadgeProps} />
       </div>
       <MatchHistory matchHistory={matchHistory} />
     </div>

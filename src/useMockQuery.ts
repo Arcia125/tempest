@@ -21,7 +21,7 @@ export const useMockQuery = (
   // id for cleanup of the timeout
   const timeout = useRef(0);
 
-  // effect to
+  // effect to control loading/error/delay
   useEffect(() => {
     timeout.current = window.setTimeout(() => {
       if (error) {
