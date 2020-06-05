@@ -5,23 +5,25 @@ export const mockSummoner = {
   profileIconId: '4576',
   revisionDate: '1590624238000',
   summonerLevel: 105,
-  leagueEntries: [
-    {
-      leagueId: '40c0ce25-7cae-4d8b-aa41-e20bf3ad94fa',
-      queueType: 'RANKED_SOLO_5x5',
-      tier: 'SILVER',
-      rank: 'IV',
-      summonerId: 'DIDIaRatq8OMKvidt6JKDE4OT3u41pnrg8LfDrL9ca0eLAM',
-      summonerName: 'Arcia125',
-      leaguePoints: 8,
-      wins: 361,
-      losses: 386,
-      veteran: false,
-      inactive: false,
-      freshBlood: true,
-      hotStreak: false,
-    },
-  ],
+  leagueEntries: {
+    entries: [
+      {
+        leagueId: '40c0ce25-7cae-4d8b-aa41-e20bf3ad94fa',
+        queueType: 'RANKED_SOLO_5x5',
+        tier: 'SILVER',
+        rank: 'IV',
+        summonerId: 'DIDIaRatq8OMKvidt6JKDE4OT3u41pnrg8LfDrL9ca0eLAM',
+        summonerName: 'Arcia125',
+        leaguePoints: 8,
+        wins: 361,
+        losses: 386,
+        veteran: false,
+        inactive: false,
+        freshBlood: true,
+        hotStreak: false,
+      },
+    ],
+  },
   matchHistory: {
     matches: [
       {
