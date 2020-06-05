@@ -1,6 +1,7 @@
 import React, { FC } from 'react';
 
 import './Typography.css';
+import { createClassNameGenerator } from './createClassNameGenerator';
 
 export enum TypographyVariants {
   h1 = 'header1',
@@ -11,15 +12,13 @@ export enum TypographyVariants {
 }
 
 export interface Props {
+  className?: string;
   variant: TypographyVariants;
   Component?: React.ElementType;
   textTransform?: 'capitalize' | 'uppercase' | 'lowercase';
 }
 
-const className = 'Typography';
-
-const createClassName = (...addedNames: string[]) =>
-  `${className} ${className}-${addedNames.join(` ${className}-`)}`;
+const classNameGenerator = createClassNameGenerator('Typography');
 
 const variantConfigs: Record<
   TypographyVariants,
@@ -59,6 +58,7 @@ const variantConfigs: Record<
 
 const Typography: FC<Props> = ({
   variant,
+  className,
   Component: PropsComponent,
   textTransform,
   children,
@@ -70,7 +70,10 @@ const Typography: FC<Props> = ({
     classNames.push(textTransform);
   }
   return (
-    <Component {...props} className={createClassName(...classNames)}>
+    <Component
+      {...props}
+      className={classNameGenerator(className, ...classNames)}
+    >
       {children}
     </Component>
   );

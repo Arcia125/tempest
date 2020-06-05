@@ -6,7 +6,7 @@ import Typography, { TypographyVariants } from './Typography';
 
 export interface Props {
   tier: string;
-  rank: string;
+  rank: string | number;
   queue: string;
 }
 
@@ -24,7 +24,9 @@ const RankedBadge: FC<Props> = ({ tier, rank, queue }) => {
         <Typography variant={TypographyVariants.p} textTransform="capitalize">
           {tier}
         </Typography>
-        <Typography variant={TypographyVariants.p}>{rank}</Typography>
+        <Typography className="RankedBadge-rank" variant={TypographyVariants.p}>
+          {rank}
+        </Typography>
       </div>
     </div>
   );

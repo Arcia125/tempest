@@ -1,5 +1,4 @@
 import React, { FC } from 'react';
-import PropTypes from 'prop-types';
 
 import './Profile.css';
 import UsernamePlate from './UsernamePlate';
@@ -8,6 +7,7 @@ import MatchHistory from './MatchHistory';
 import { MatchHistory as IMatchHistory } from './types';
 
 export interface Props {
+  profileIconId: string | number;
   username: string;
   summonerLevel: string | number;
   matchHistory: IMatchHistory;
@@ -15,6 +15,7 @@ export interface Props {
 }
 
 const Profile: FC<Props> = ({
+  profileIconId,
   username,
   summonerLevel,
   matchHistory,
@@ -23,14 +24,17 @@ const Profile: FC<Props> = ({
   return (
     <div className="Profile">
       <div className="Profile-left">
-        <UsernamePlate username={username} summonerLevel={summonerLevel} />
+        <UsernamePlate
+          className="Profile-UsernamePlate"
+          profileIconId={profileIconId}
+          username={username}
+          summonerLevel={summonerLevel}
+        />
         <RankedBadge {...rankedBadgeProps} />
       </div>
       <MatchHistory matchHistory={matchHistory} />
     </div>
   );
 };
-
-Profile.propTypes = {};
 
 export { Profile };

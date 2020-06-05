@@ -14,7 +14,7 @@ export const MatchHistoryPreview: FC<Props> = ({ matchHistoryItem }) => (
     <div className="MatchHistoryPreview-wl-tab" />
     <RiotImage
       type={RiotImageType.CHAMPION}
-      name={getImageNameByChampionKey(matchHistoryItem.champion)}
+      name={getImageNameByChampionKey(String(matchHistoryItem.champion))}
       alt={championsByKey[matchHistoryItem.champion].name}
     />
     <div>{/* <span>{matchHistoryItem}</span> */}</div>

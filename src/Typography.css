@@ -2,11 +2,11 @@
   margin: 0;
 }
 
-.Typography-capitalize {
+.Typography.Typography-capitalize {
   text-transform: capitalize;
 }
 
-.Typography .Typography-header1 {
+.Typography.Typography-header1 {
   font-family: 'Lato', sans-serif;
   font-style: normal;
   font-weight: 500;
@@ -16,7 +16,7 @@
   color: #E5EBEF;
 }
 
-.Typography .Typography-header2 {
+.Typography.Typography-header2 {
   font-family: 'Lato', sans-serif;
   font-style: normal;
   font-weight: 500;
@@ -28,7 +28,7 @@
   color: #E5EBEF;
 }
 
-.Typography .Typography-header3 {
+.Typography.Typography-header3 {
   font-family: 'Lato', sans-serif;
   font-style: normal;
   font-weight: normal;
@@ -40,7 +40,7 @@
   color: #E5EBEF;
 }
 
-.Typography .Typography-paragraph {
+.Typography.Typography-paragraph {
   font-family: 'Lato', sans-serif;
   font-style: normal;
   font-weight: normal;
@@ -53,7 +53,7 @@
 
 }
 
-.Typography .Typography-xs {
+.Typography.Typography-xs {
   font-family: 'Lato', sans-serif;
   font-style: normal;
   font-weight: normal;

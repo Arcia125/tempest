@@ -4,4 +4,11 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: 10px;
+}
+
+.UsernamePlate img.profile-icon {
+  border-radius: 50%;
+  width: 36px;
+  margin-right: 8px;
 }

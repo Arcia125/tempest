@@ -6,8 +6,8 @@ export type ErrorLike = Error | string | null;
 
 export interface MatchHistoryItem {
   platformId: string;
-  gameId: string;
-  champion: string;
+  gameId: number;
+  champion: number;
   queue: string;
   season: number;
   timestamp: string;
@@ -16,7 +16,7 @@ export interface MatchHistoryItem {
 }
 
 export interface MatchHistory {
-  matches: [MatchHistoryItem];
+  matches: MatchHistoryItem[];
   startIndex: number;
   endIndex: number;
   totalGames: number;

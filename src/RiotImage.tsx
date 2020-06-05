@@ -10,6 +10,7 @@ export interface Props
   > {
   type: RiotImageType;
   name: string;
+  className?: string;
 }
 
 export const RiotImage: FC<Props> = ({ type, name, ...props }) => {
