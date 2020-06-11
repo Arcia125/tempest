@@ -3,11 +3,12 @@ import PropTypes from 'prop-types';
 
 import './RankedBadge.css';
 import Typography, { TypographyVariants } from './Typography';
+import { Maybe } from './operations';
 
 export interface Props {
-  tier: string;
-  rank: string | number;
-  queue: string;
+  tier?: Maybe<string>;
+  rank?: Maybe<string | number>;
+  queue?: Maybe<string>;
 }
 
 const RankedBadge: FC<Props> = ({ tier, rank, queue }) => {

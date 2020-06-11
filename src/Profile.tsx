@@ -4,14 +4,16 @@ import './Profile.css';
 import UsernamePlate from './UsernamePlate';
 import RankedBadge, { Props as RankedBadgeProps } from './RankedBadge';
 import MatchHistory from './MatchHistory';
-import { MatchHistory as IMatchHistory } from './types';
+// import { MatchHistory as IMatchHistory } from './types';
+import { Maybe, MatchHistory as IMatchHistory } from './operations';
+// import { MatchHistory } from './types';
 
 export interface Props {
-  profileIconId: string | number;
-  username: string;
-  summonerLevel: string | number;
-  matchHistory: IMatchHistory;
-  rankedBadgeProps: RankedBadgeProps;
+  profileIconId?: Maybe<string | number>;
+  username?: Maybe<string>;
+  summonerLevel?: Maybe<string | number>;
+  matchHistory?: Maybe<IMatchHistory>;
+  rankedBadgeProps?: RankedBadgeProps;
 }
 
 const Profile: FC<Props> = ({
@@ -26,7 +28,7 @@ const Profile: FC<Props> = ({
       <div className="Profile-left">
         <UsernamePlate
           className="Profile-UsernamePlate"
-          profileIconId={profileIconId}
+          profileIconId={String(profileIconId)}
           username={username}
           summonerLevel={summonerLevel}
         />

@@ -1,0 +1,15 @@
+.MatchHistoryPreview {
+  height: 66px;
+  border-radius: 5px;
+  overflow: hidden;
+  display: flex;
+}
+
+.MatchHistoryPreview-wl-tab {
+  width: 6px;
+  height: 100%;
+}
+
+.MatchHistoryPreview-champion-image {
+  width: 66px;
+}

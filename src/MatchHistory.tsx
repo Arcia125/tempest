@@ -2,11 +2,12 @@ import React, { FC } from 'react';
 import PropTypes from 'prop-types';
 
 import './MatchHistory.css';
-import { MatchHistory as IMatchHistory } from './types';
+import { MatchHistory as IMatchHistory } from './operations';
 import { MatchHistoryList } from './MatchHistoryList';
+import { Maybe } from './operations';
 
 export interface Props {
-  matchHistory: IMatchHistory;
+  matchHistory?: Maybe<IMatchHistory>;
 }
 
 const MatchHistory: FC<Props> = ({ matchHistory }) => {

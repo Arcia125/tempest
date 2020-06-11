@@ -11,6 +11,7 @@ import {
   romanNumeralToNumber,
   RomanNumeral,
 } from './rankedData';
+import { useSummonerQuery } from './operations';
 
 /*
   id: ID
@@ -64,7 +65,12 @@ const GET_PROFILE = gql`
 `;
 
 const ProfilePage: FC = () => {
-  const { loading, error, data } = useMockQuery(mockSummoner);
+  const { loading, error, data } = useSummonerQuery({
+    variables: {
+      username: 'Arcia125',
+    },
+  });
+  // const { loading, error, data } = useMockQuery(mockSummoner);
   // const { loading, error, data } = useQuery(GET_PROFILE, {
   //   variables: { username: 'Arcia125' },
   // });
@@ -73,24 +79,21 @@ const ProfilePage: FC = () => {
     console.error(error);
     return <p>Something went wrong</p>;
   }
-  const {
-    summonerLevel,
-    name,
-    matchHistory,
-    leagueEntries,
-    profileIconId,
-  } = mockSummoner;
-  const [entry] = leagueEntries.entries;
+  // const { summonerLevel, name, matchHistory, leagueEntries, profileIconId } =
+  //   data && data.summoner ? data.summoner : {};
+  // const [entry] = leagueEntries.entries;
+  const summoner = data?.summoner;
+  const entry = summoner?.leagueEntries?.[0];
   return (
     <Profile
-      profileIconId={profileIconId}
-      username={name}
-      summonerLevel={summonerLevel}
-      matchHistory={matchHistory}
+      profileIconId={summoner?.profileIconId}
+      username={summoner?.name}
+      summonerLevel={summoner?.summonerLevel}
+      matchHistory={summoner?.matchHistory}
       rankedBadgeProps={{
-        tier: entry.tier.toLowerCase(),
-        rank: romanNumeralToNumber(entry.rank as RomanNumeral),
-        queue: queueFromQueueType(entry.queueType),
+        tier: entry?.tier?.toLowerCase(),
+        rank: romanNumeralToNumber(entry?.rank as RomanNumeral),
+        queue: entry?.queueType ? queueFromQueueType(entry?.queueType) : null,
       }}
     />
   );

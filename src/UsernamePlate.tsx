@@ -6,11 +6,12 @@ import Typography, { TypographyVariants } from './Typography';
 import { createClassNameGenerator } from './createClassNameGenerator';
 import { RiotImage } from './RiotImage';
 import { RiotImageType } from './types';
+import { Maybe } from './operations';
 
 export interface Props {
   profileIconId: string;
-  username: string;
-  summonerLevel: string | number;
+  username?: Maybe<string>;
+  summonerLevel?: Maybe<string | number>;
   className?: string;
 }
 
