@@ -2,7 +2,11 @@
 
 :root {
   --rich-black: #001a23;
+  --gunmetal: #183139;
+  --charcoal: #2f484f;
   --eggshell: #e5ebef;
+  --baby-blue: #91c4f2;
+  --peach: #e28888;
 }
 
 body {

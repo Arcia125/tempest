@@ -1,5 +1,6 @@
 .MatchHistory {
-  background: #183139;
+  background: var(--gunmetal);
   border-radius: 5px;
   padding: 7px 7px 10px 7px;
+  width: 100%;
 }

@@ -388,7 +388,7 @@ export type SummonerQuery = { __typename?: 'Query' } & {
   summoner?: Maybe<
     { __typename?: 'Summoner' } & Pick<
       Summoner,
-      'name' | 'profileIconId' | 'summonerLevel'
+      'id' | 'name' | 'profileIconId' | 'summonerLevel'
     > & {
         leagueEntries?: Maybe<
           Array<
@@ -407,8 +407,67 @@ export type SummonerQuery = { __typename?: 'Query' } & {
                 Maybe<
                   { __typename?: 'MatchHistoryItem' } & Pick<
                     MatchHistoryItem,
-                    'champion'
-                  >
+                    'queue' | 'champion'
+                  > & {
+                      details?: Maybe<
+                        { __typename?: 'MatchDetails' } & Pick<
+                          MatchDetails,
+                          'gameDuration' | 'gameMode'
+                        > & {
+                            participantIdentities?: Maybe<
+                              Array<
+                                Maybe<
+                                  {
+                                    __typename?: 'MatchParticipantIdentity';
+                                  } & Pick<
+                                    MatchParticipantIdentity,
+                                    'participantId'
+                                  > & {
+                                      player?: Maybe<
+                                        { __typename?: 'MatchPlayer' } & Pick<
+                                          MatchPlayer,
+                                          'summonerId'
+                                        >
+                                      >;
+                                    }
+                                >
+                              >
+                            >;
+                            participants?: Maybe<
+                              Array<
+                                Maybe<
+                                  { __typename?: 'MatchParticipant' } & Pick<
+                                    MatchParticipant,
+                                    'participantId' | 'teamId'
+                                  > & {
+                                      stats?: Maybe<
+                                        {
+                                          __typename?: 'MatchParticipantStats';
+                                        } & Pick<
+                                          MatchParticipantStats,
+                                          | 'kills'
+                                          | 'deaths'
+                                          | 'assists'
+                                          | 'totalMinionsKilled'
+                                        >
+                                      >;
+                                    }
+                                >
+                              >
+                            >;
+                            teams?: Maybe<
+                              Array<
+                                Maybe<
+                                  { __typename?: 'MatchTeamStats' } & Pick<
+                                    MatchTeamStats,
+                                    'win' | 'teamId'
+                                  >
+                                >
+                              >
+                            >;
+                          }
+                      >;
+                    }
                 >
               >
             >;
@@ -421,6 +480,7 @@ export type SummonerQuery = { __typename?: 'Query' } & {
 export const SummonerDocument = gql`
   query Summoner($username: String!) {
     summoner(username: $username) {
+      id
       name
       profileIconId
       summonerLevel
@@ -431,7 +491,32 @@ export const SummonerDocument = gql`
       }
       matchHistory {
         matches {
+          queue
           champion
+          details {
+            gameDuration
+            gameMode
+            participantIdentities {
+              participantId
+              player {
+                summonerId
+              }
+            }
+            participants {
+              participantId
+              teamId
+              stats {
+                kills
+                deaths
+                assists
+                totalMinionsKilled
+              }
+            }
+            teams {
+              win
+              teamId
+            }
+          }
         }
       }
     }

@@ -3,6 +3,9 @@
   border-radius: 5px;
   overflow: hidden;
   display: flex;
+  justify-content: flex-start;
+  align-content: center;
+  background-color: var(--charcoal);
 }
 
 .MatchHistoryPreview-wl-tab {
@@ -10,6 +13,50 @@
   height: 100%;
 }
 
+.MatchHistoryPreview_Draw .MatchHistoryPreview-wl-tab {
+  background-color: var(--eggshell);
+}
+
+.MatchHistoryPreview_Victory .MatchHistoryPreview-wl-tab {
+  background-color: var(--baby-blue);
+}
+
+.MatchHistoryPreview_Defeat .MatchHistoryPreview-wl-tab {
+  background-color: var(--peach);
+}
+
+.MatchHistoryPreview-details {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+}
+
+.MatchHistoryPreview-details .Typography {
+  text-align: center;
+  width: 0;
+  white-space: nowrap;
+}
+
+.MatchHistoryPreview-details_outcome {
+}
+
+.MatchHistoryPreview_Draw .MatchHistoryPreview-details_outcome {
+  color: var(--eggshell);
+}
+
+.MatchHistoryPreview_Victory .MatchHistoryPreview-details_outcome {
+  color: var(--baby-blue);
+}
+
+.MatchHistoryPreview_Defeat .MatchHistoryPreview-details_outcome {
+  color: var(--peach);
+}
+
 .MatchHistoryPreview-champion-image {
   width: 66px;
+}
+
+.MatchHistoryPreview:not(:last-of-type) {
+  margin-bottom: 8px;
 }

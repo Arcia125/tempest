@@ -4,14 +4,13 @@ import './Profile.css';
 import UsernamePlate from './UsernamePlate';
 import RankedBadge, { Props as RankedBadgeProps } from './RankedBadge';
 import MatchHistory from './MatchHistory';
-// import { MatchHistory as IMatchHistory } from './types';
 import { Maybe, MatchHistory as IMatchHistory } from './operations';
-// import { MatchHistory } from './types';
 
 export interface Props {
   profileIconId?: Maybe<string | number>;
   username?: Maybe<string>;
   summonerLevel?: Maybe<string | number>;
+  summonerId?: Maybe<string>;
   matchHistory?: Maybe<IMatchHistory>;
   rankedBadgeProps?: RankedBadgeProps;
 }
@@ -22,6 +21,7 @@ const Profile: FC<Props> = ({
   summonerLevel,
   matchHistory,
   rankedBadgeProps,
+  summonerId,
 }) => {
   return (
     <div className="Profile">
@@ -34,7 +34,9 @@ const Profile: FC<Props> = ({
         />
         <RankedBadge {...rankedBadgeProps} />
       </div>
-      <MatchHistory matchHistory={matchHistory} />
+      <div className="Profile-right">
+        <MatchHistory matchHistory={matchHistory} summonerId={summonerId} />
+      </div>
     </div>
   );
 };

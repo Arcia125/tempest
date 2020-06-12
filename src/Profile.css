@@ -1,11 +1,21 @@
 .Profile {
   display: flex;
+  padding-left: 16px;
+  padding-right: 16px;
+  width: calc(100% - 6px - 16px);
+  box-sizing: border-box;
 }
 
 .Profile-left {
   width: 156px;
+  padding-right: 6px;
+  box-sizing: border-box;
 }
 
 .Profile-UsernamePlate {
   margin-bottom: 12px;
+}
+
+.Profile-right {
+  width: 100%;
 }

@@ -1,15 +1,20 @@
 import React, { FC } from 'react';
 import { MatchHistoryPreview } from './MatchHistoryPreview';
-import { Maybe, MatchHistory } from './operations';
+import { Maybe, MatchHistory, Summoner } from './operations';
 
 export interface Props {
   matchHistory?: Maybe<MatchHistory>;
+  summonerId?: Maybe<string>;
 }
 
-export const MatchHistoryList: FC<Props> = ({ matchHistory }) => (
+export const MatchHistoryList: FC<Props> = ({ matchHistory, summonerId }) => (
   <>
     {matchHistory?.matches?.map((matchHistoryItem, i) => (
-      <MatchHistoryPreview key={i} matchHistoryItem={matchHistoryItem} />
+      <MatchHistoryPreview
+        key={i}
+        matchHistoryItem={matchHistoryItem}
+        summonerId={summonerId}
+      />
     ))}
   </>
 );
