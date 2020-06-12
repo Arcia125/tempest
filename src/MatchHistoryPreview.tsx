@@ -51,7 +51,7 @@ export const MatchHistoryPreview: FC<Props> = ({
           variant={TypographyVariants.p}
           className="MatchHistoryPreview-details_outcome"
         >
-          {getGameOutcome(win)}
+          {gameOutcome}
         </Typography>
         <Typography
           variant={TypographyVariants.p}

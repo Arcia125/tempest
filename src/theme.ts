@@ -9,8 +9,6 @@ const colors = {
   peach: getCssPropertyValue('--peach'),
 };
 
-console.log(colors);
-
 export const theme = {
   colors,
 }
