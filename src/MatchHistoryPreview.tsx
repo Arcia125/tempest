@@ -13,17 +13,13 @@ import {
   MatchParticipantIdentity,
 } from './operations';
 import Typography, { TypographyVariants } from './Typography';
+import { getQueueName } from './queueData';
+import { leftPad } from './utils';
 
 export interface Props {
   matchHistoryItem?: Maybe<MatchHistoryItem>;
   summonerId?: Maybe<string>;
 }
-
-// const winColor = theme.;
-
-// const lossColor = 'red';
-
-// const drawColor = 'white';
 
 export const MatchHistoryPreview: FC<Props> = ({
   matchHistoryItem,
@@ -36,9 +32,6 @@ export const MatchHistoryPreview: FC<Props> = ({
   const participant = getParticipant(matchHistoryItem, participantIdentity);
   const team = getTeam(matchHistoryItem, participant);
   const win = team?.win;
-  // const participant = matchHistoryItem?.details?.participants?.find(
-  //   (p) => p?.participantId === summoner?
-  // );
   const gameOutcome = getGameOutcome(win);
   return (
     <div className={`MatchHistoryPreview MatchHistoryPreview_${gameOutcome}`}>
@@ -90,18 +83,22 @@ export const MatchHistoryPreview: FC<Props> = ({
 };
 
 function getQueue(matchHistoryItem?: Maybe<MatchHistoryItem>): React.ReactNode {
-  return matchHistoryItem?.queue;
+  return typeof matchHistoryItem?.queue === 'number'
+    ? getQueueName(matchHistoryItem?.queue)
+    : '-';
 }
 
 function getGameDuration(
   matchHistoryItem?: Maybe<MatchHistoryItem>
 ): React.ReactNode {
-  return matchHistoryItem?.details?.gameDuration || '-';
+  const duration = matchHistoryItem?.details?.gameDuration ?? 0;
+  const format = (v: number) => leftPad(v, '0', 2);
+  return `${format(Math.floor(duration / 60))}:${format(duration % 60)}`;
 }
 
 function getCs(participant?: Maybe<MatchParticipant>): React.ReactNode {
-  const cs = participant?.stats?.totalMinionsKilled;
-  return typeof cs === 'undefined' || cs === null ? '-' : `${cs} CS`;
+  const cs = participant?.stats?.totalMinionsKilled ?? 0;
+  return `${cs} CS`;
 }
 
 function getKda(participant?: Maybe<MatchParticipant>): React.ReactNode {
@@ -109,7 +106,7 @@ function getKda(participant?: Maybe<MatchParticipant>): React.ReactNode {
   const deaths = participant?.stats?.deaths;
   const assists = participant?.stats?.assists;
   return typeof kills === 'undefined' || kills === null
-    ? '-'
+    ? '0/0/0'
     : `${kills}/${deaths}/${assists}`;
 }
 

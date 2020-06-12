@@ -11,3 +11,8 @@ export function mapBy<T extends {}>(arr: Array<T>, key: keyof T): Remapped<T> {
     return acc;
   }, {} as Remapped<T>);
 }
+
+export function leftPad(val: string | number, pad: string, length: number) {
+  const discrepancy = length - val.toString().length;
+  return `${discrepancy > 0 ? pad.repeat(discrepancy) : ''}${val}`;
+}
