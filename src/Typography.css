@@ -6,6 +6,18 @@
   color: var(--eggshell);
 }
 
+.Typography-babyBlue {
+  color: var(--baby-blue);
+}
+
+.Typography-blizzardBlue {
+  color: var(--blizzard-blue);
+}
+
+.Typography-peach {
+  color: var(--peach);
+}
+
 .Typography.Typography-capitalize {
   text-transform: capitalize;
 }

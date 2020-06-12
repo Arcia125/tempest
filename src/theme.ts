@@ -6,6 +6,7 @@ const colors = {
   charcoal: getCssPropertyValue('--charcoal'),
   eggshell: getCssPropertyValue('--eggshell'),
   babyBlue: getCssPropertyValue('--baby-blue'),
+  blizzardBlue: getCssPropertyValue('--blizzard-blue'),
   peach: getCssPropertyValue('--peach'),
 };
 

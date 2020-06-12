@@ -41,18 +41,6 @@
 .MatchHistoryPreview-details_outcome {
 }
 
-.MatchHistoryPreview_Draw .MatchHistoryPreview-details_outcome {
-  color: var(--eggshell);
-}
-
-.MatchHistoryPreview_Victory .MatchHistoryPreview-details_outcome {
-  color: var(--baby-blue);
-}
-
-.MatchHistoryPreview_Defeat .MatchHistoryPreview-details_outcome {
-  color: var(--peach);
-}
-
 .MatchHistoryPreview-champion-image {
   width: 66px;
 }

@@ -50,6 +50,7 @@ export const MatchHistoryPreview: FC<Props> = ({
         <Typography
           variant={TypographyVariants.p}
           className="MatchHistoryPreview-details_outcome"
+          color={won(win) ? 'babyBlue' : lost(win) ? 'peach' : 'eggshell'}
         >
           {gameOutcome}
         </Typography>
@@ -62,6 +63,7 @@ export const MatchHistoryPreview: FC<Props> = ({
         <Typography
           variant={TypographyVariants.p}
           className="MatchHistoryPreview-details_cs"
+          color="blizzardBlue"
         >
           {getCs(participant)}
         </Typography>
@@ -74,6 +76,7 @@ export const MatchHistoryPreview: FC<Props> = ({
         <Typography
           variant={TypographyVariants.p}
           className="MatchHistoryPreview-details_queue"
+          color="blizzardBlue"
         >
           {getQueue(matchHistoryItem)}
         </Typography>
@@ -110,12 +113,16 @@ function getKda(participant?: Maybe<MatchParticipant>): React.ReactNode {
     : `${kills}/${deaths}/${assists}`;
 }
 
-function getGameOutcome(win?: Maybe<GameOutcome>): string | undefined {
-  return win === GameOutcome.Win
-    ? 'Victory'
-    : win === GameOutcome.Fail
-    ? 'Defeat'
-    : 'Draw';
+function getGameOutcome(win?: Maybe<GameOutcome>): string {
+  return won(win) ? 'Victory' : lost(win) ? 'Defeat' : 'Draw';
+}
+
+function lost(win?: Maybe<GameOutcome>) {
+  return win === GameOutcome.Fail;
+}
+
+function won(win?: Maybe<GameOutcome>) {
+  return win === GameOutcome.Win;
 }
 
 function getTeam(
