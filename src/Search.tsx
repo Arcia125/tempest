@@ -4,6 +4,7 @@ import './Search.css';
 import Typography, { TypographyVariants } from './Typography';
 import StormIcon from './StormIcon';
 import SearchInput from './SearchInput';
+import { useHistory } from 'react-router';
 
 export interface Props {}
 
@@ -11,10 +12,12 @@ const Search: FC<Props> = (props) => {
   const [search, setSearch] = useState('');
   const setter: React.ChangeEventHandler<HTMLInputElement> = (event) =>
     setSearch(event.target.value);
+  const history = useHistory();
 
   const handleSearch = () => {
-    console.log('current search value is ', search);
+    history.push(`/summoner/profile/${search}`);
   };
+
   return (
     <div className="Search">
       <StormIcon className="Search-storm" />
