@@ -8,11 +8,13 @@ import {
   RomanNumeral,
 } from './rankedData';
 import { useSummonerQuery } from './operations';
+import { useParams } from 'react-router';
 
 const ProfilePage: FC = () => {
+  const x = useParams<{ summonerName: string }>();
   const { loading, error, data } = useSummonerQuery({
     variables: {
-      username: 'Arcia125',
+      username: x.summonerName,
     },
   });
 

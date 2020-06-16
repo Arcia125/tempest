@@ -1,5 +1,6 @@
 import React from 'react';
 import { MemoryRouter as Router, Switch, Route } from 'react-router';
+import { Link } from 'react-router-dom';
 
 //Styles
 import './App.css';
@@ -13,7 +14,9 @@ function App() {
     <Router>
       <div className="App">
         <header className="App-header">
-          <Logo />
+          <Link to="/">
+            <Logo />
+          </Link>
         </header>
         <Switch>
           <Route path="/summoner/profile/:summonerName">
