@@ -13,11 +13,12 @@ export enum TypographyVariants {
 }
 
 export interface Props {
+  id?: string;
   className?: string;
   variant: TypographyVariants;
-  Component?: React.ElementType;
   textTransform?: 'capitalize' | 'uppercase' | 'lowercase';
   color?: keyof typeof theme.colors;
+  Component?: React.ElementType;
 }
 
 const classNameGenerator = createClassNameGenerator('Typography');
@@ -59,11 +60,12 @@ const variantConfigs: Record<
 };
 
 const Typography: FC<Props> = ({
-  variant,
+  id,
   className,
-  Component: PropsComponent,
+  variant,
   textTransform,
   color = 'eggshell',
+  Component: PropsComponent,
   children,
 }) => {
   const { Component: VariantComponent, props } = variantConfigs[variant];
@@ -75,6 +77,7 @@ const Typography: FC<Props> = ({
     <Component
       {...props}
       className={classNameGenerator(className, ...classNames)}
+      id={id}
     >
       {children}
     </Component>

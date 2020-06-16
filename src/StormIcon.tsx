@@ -1,6 +1,6 @@
-import React, { FC } from 'react';
+import React, { FC, SVGProps } from 'react';
 
-const Storm: FC<{}> = (props) => {
+const StormIcon: FC<SVGProps<SVGSVGElement>> = (props) => {
   return (
     <svg width={130} height={83} fill="none" {...props}>
       <path
@@ -31,4 +31,4 @@ const Storm: FC<{}> = (props) => {
   );
 };
 
-export default Storm;
+export default StormIcon;

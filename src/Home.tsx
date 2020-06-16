@@ -1,10 +1,12 @@
 import React, { FC } from 'react';
 import ProfilePage from './ProfilePage';
+import SearchPage from './SearchPage';
 
 const Home: FC = () => {
   return (
     <div className="Home">
-      <ProfilePage />
+      {/* <ProfilePage /> */}
+      <SearchPage />
     </div>
   );
 };

@@ -1,0 +1,26 @@
+.SearchInput {
+  background-color: var(--charcoal);
+  display: flex;
+  align-items: center;
+}
+
+.SearchInput-input {
+  border: none;
+  background-color: transparent;
+  padding: 16px;
+  color: var(--eggshell);
+  width: 100%;
+}
+
+.SearchInput-input::placeholder {
+  opacity: 0.9;
+  color: var(--eggshell);
+}
+
+.SearchInput-submit {
+  background-color: transparent;
+  border: none;
+  display: flex;
+  align-items: center;
+  padding-right: 18px;
+}
