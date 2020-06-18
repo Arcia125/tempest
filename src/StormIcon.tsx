@@ -6,8 +6,8 @@ const StormIcon: FC<SVGProps<SVGSVGElement>> = (props) => {
   return (
     <svg width={130} height={83} fill="none" {...props}>
       <linearGradient id="lg" x1="0.5" y1="0" x2="0.5" y2="1">
-        <stop offset="0%" stop-opacity="1" stop-color="#CCFCCB" />
-        <stop offset="0%" stop-opacity="1" stop-color="#CCFCCB">
+        <stop offset="0%" stopOpacity="1" stopColor="#CCFCCB" />
+        <stop offset="0%" stopOpacity="1" stopColor="#CCFCCB">
           <animate
             calcMode="spline"
             keySplines="
@@ -25,7 +25,7 @@ const StormIcon: FC<SVGProps<SVGSVGElement>> = (props) => {
             begin=".2s"
           />
         </stop>
-        <stop offset="0%" stop-opacity="0" stop-color="#CCFCCB">
+        <stop offset="0%" stopOpacity="0" stopColor="#CCFCCB">
           <animate
             calcMode="spline"
             keySplines="
@@ -43,7 +43,7 @@ const StormIcon: FC<SVGProps<SVGSVGElement>> = (props) => {
             begin="0s"
           />
         </stop>
-        <stop offset="0%" stop-opacity="0" stop-color="#CCFCCB" />
+        <stop offset="0%" stopOpacity="0" stopColor="#CCFCCB" />
       </linearGradient>
       <path
         className="cloud-0"
