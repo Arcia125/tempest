@@ -20,6 +20,7 @@ const RankedBadge: FC<Props> = ({ tier, rank, queue }) => {
         src={`${
           process.env.PUBLIC_URL
         }ranked-emblems/${tier?.toLowerCase()}.png`}
+        alt={`Ranked emblem - ${tier}`}
       />
       <div className="RankedBadge-tier-rank">
         <Typography variant={TypographyVariants.p} textTransform="capitalize">
