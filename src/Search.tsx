@@ -15,7 +15,7 @@ const Search: FC<Props> = (props) => {
   const history = useHistory();
 
   const handleSearch = () => {
-    history.push(`/summoner/profile/${search}`);
+    if (search) history.push(`/summoner/profile/${search}`);
   };
 
   return (
