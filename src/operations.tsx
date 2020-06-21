@@ -11,11 +11,32 @@ export type Scalars = {
   Float: number;
 };
 
+export type Mutation = {
+  __typename?: 'Mutation';
+  signup?: Maybe<AuthPayload>;
+  login?: Maybe<AuthPayload>;
+  error: Scalars['Boolean'];
+};
+
+export type MutationSignupArgs = {
+  email: Scalars['String'];
+  password: Scalars['String'];
+};
+
+export type MutationLoginArgs = {
+  email: Scalars['String'];
+  password: Scalars['String'];
+};
+
+export type MutationErrorArgs = {
+  error: Scalars['String'];
+};
+
 export type Query = {
   __typename?: 'Query';
   info: Scalars['String'];
   summoner?: Maybe<Summoner>;
-  currentGame?: Maybe<Scalars['String']>;
+  currentGame?: Maybe<CurrentGameInfo>;
 };
 
 export type QuerySummonerArgs = {
@@ -24,6 +45,105 @@ export type QuerySummonerArgs = {
 
 export type QueryCurrentGameArgs = {
   summonerId?: Maybe<Scalars['ID']>;
+};
+
+export type CurrentGameInfo = {
+  __typename?: 'CurrentGameInfo';
+  /** The ID of the game */
+  gameId?: Maybe<Scalars['String']>;
+  /** The game start time represented in epoch milliseconds */
+  gameStartTime?: Maybe<Scalars['Int']>;
+  /** The ID of the platform on which the game is being played */
+  platformId?: Maybe<Scalars['String']>;
+  /** The game mode */
+  gameMode?: Maybe<Scalars['String']>;
+  /** The ID of the map */
+  mapId?: Maybe<Scalars['Int']>;
+  /** The game type */
+  gameType?: Maybe<Scalars['String']>;
+  /** Banned champion information */
+  bannedChampions?: Maybe<Array<Maybe<CurrentGameBannedChampion>>>;
+  /** The observer information */
+  observers?: Maybe<Observer>;
+  /** The participant information */
+  participants?: Maybe<Array<Maybe<CurrentGameParticipant>>>;
+  /** The amount of time in seconds that has passed since the game started */
+  gameLength?: Maybe<Scalars['Int']>;
+  /** The queue type (queue types are documented on the Game Constants page) */
+  gameQueueConfigId?: Maybe<Scalars['Int']>;
+};
+
+export type CurrentGameBannedChampion = {
+  __typename?: 'CurrentGameBannedChampion';
+  /** The turn during which the champion was banned */
+  pickTurn?: Maybe<Scalars['Int']>;
+  /** The ID of the banned champion */
+  championId?: Maybe<Scalars['Int']>;
+  /** The ID of the team that banned the champion */
+  teamId?: Maybe<Scalars['Int']>;
+};
+
+export type CurrentGameParticipant = {
+  __typename?: 'CurrentGameParticipant';
+  /** The ID of the profile icon used by this participant */
+  profileIconId?: Maybe<Scalars['Int']>;
+  /** The ID of the champion played by this participant */
+  championId?: Maybe<Scalars['Int']>;
+  /** The summoner name of this participant */
+  summonerName?: Maybe<Scalars['String']>;
+  /** List of Game Customizations */
+  gameCustomizationObjects?: Maybe<
+    Array<Maybe<CurrentGameCustomizationObject>>
+  >;
+  /** Flag indicating whether or not this participant is a bot */
+  bot?: Maybe<Scalars['Boolean']>;
+  /** Perks/Runes Reforged Information */
+  perks?: Maybe<SpectatorPerks>;
+  /** The ID of the second summoner spell used by this participant */
+  spell2Id?: Maybe<Scalars['Int']>;
+  /** The team ID of this participant, indicating the participant's team */
+  teamId?: Maybe<Scalars['Int']>;
+  /** The ID of the first summoner spell used by this participant */
+  spell1Id?: Maybe<Scalars['Int']>;
+  /** The encrypted summoner ID of this participant */
+  summonerId?: Maybe<Scalars['String']>;
+};
+
+export type SpectatorPerks = {
+  __typename?: 'SpectatorPerks';
+  /** Primary runes path */
+  perkStyle?: Maybe<Scalars['Int']>;
+  /** IDs of the perks/runes assigned. */
+  perkIds?: Maybe<Array<Maybe<Scalars['Int']>>>;
+  /** Secondary runes path */
+  perkSubStyle?: Maybe<Scalars['Int']>;
+};
+
+export type CurrentGameCustomizationObject = {
+  __typename?: 'CurrentGameCustomizationObject';
+  /** Category identifier for Game Customization */
+  category?: Maybe<Scalars['String']>;
+  /** Game Customization content */
+  content?: Maybe<Scalars['String']>;
+};
+
+export type Observer = {
+  __typename?: 'Observer';
+  /** Key used to decrypt the spectator grid game data for playback */
+  encryptionKey?: Maybe<Scalars['String']>;
+};
+
+export type User = {
+  __typename?: 'User';
+  id?: Maybe<Scalars['ID']>;
+  email: Scalars['String'];
+  summoner?: Maybe<Summoner>;
+};
+
+export type AuthPayload = {
+  __typename?: 'AuthPayload';
+  token?: Maybe<Scalars['String']>;
+  user?: Maybe<User>;
 };
 
 export type Summoner = {
@@ -37,6 +157,7 @@ export type Summoner = {
   summonerLevel?: Maybe<Scalars['Int']>;
   matchHistory?: Maybe<MatchHistory>;
   leagueEntries?: Maybe<Array<Maybe<LeagueEntry>>>;
+  currentGame?: Maybe<CurrentGameInfo>;
 };
 
 export type MatchHistory = {
@@ -380,6 +501,15 @@ export type LeagueEntry = {
   hotStreak?: Maybe<Scalars['Boolean']>;
 };
 
+export type ErrorMutationVariables = {
+  error: Scalars['String'];
+};
+
+export type ErrorMutation = { __typename?: 'Mutation' } & Pick<
+  Mutation,
+  'error'
+>;
+
 export type SummonerQueryVariables = {
   username: Scalars['String'];
 };
@@ -477,6 +607,52 @@ export type SummonerQuery = { __typename?: 'Query' } & {
   >;
 };
 
+export const ErrorDocument = gql`
+  mutation Error($error: String!) {
+    error(error: $error)
+  }
+`;
+export type ErrorMutationFn = ApolloReactCommon.MutationFunction<
+  ErrorMutation,
+  ErrorMutationVariables
+>;
+
+/**
+ * __useErrorMutation__
+ *
+ * To run a mutation, you first call `useErrorMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useErrorMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [errorMutation, { data, loading, error }] = useErrorMutation({
+ *   variables: {
+ *      error: // value for 'error'
+ *   },
+ * });
+ */
+export function useErrorMutation(
+  baseOptions?: ApolloReactHooks.MutationHookOptions<
+    ErrorMutation,
+    ErrorMutationVariables
+  >
+) {
+  return ApolloReactHooks.useMutation<ErrorMutation, ErrorMutationVariables>(
+    ErrorDocument,
+    baseOptions
+  );
+}
+export type ErrorMutationHookResult = ReturnType<typeof useErrorMutation>;
+export type ErrorMutationResult = ApolloReactCommon.MutationResult<
+  ErrorMutation
+>;
+export type ErrorMutationOptions = ApolloReactCommon.BaseMutationOptions<
+  ErrorMutation,
+  ErrorMutationVariables
+>;
 export const SummonerDocument = gql`
   query Summoner($username: String!) {
     summoner(username: $username) {
