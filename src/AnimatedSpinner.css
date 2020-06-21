@@ -1,8 +1,16 @@
 .AnimatedSpinner {
-  animation: spin infinite 1000ms linear;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 60vh;
+}
+
+.AnimatedSpinner > div {
+  animation: spin infinite 760ms linear;
   background: #91c4f2;
-  height: 100px;
-  width: 100px;
+  height: 85px;
+  width: 85px;
   border-radius: 5px;
   position: relative;
   border-bottom-left-radius: 50%;
@@ -10,16 +18,16 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .AnimatedSpinner {
+  .AnimatedSpinner > div {
     animation: spin infinite 20s linear;
   }
 }
 
-.AnimatedSpinner::before {
+.AnimatedSpinner > div::before {
   content: ' ';
   background: #b3efb2;
-  height: 25px;
-  width: 25px;
+  height: 25%;
+  width: 25%;
   position: absolute;
   left: 25%;
   top: 25%;
@@ -30,11 +38,11 @@
   transform: translate(50%, 50%);
 }
 
-.AnimatedSpinner::after {
+.AnimatedSpinner > div::after {
   content: ' ';
   background: #7d5ba6;
-  height: 50px;
-  width: 50px;
+  height: 50%;
+  width: 50%;
   position: absolute;
   left: 25%;
   top: 25%;
