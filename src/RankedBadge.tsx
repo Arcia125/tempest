@@ -12,14 +12,14 @@ export interface Props {
 }
 
 const RankedBadge: FC<Props> = ({ tier, rank, queue }) => {
-  return (
+  return !(tier && rank && queue) ? null : (
     <div className="RankedBadge">
       <Typography variant={TypographyVariants.p}>{queue}</Typography>
       <img
         className="RankedBadge-emblem"
         src={`${
           process.env.PUBLIC_URL
-        }ranked-emblems/${tier?.toLowerCase()}.png`}
+        }ranked-emblems/${tier.toLowerCase()}.png`}
         alt={`Ranked emblem - ${tier}`}
       />
       <div className="RankedBadge-tier-rank">
