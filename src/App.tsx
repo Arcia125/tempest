@@ -2,9 +2,7 @@ import React from 'react';
 import { MemoryRouter as Router, Switch, Route } from 'react-router';
 import { Link } from 'react-router-dom';
 
-//Styles
 import './App.css';
-//Components
 import { Logo } from './Logo';
 import SearchPage from './SearchPage';
 import ProfilePage from './ProfilePage';
