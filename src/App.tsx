@@ -41,11 +41,11 @@ function App() {
               </Link>
             </header>
             <Switch>
-              <Route path="/summoner/profile/:summonerName">
-                <ProfilePage />
-              </Route>
               <Route path="/" exact>
                 <SearchPage />
+              </Route>
+              <Route path="/summoner/profile/:summonerName">
+                <ProfilePage />
               </Route>
             </Switch>
           </div>
