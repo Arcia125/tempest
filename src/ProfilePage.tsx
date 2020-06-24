@@ -11,10 +11,10 @@ import { useSummonerQuery } from './operations';
 import { useParams } from 'react-router';
 
 const ProfilePage: FC = () => {
-  const x = useParams<{ summonerName: string }>();
+  const params = useParams<{ summonerName: string }>();
   const { loading, error, data } = useSummonerQuery({
     variables: {
-      username: x.summonerName,
+      username: params.summonerName,
     },
   });
 
