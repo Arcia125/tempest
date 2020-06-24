@@ -8,30 +8,13 @@ import './App.css';
 import { Logo } from './Logo';
 import SearchPage from './SearchPage';
 import ProfilePage from './ProfilePage';
-import ErrorBoundary from './ErrorBoundary';
-import { useErrorMutation } from './operations';
 import { Provider } from './lcuData';
+import ErrorReporter from './ErrorReporter';
 
 function App() {
-  const [reportError, errorMutation] = useErrorMutation();
-
   return (
     <Router>
-      <ErrorBoundary
-        onError={(errorState) => {
-          console.error(errorState);
-          reportError({
-            variables: {
-              error: JSON.stringify({
-                error: JSON.stringify(errorState.error, [
-                  ...Object.getOwnPropertyNames(errorState.error),
-                ]),
-                info: errorState.info,
-              }),
-            },
-          });
-        }}
-      >
+      <ErrorReporter>
         <Provider>
           <div className="App">
             <header className="App-header">
@@ -49,9 +32,9 @@ function App() {
             </Switch>
           </div>
         </Provider>
-      </ErrorBoundary>
+      </ErrorReporter>
     </Router>
-  );d
+  );
 }
 
 export default App;
