@@ -10,11 +10,10 @@ import SearchPage from './SearchPage';
 import ProfilePage from './ProfilePage';
 import ErrorBoundary from './ErrorBoundary';
 import { useErrorMutation } from './operations';
-import { lcuContext, useLcuData } from './lcuData';
+import { Provider } from './lcuData';
 
 function App() {
   const [reportError, errorMutation] = useErrorMutation();
-  const lcuData = useLcuData();
 
   return (
     <Router>
@@ -33,7 +32,7 @@ function App() {
           });
         }}
       >
-        <lcuContext.Provider value={lcuData}>
+        <Provider>
           <div className="App">
             <header className="App-header">
               <Link to="/">
@@ -49,10 +48,10 @@ function App() {
               </Route>
             </Switch>
           </div>
-        </lcuContext.Provider>
+        </Provider>
       </ErrorBoundary>
     </Router>
-  );
+  );d
 }
 
 export default App;

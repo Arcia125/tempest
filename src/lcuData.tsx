@@ -1,7 +1,7 @@
-import { createContext, useState, useEffect } from 'react';
+import React, { createContext, useState, useEffect, FC } from 'react';
 const { ipcRenderer } = window.require('electron');
 
-export const lcuContext = createContext({});
+const lcuContext = createContext({});
 
 export const useLcuData = () => {
   const [lcuData, setLcuData] = useState({});
@@ -20,4 +20,12 @@ export const useLcuData = () => {
   }, []);
 
   return lcuData;
-}
+};
+
+export const Provider: FC<{}> = ({ children }) => {
+  const lcuData = useLcuData();
+
+  return <lcuContext.Provider value={lcuData}>{children}</lcuContext.Provider>;
+};
+
+export const Consumer = lcuContext.Consumer;
