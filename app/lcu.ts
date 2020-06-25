@@ -1,4 +1,3 @@
-
 import WebSocket from 'ws';
 
 import { Emitter, EventReceiver, EventKey, BaseEmitter } from './Emitter';
@@ -118,5 +117,4 @@ export class LCUWebSocket implements WebSocketEmitter {
         break;
     }
   }
-
 }
