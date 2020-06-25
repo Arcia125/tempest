@@ -1,31 +1,43 @@
-import React, { createContext, useState, useEffect, FC } from 'react';
-const { ipcRenderer } = window.require('electron');
+// import React, {
+//   createContext,
+//   useState,
+//   useEffect,
+//   FC,
+//   useContext,
+// } from 'react';
 
-const lcuContext = createContext({});
+// import { LCUData } from './lcu';
 
-export const useLcuData = () => {
-  const [lcuData, setLcuData] = useState({});
-  useEffect(() => {
-    const handleLcuData: (event: any, ...args: any[]) => void = (
-      event,
-      data
-    ) => {
-      setLcuData(data);
-    };
-    ipcRenderer.on('lcu-data', handleLcuData);
-    ipcRenderer.send('get-lcu-data', '');
-    return () => {
-      ipcRenderer.off('lcu-data', handleLcuData);
-    };
-  }, []);
+// const { ipcRenderer } = window.require('electron');
 
-  return lcuData;
-};
+// export const lcuContext = createContext<LCUData | {}>({});
 
-export const Provider: FC<{}> = ({ children }) => {
-  const lcuData = useLcuData();
+// export const useLcuContext = () => useContext(lcuContext);
 
-  return <lcuContext.Provider value={lcuData}>{children}</lcuContext.Provider>;
-};
+// export const useLcuDataConnection = () => {
+//   const [lcuData, setLcuData] = useState({});
 
-export const Consumer = lcuContext.Consumer;
+//   useEffect(() => {
+//     const handleLcuData: (event: any, ...args: any[]) => void = (
+//       event,
+//       data
+//     ) => {
+//       setLcuData(data);
+//     };
+//     ipcRenderer.on('lcu-data', handleLcuData);
+//     ipcRenderer.send('get-lcu-data', '');
+//     return () => {
+//       ipcRenderer.off('lcu-data', handleLcuData);
+//     };
+//   }, []);
+
+//   return lcuData;
+// };
+
+// export const Provider: FC<{}> = ({ children }) => {
+//   const lcuData = useLcuDataConnection();
+
+//   return <lcuContext.Provider value={lcuData}>{children}</lcuContext.Provider>;
+// };
+
+// export const Consumer = lcuContext.Consumer;
