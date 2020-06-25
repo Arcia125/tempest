@@ -1,19 +1,21 @@
-const path = require('path');
-const { app, BrowserWindow, nativeImage, ipcMain } = require('electron');
-const isDev = require('electron-is-dev');
-const LCUConnector = require('lcu-connector');
+import path from 'path';
+import { app, BrowserWindow, nativeImage, ipcMain } from 'electron';
+import isDev from 'electron-is-dev';
+import LCUConnector from 'lcu-connector';
+
+import { LCUWebSocket, LCUData, LCU_SOCKET_TOPIC } from './lcu';
 
 const iconUrl = path.resolve(__dirname, 'favicon.ico');
 
-let mainWindow;
+let mainWindow: BrowserWindow | null, socket: LCUWebSocket;
 
 const indexHtmlPath = path.join(__dirname, './build/index.html');
 const indexHtmlUrl = `file://${indexHtmlPath}`;
 const lcuConnector = new LCUConnector();
-const lcuDataPromise = new Promise((resolve, reject) => {
+const lcuConnectionPromise = new Promise((resolve, reject) => {
   let resolved = false;
   lcuConnector.on('connect', async (data) => {
-    console.log('Connected to LCU', data);
+    // console.log('Connected to LCU', data);
     if (!resolved) {
       resolve(data);
       resolved = true;
@@ -24,13 +26,15 @@ const lcuDataPromise = new Promise((resolve, reject) => {
 
 function createWindow() {
   // Create the browser window.
+  const width = 800;
+  const height = 600;
   mainWindow = new BrowserWindow({
-    width: 800,
-    height: 600,
+    width,
+    height,
     icon: nativeImage.createFromPath(iconUrl),
     autoHideMenuBar: true,
-    minWidth: 665,
-    minHeight: 500,
+    minWidth: width * .9,
+    minHeight: height * .9,
     webPreferences: {
       nodeIntegration: true,
     },
@@ -41,12 +45,23 @@ function createWindow() {
   mainWindow.on('closed', () => (mainWindow = null));
 
   ipcMain.on('get-lcu-data', (event, data) => {
-    lcuDataPromise.then((data) => event.reply('lcu-data', data));
+    lcuConnectionPromise.then((data) => event.reply('lcu-data', data));
   });
   lcuConnector.start();
+
+  lcuConnectionPromise.then(data => {
+    console.log('creating socket');
+    socket = new LCUWebSocket(data as LCUData, '');
+    socket.onOpen(() => {
+      console.log('opened socket');
+      socket.on(LCU_SOCKET_TOPIC.JSONAPIEVENT, console.log);
+      socket.subscribe(LCU_SOCKET_TOPIC.JSONAPIEVENT);
+    })
+  })
 }
 
 app.whenReady().then(createWindow);
+
 
 app.on('activate', () => {
   if (mainWindow === null) createWindow();
