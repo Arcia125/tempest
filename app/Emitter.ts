@@ -14,10 +14,16 @@ export interface BaseEmitter<T extends EventMap> {
     (eventName: K, params: T[K]): void;
 }
 
+/**
+ * @description utility function to create a typesafe EventEmitter
+ */
 function createEmitter<T extends EventMap>(): BaseEmitter<T> {
   return new EventEmitter();
 }
 
+/**
+ * @description event emitter utility that allows typesafe EventEmitters.
+ */
 export class Emitter<T extends EventMap> implements BaseEmitter<T> {
   private innerEmitter = createEmitter();
 
