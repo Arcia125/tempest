@@ -1,6 +1,7 @@
 import WebSocket from 'ws';
 
 import { Emitter, EventReceiver, EventKey, BaseEmitter } from './Emitter';
+import LCUConnector from 'lcu-connector';
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
 
 export interface LCUData {
@@ -116,5 +117,49 @@ export class LCUWebSocket implements WebSocketEmitter {
         console.log('Unknown type, if you see this file an issue with at https://discord.gg/hPtrMcx with the following data:', [type, data]);
         break;
     }
+  }
+}
+
+
+
+export class LCUConnection {
+  private lcuConnectionPromise: Promise<LCUData> | null = null;
+  private createLCUConnection(lcuConnector: LCUConnector) {
+    return new Promise<LCUData>((resolve, reject) => {
+      let resolved = false;
+      lcuConnector.on('connect', async (data) => {
+        // console.log('Connected to LCU', data);
+        if (!resolved) {
+          resolve(data as unknown as LCUData);
+          resolved = true;
+        }
+      });
+      lcuConnector.start();
+    });
+  }
+
+  private resetLCUConnection() {
+    this.lcuConnector.stop();
+    return this.initLCUConnection();
+  }
+
+  private initLCUConnection() {
+    return (this.lcuConnectionPromise = this.createLCUConnection(this.lcuConnector));
+  }
+
+  public constructor(private lcuConnector: LCUConnector) {
+  }
+
+  public init() {
+    this.initLCUConnection()
+
+    return this;
+  }
+
+  public getLCUData(fresh: boolean = false): Promise<LCUData> {
+    if (fresh) {
+      return this.resetLCUConnection();
+    }
+    return this.lcuConnectionPromise || this.initLCUConnection();
   }
 }

@@ -3,26 +3,22 @@ import { app, BrowserWindow, nativeImage, ipcMain } from 'electron';
 import isDev from 'electron-is-dev';
 import LCUConnector from 'lcu-connector';
 
-import { LCUWebSocket, LCUData, LCU_SOCKET_TOPIC } from './lcu';
+import { LCUWebSocket, LCUData, LCU_SOCKET_TOPIC, LCUConnection } from './lcu';
 
 const iconUrl = path.resolve(__dirname, 'favicon.ico');
 
-let mainWindow: BrowserWindow | null, socket: LCUWebSocket;
+let mainWindow: BrowserWindow | null,
+  socket: LCUWebSocket;
 
 const indexHtmlPath = path.join(__dirname, './build/index.html');
 const indexHtmlUrl = `file://${indexHtmlPath}`;
 const lcuConnector = new LCUConnector();
-const lcuConnectionPromise = new Promise((resolve, reject) => {
-  let resolved = false;
-  lcuConnector.on('connect', async (data) => {
-    // console.log('Connected to LCU', data);
-    if (!resolved) {
-      resolve(data);
-      resolved = true;
-    }
-    if (mainWindow) mainWindow.webContents.send('lcu-data', data);
-  });
-});
+const lcuConnection = new LCUConnection(lcuConnector).init();
+
+// const lcuConnectionPromise = createLCUConnectionPromise(lcuConnector).then(data => {
+//   if (mainWindow) mainWindow.webContents.send('lcu-data', data);
+//   return data;
+// });
 
 function createWindow() {
   // Create the browser window.
@@ -43,13 +39,20 @@ function createWindow() {
   // mainWindow.loadURL('http://localhost:3000');
   mainWindow.loadURL(isDev ? 'http://localhost:3000' : indexHtmlUrl);
   mainWindow.on('closed', () => (mainWindow = null));
+}
 
+app.whenReady().then(createWindow);
+
+app.on('activate', () => {
+  if (mainWindow === null) createWindow();
+});
+
+app.on('browser-window-created', (event) => {
   ipcMain.on('get-lcu-data', (event, data) => {
-    lcuConnectionPromise.then((data) => event.reply('lcu-data', data));
+    lcuConnection.getLCUData().then((data) => event.reply('lcu-data', data));
   });
-  lcuConnector.start();
 
-  lcuConnectionPromise.then(data => {
+  lcuConnection.getLCUData().then(data => {
     console.log('creating socket');
     socket = new LCUWebSocket(data as LCUData, '');
     socket.onOpen(() => {
@@ -58,14 +61,8 @@ function createWindow() {
       socket.subscribe(LCU_SOCKET_TOPIC.JSONAPIEVENT);
     })
   })
-}
-
-app.whenReady().then(createWindow);
-
-
-app.on('activate', () => {
-  if (mainWindow === null) createWindow();
 });
+
 
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') app.quit();
