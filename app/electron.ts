@@ -2,7 +2,7 @@ import path from 'path';
 import { app, BrowserWindow, nativeImage, ipcMain } from 'electron';
 import isDev from 'electron-is-dev';
 import LCUConnector from 'lcu-connector';
-import { LCUConnection, LCUWebSocket, LCUData, LCU_SOCKET_TOPIC } from './lcu';
+import { LCUConnection, LCUWebSocket, LCU_SOCKET_TOPIC, LCUData } from './lcu';
 
 const iconUrl = path.resolve(__dirname, 'favicon.ico');
 

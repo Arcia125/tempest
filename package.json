@@ -32,6 +32,7 @@
     "react-router": "^5.2.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.1",
+    "react-toastify": "^6.0.6",
     "typescript": "^3.9.3",
     "ws": "^7.3.0"
   },
@@ -60,11 +61,13 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "build-main": "tsc --project ./tsconfig.main.json",
+    "build-main": "tsc --project ./app/tsconfig.json",
+    "build-main-prod": "npm run build-main -- --transpileOnly",
+    "typecheck-main": "npm run build-main -- --noEmit --watch",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "start-electron": "electron .",
-    "preelectron-pack": "npm run build",
+    "preelectron-pack": "concurrently \"npm run build\" \"npm run build-main\"",
     "watch-ts-electron": "cross-env NODE_ENV=dev nodemon -e ts,js,json --watch app --watch . --exec \"npm run build-main && npm run start-electron\"",
     "electron-dev": "concurrently \"cross-env BROWSER=none npm run start\" \"wait-on http://localhost:3000 && npm run watch-ts-electron\"",
     "electron-pack": "electron-builder build",

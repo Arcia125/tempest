@@ -14,9 +14,9 @@ const InnerApp = () => {
   return (
     <div className="App">
       <header className="App-header">
-        <Link to="/">
+        {/* <Link to="/">
           <Logo />
-        </Link>
+        </Link> */}
       </header>
       <Switch>
         <Route path="/" exact>
