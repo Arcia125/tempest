@@ -124,7 +124,8 @@ export class LCUWebSocket implements WebSocketEmitter {
 
 export class LCUConnection {
   private lcuConnectionPromise: Promise<LCUData> | null = null;
-  private createLCUConnection(lcuConnector: LCUConnector) {
+
+  private static createLCUConnection(lcuConnector: LCUConnector) {
     return new Promise<LCUData>((resolve, reject) => {
       let resolved = false;
       lcuConnector.on('connect', async (data) => {
@@ -138,17 +139,20 @@ export class LCUConnection {
     });
   }
 
+  private createLCUConnection() {
+    return LCUConnection.createLCUConnection(this.lcuConnector);
+  }
+
   private resetLCUConnection() {
     this.lcuConnector.stop();
     return this.initLCUConnection();
   }
 
   private initLCUConnection() {
-    return (this.lcuConnectionPromise = this.createLCUConnection(this.lcuConnector));
+    return (this.lcuConnectionPromise = this.createLCUConnection());
   }
 
-  public constructor(private lcuConnector: LCUConnector) {
-  }
+  public constructor(private lcuConnector: LCUConnector) { }
 
   public init() {
     this.initLCUConnection()
