@@ -2,7 +2,6 @@ import path from 'path';
 import { app, BrowserWindow, nativeImage, ipcMain } from 'electron';
 import isDev from 'electron-is-dev';
 import LCUConnector from 'lcu-connector';
-
 import { LCUWebSocket, LCUData, LCU_SOCKET_TOPIC, LCUConnection } from './lcu';
 
 const iconUrl = path.resolve(__dirname, 'favicon.ico');
@@ -57,8 +56,11 @@ app.on('browser-window-created', (event) => {
     socket = new LCUWebSocket(data as LCUData, '');
     socket.onOpen(() => {
       console.log('opened socket');
-      socket.on(LCU_SOCKET_TOPIC.JSONAPIEVENT, console.log);
-      socket.subscribe(LCU_SOCKET_TOPIC.JSONAPIEVENT);
+      socket.on(LCU_SOCKET_TOPIC.JSON_API_EVENT, event => {
+        if ((<any>event)?.uri?.includes('champ-select')) console.log(event);
+        else if (typeof event['uri'] === 'string') console.log(event.uri);
+      });
+      socket.subscribe(LCU_SOCKET_TOPIC.JSON_API_EVENT);
     })
   })
 });

@@ -37,13 +37,12 @@ enum WEB_SOCKET_MESSAGE {
 };
 
 export enum LCU_SOCKET_TOPIC {
-  JSONAPIEVENT = 'OnJsonApiEvent'
+  JSON_API_EVENT = 'OnJsonApiEvent'
 }
 
-type LCUWebsocketCallback = (this: WebSocket, ev: any) => any;
+type LCUWebsocketCallback<T> = EventReceiver<(this: WebSocket, ev: T) => any>;
 
-type WebSocketEmitter = BaseEmitter<Record<LCU_SOCKET_TOPIC, LCUWebsocketCallback>>;
-
+type WebSocketEmitter = BaseEmitter<Record<LCU_SOCKET_TOPIC, LCUWebsocketCallback<any>>>;
 
 export class LCUWebSocket implements WebSocketEmitter {
   private session: null | string = null;
@@ -54,7 +53,7 @@ export class LCUWebSocket implements WebSocketEmitter {
     // super(getLcuUrl(lcuData, endpoint, 'ws', false), 'wamp');
     this.socket = new WebSocket(getLcuUrl(lcuData, endpoint, 'wss'), 'wamp');
     this.socket.addEventListener('message', this.onMessage.bind(this))
-    this.socket.addEventListener('error', console.log);
+    this.socket.addEventListener('error', console.error);
   }
 
   close() {
@@ -74,7 +73,7 @@ export class LCUWebSocket implements WebSocketEmitter {
     return this.socket.send(JSON.stringify([type, topic]))
   }
 
-  on(topic: LCU_SOCKET_TOPIC, callback: EventReceiver<LCUWebsocketCallback>) {
+  on<T>(topic: LCU_SOCKET_TOPIC, callback: LCUWebsocketCallback<T>) {
     this.emitter.on(topic, callback);
   }
 
@@ -82,12 +81,12 @@ export class LCUWebSocket implements WebSocketEmitter {
     this.socket.addEventListener('open', cb);
   }
 
-  off(topic: LCU_SOCKET_TOPIC, callback: EventReceiver<LCUWebsocketCallback>) {
+  off<T>(topic: LCU_SOCKET_TOPIC, callback: LCUWebsocketCallback<T>) {
     this.emitter.off(topic, callback);
   }
 
-  emit(topic: LCU_SOCKET_TOPIC, callback: EventKey<LCUWebsocketCallback>) {
-    throw new Error('did you mean to call emit on an LCUWebSocket?')
+  emit<T>(topic: LCU_SOCKET_TOPIC, callback: EventKey<LCUWebsocketCallback<T>>): never {
+    throw new Error('did you mean to call emit on an LCUWebSocket?');
   }
 
   private onMessage(message: MessageEvent) {
