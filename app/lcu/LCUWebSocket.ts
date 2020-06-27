@@ -1,8 +1,9 @@
 import WebSocket from 'ws';
 
+import { Emitter, EventReceiver, EventKey, BaseEmitter } from '../Emitter';
 import { getLcuUrl } from './getLcuUrl';
 import { LCUData } from './LCUData';
-import { Emitter, EventReceiver, EventKey, BaseEmitter } from '../Emitter';
+import { LCUSocketTopic } from './LCUSocketTopic';
 
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
 
@@ -12,7 +13,7 @@ interface MessageEvent {
   target: WebSocket;
 }
 
-enum WEB_SOCKET_MESSAGE {
+const enum WEB_SOCKET_MESSAGE {
   WELCOME = 0,
   PREFIX = 1,
   CALL = 2,
@@ -24,13 +25,9 @@ enum WEB_SOCKET_MESSAGE {
   EVENT = 8
 };
 
-export enum LCU_SOCKET_TOPIC {
-  JSON_API_EVENT = 'OnJsonApiEvent'
-}
-
 type LCUWebsocketCallback<T> = EventReceiver<(this: WebSocket, ev: T) => any>;
 
-type WebSocketEmitter = BaseEmitter<Record<LCU_SOCKET_TOPIC, LCUWebsocketCallback<any>>>;
+type WebSocketEmitter = BaseEmitter<Record<LCUSocketTopic, LCUWebsocketCallback<any>>>;
 
 export class LCUWebSocket implements WebSocketEmitter {
   private session: null | string = null;
@@ -49,19 +46,19 @@ export class LCUWebSocket implements WebSocketEmitter {
     this.session = null;
   }
 
-  subscribe(topic: LCU_SOCKET_TOPIC) {
+  subscribe(topic: LCUSocketTopic) {
     this.sendMessage(WEB_SOCKET_MESSAGE.SUBSCRIBE, topic);
   }
 
-  unsubscribe(topic: LCU_SOCKET_TOPIC) {
+  unsubscribe(topic: LCUSocketTopic) {
     this.sendMessage(WEB_SOCKET_MESSAGE.UNSUBSCRIBE, topic);
   }
 
-  sendMessage(type: WEB_SOCKET_MESSAGE, topic: LCU_SOCKET_TOPIC) {
+  sendMessage(type: WEB_SOCKET_MESSAGE, topic: LCUSocketTopic) {
     return this.socket.send(JSON.stringify([type, topic]))
   }
 
-  on<T>(topic: LCU_SOCKET_TOPIC, callback: LCUWebsocketCallback<T>) {
+  on<T>(topic: LCUSocketTopic, callback: LCUWebsocketCallback<T>) {
     this.emitter.on(topic, callback);
   }
 
@@ -69,11 +66,11 @@ export class LCUWebSocket implements WebSocketEmitter {
     this.socket.addEventListener('open', cb);
   }
 
-  off<T>(topic: LCU_SOCKET_TOPIC, callback: LCUWebsocketCallback<T>) {
+  off<T>(topic: LCUSocketTopic, callback: LCUWebsocketCallback<T>) {
     this.emitter.off(topic, callback);
   }
 
-  emit<T>(topic: LCU_SOCKET_TOPIC, callback: EventKey<LCUWebsocketCallback<T>>): never {
+  emit<T>(topic: LCUSocketTopic, callback: EventKey<LCUWebsocketCallback<T>>): never {
     throw new Error('did you mean to call emit on an LCUWebSocket?');
   }
 
@@ -96,7 +93,7 @@ export class LCUWebSocket implements WebSocketEmitter {
         console.log('Unknown call, if you see this file an issue at https://discord.gg/hPtrMcx with the following data:', data);
         break;
       case WEB_SOCKET_MESSAGE.EVENT: {
-        const [topic, payload] = data as unknown as [LCU_SOCKET_TOPIC, any];
+        const [topic, payload] = data as unknown as [LCUSocketTopic, any];
         this.emitter.emit(topic, payload);
         break;
       }

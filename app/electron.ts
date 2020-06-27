@@ -2,7 +2,9 @@ import path from 'path';
 import { app, BrowserWindow, nativeImage, ipcMain } from 'electron';
 import isDev from 'electron-is-dev';
 import LCUConnector from 'lcu-connector';
-import { LCUConnection, LCUWebSocket, LCU_SOCKET_TOPIC, LCUData } from './lcu';
+import { LCUConnection, LCUWebSocket, LCUSocketTopic, LCUData, LCUPluginEvent } from './lcu';
+import { LCUEventEmitter } from './lcu/LCUEventEmitter';
+
 
 const iconUrl = path.resolve(__dirname, 'favicon.ico');
 
@@ -13,6 +15,9 @@ const indexHtmlPath = path.join(__dirname, './build/index.html');
 const indexHtmlUrl = `file://${indexHtmlPath}`;
 const lcuConnector = new LCUConnector();
 const lcuConnection = new LCUConnection(lcuConnector).init();
+console.log(LCUSocketTopic);
+console.log(LCUEventEmitter);
+export const lcuEmitter = new LCUEventEmitter();
 
 // const lcuConnectionPromise = createLCUConnectionPromise(lcuConnector).then(data => {
 //   if (mainWindow) mainWindow.webContents.send('lcu-data', data);
@@ -40,6 +45,7 @@ function createWindow() {
   mainWindow.on('closed', () => (mainWindow = null));
 }
 
+
 app.whenReady().then(createWindow);
 
 app.on('activate', () => {
@@ -56,16 +62,24 @@ app.on('browser-window-created', (event) => {
     socket = new LCUWebSocket(data as LCUData, '');
     socket.onOpen(() => {
       console.log('opened socket');
-      socket.on(LCU_SOCKET_TOPIC.JSON_API_EVENT, (event: any) => {
-        if (event?.uri?.includes('champ-select')) console.log(event);
-        else if (typeof event['uri'] === 'string') console.log(event.uri);
+      socket.on(LCUSocketTopic.JSON_API_EVENT, (event: any) => {
+        if (typeof event?.uri === 'string') lcuEmitter.handleJsonApiEvent(event);
+        else console.error(`Unexpected event emitted by LCUWebSocket ${JSON.stringify(event)}`);
+        // if (event?.uri?.includes('champ-select')) console.log(event);
+        // else if (typeof event['uri'] === 'string') console.log(event.uri);
       });
-      socket.subscribe(LCU_SOCKET_TOPIC.JSON_API_EVENT);
+      socket.subscribe(LCUSocketTopic.JSON_API_EVENT);
     })
   })
 });
 
 
+
+// lcuEmitter.on(LCUPluginEvent.CHAMP_SELECT, event => {
+//   ipcMain.emit(LCUPluginEvent.CHAMP_SELECT, event);
+// });
+
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') app.quit();
 });
+

@@ -1,6 +1,6 @@
 import LCUConnector from 'lcu-connector';
 
-import { LCUData } from "./LCUData";
+import { LCUData } from './LCUData';
 
 export class LCUConnection {
   private lcuConnectionPromise: Promise<LCUData> | null = null;
