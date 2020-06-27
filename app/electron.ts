@@ -2,8 +2,8 @@ import path from 'path';
 import { app, BrowserWindow, nativeImage, ipcMain } from 'electron';
 import isDev from 'electron-is-dev';
 import LCUConnector from 'lcu-connector';
-import { LCUConnection, LCUWebSocket, LCUSocketTopic, LCUData, LCUPluginEvent } from './lcu';
-import { LCUEventEmitter } from './lcu/LCUEventEmitter';
+
+import { LCUData, LCUSocketTopic, LCUConnection, LCUWebSocket, LCUEventEmitter } from './lcu';
 
 
 const iconUrl = path.resolve(__dirname, 'favicon.ico');
@@ -15,9 +15,7 @@ const indexHtmlPath = path.join(__dirname, './build/index.html');
 const indexHtmlUrl = `file://${indexHtmlPath}`;
 const lcuConnector = new LCUConnector();
 const lcuConnection = new LCUConnection(lcuConnector).init();
-console.log(LCUSocketTopic);
-console.log(LCUEventEmitter);
-export const lcuEmitter = new LCUEventEmitter();
+const lcuEmitter = new LCUEventEmitter();
 
 // const lcuConnectionPromise = createLCUConnectionPromise(lcuConnector).then(data => {
 //   if (mainWindow) mainWindow.webContents.send('lcu-data', data);

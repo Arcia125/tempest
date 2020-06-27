@@ -24,7 +24,7 @@ export class LCUEventEmitter extends Emitter<Record<LCUPluginEvent, any>> {
         break;
       }
       default: {
-        console.warn(`Unimplemented event ${plugin} plugin`);
+        console.warn(`Unimplemented event plugin ${plugin}`);
         this.emit(plugin as LCUPluginEvent, event);
       }
     }
