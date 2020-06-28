@@ -3,7 +3,7 @@ import { app, BrowserWindow, nativeImage, ipcMain } from 'electron';
 import isDev from 'electron-is-dev';
 import LCUConnector from 'lcu-connector';
 
-import { LCUData, LCUSocketTopic, LCUConnection, LCUWebSocket, LCUEventEmitter } from './lcu';
+import { LCUData, LCUSocketTopic, LCUConnection, LCUWebSocket, LCUEventEmitter, LCUPluginEvent } from './lcu';
 
 
 const iconUrl = path.resolve(__dirname, 'favicon.ico');
@@ -16,11 +16,6 @@ const indexHtmlUrl = `file://${indexHtmlPath}`;
 const lcuConnector = new LCUConnector();
 const lcuConnection = new LCUConnection(lcuConnector).init();
 const lcuEmitter = new LCUEventEmitter();
-
-// const lcuConnectionPromise = createLCUConnectionPromise(lcuConnector).then(data => {
-//   if (mainWindow) mainWindow.webContents.send('lcu-data', data);
-//   return data;
-// });
 
 function createWindow() {
   // Create the browser window.
@@ -56,10 +51,8 @@ app.on('browser-window-created', (event) => {
   });
 
   lcuConnection.getLCUData().then(data => {
-    console.log('creating socket');
     socket = new LCUWebSocket(data as LCUData, '');
     socket.onOpen(() => {
-      console.log('opened socket');
       socket.on(LCUSocketTopic.JSON_API_EVENT, (event: any) => {
         if (typeof event?.uri === 'string') lcuEmitter.handleJsonApiEvent(event);
         else console.error(`Unexpected event emitted by LCUWebSocket ${JSON.stringify(event)}`);
@@ -67,6 +60,7 @@ app.on('browser-window-created', (event) => {
         // else if (typeof event['uri'] === 'string') console.log(event.uri);
       });
       socket.subscribe(LCUSocketTopic.JSON_API_EVENT);
+      lcuEmitter.registerWindowEmitters(mainWindow, Object.values(LCUPluginEvent))
     })
   })
 });
