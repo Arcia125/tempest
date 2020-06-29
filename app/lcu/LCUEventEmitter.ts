@@ -3,21 +3,18 @@ import { ipcMain, BrowserWindow } from 'electron';
 import { Emitter } from '../Emitter';
 import { LCUPluginEvent } from './LCUPluginEvent';
 
-const getPlugin = (eventUri: string) => eventUri.split('/')[1];
+const getPlugin = (eventUri: string): LCUPluginEvent => eventUri.split('/')[1] as LCUPluginEvent;
 
 const plugins = Object.values(LCUPluginEvent);
 
 export class LCUEventEmitter extends Emitter<Record<LCUPluginEvent, any>> {
-  constructor() {
-    super();
-  }
 
   public handleJsonApiEvent(event: { uri: string }) {
     const plugin = getPlugin(event.uri);
-    if (plugins.includes(plugin as LCUPluginEvent)) this.emit(plugin as LCUPluginEvent, event);
+    if (plugins.includes(plugin)) this.emit(plugin, event);
     else {
       console.warn(`Unimplemented event plugin ${plugin} ${event.uri}`);
-      this.emit(plugin as LCUPluginEvent, event);
+      this.emit(plugin, event);
     }
     // switch (plugin) {
     //   case LCUPluginEvent.CHAMP_SELECT:
@@ -31,24 +28,14 @@ export class LCUEventEmitter extends Emitter<Record<LCUPluginEvent, any>> {
     // }
   }
 
-  private emitOnIPCMain(pluginEventKey: LCUPluginEvent) {
+  private emitOn(emit: LCUEventEmitter["emit"], pluginEventKey: LCUPluginEvent) {
     this.on(pluginEventKey, event => {
       console.log('emitting', pluginEventKey);
-      ipcMain.emit(pluginEventKey, event);
+      emit(pluginEventKey, event);
     });
   }
-
-  public registerIpcMainEmitters(pluginEvents: LCUPluginEvent[]) {
-    pluginEvents.forEach(pluginEvent => {
-      console.log(`registering plugin ${pluginEvent}`)
-      this.emitOnIPCMain(pluginEvent);
-    });
-  }
-
   private emitOnWindow(window: BrowserWindow, pluginEventKey: LCUPluginEvent) {
-    this.on(pluginEventKey, event => {
-      window.webContents.send(pluginEventKey, event);
-    })
+    this.emitOn(window.webContents.send.bind(window.webContents), pluginEventKey);
   }
 
   public registerWindowEmitters(window: BrowserWindow, pluginEventKeys: LCUPluginEvent[]) {
