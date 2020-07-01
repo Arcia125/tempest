@@ -4,8 +4,6 @@ import * as reducers from './reducerTypes';
 import { lcuRequest, lcuContext } from './lcuData';
 import { getRequestArgs } from './shared/LCUPluginEvent';
 
-// const getCurrentSummoner = (lcuData: LCUData) => lcuFetch(lcuData, ...getRequestArgs('summoner', 'currentSummoner', {}));
-
 const getCurrentSummoner = () => lcuRequest(...getRequestArgs('summoner', 'currentSummoner', {}));
 
 interface CurrentSummonerData {
