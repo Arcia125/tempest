@@ -7,15 +7,38 @@ import React, {
 } from 'react';
 
 import { LCUData } from './shared/LCUData';
-import { getLcuUrl } from './shared/getLcuUrl';
+import { Channels } from './shared/ipc';
 
 const { ipcRenderer } = window.require('electron');
 
-export const lcuFetch = (
-  lcuData: LCUData,
-  endpoint: string,
-  options: RequestInit
-) => fetch(getLcuUrl(lcuData, endpoint), options);
+// export const lcuFetch = (
+//   lcuData: LCUData,
+//   endpoint: string,
+//   options: Partial<RequestInit>
+// ) => {
+//   console.log(options);
+//   return fetch(`${process.env.REACT_APP_API_URL || ''}${endpoint}`, {
+//     ...options,
+//     headers: {
+//       ...options.headers,
+//       Authorization: `Basic ${btoa(`${lcuData.username}:${lcuData.password}`)}`,
+//       Accept: 'application/json',
+//     },
+//   });
+// };
+
+export const lcuRequest = (endpoint: string, options: Partial<RequestInit>) => {
+  return new Promise((resolve, reject) => {
+    ipcRenderer.on(Channels.LCU_RESPONSE, (event: any, data: any) => {
+      console.log(event, data);
+      resolve(data);
+    });
+    ipcRenderer.send(Channels.LCU_REQUEST, {
+      endpoint,
+      options: { ...options },
+    });
+  });
+};
 
 export const lcuContext = createContext<LCUData | {}>({});
 
@@ -29,12 +52,14 @@ export const useLcuDataConnection = () => {
       event,
       data
     ) => {
+      console.log('received lcuData', data);
       setLcuData(data);
     };
-    ipcRenderer.on('lcu-data', handleLcuData);
-    ipcRenderer.send('get-lcu-data', '');
+    ipcRenderer.on(Channels.LCU_DATA, handleLcuData);
+    ipcRenderer.send(Channels.GET_LCU_DATA, '');
+    console.log('asking for lcu-data');
     return () => {
-      ipcRenderer.off('lcu-data', handleLcuData);
+      ipcRenderer.off(Channels.LCU_DATA, handleLcuData);
     };
   }, []);
 

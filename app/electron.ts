@@ -2,10 +2,14 @@ import path from 'path';
 import { app, BrowserWindow, nativeImage, ipcMain } from 'electron';
 import isDev from 'electron-is-dev';
 import LCUConnector from 'lcu-connector';
+import fetch from 'node-fetch';
+import log from 'electron-log';
 
 import { LCUPluginEvent } from '../src/shared/LCUPluginEvent';
 import { LCUData } from '../src/shared/LCUData';
 import { LCUSocketTopic, LCUConnection, LCUWebSocket, LCUEventEmitter } from './lcu';
+import { getLcuUrl } from '../src/shared/getLcuUrl';
+import { Channels } from '../src/shared/ipc';
 
 const iconUrl = path.resolve(__dirname, 'favicon.ico');
 
@@ -43,22 +47,34 @@ function createWindow() {
 app.whenReady().then(createWindow);
 
 app.on('activate', () => {
+  log.info('activate')
   if (mainWindow === null) createWindow();
 });
 
 app.on('browser-window-created', (event) => {
-  ipcMain.on('get-lcu-data', (event, data) => {
-    lcuConnection.getLCUData().then((data) => event.reply('lcu-data', data));
+  ipcMain.on(Channels.GET_LCU_DATA, (event, data) => {
+    log.info('received request for lcu-data');
+    lcuConnection.getLCUData().then((data) => event.reply(Channels.LCU_DATA, data));
   });
-
   lcuConnection.getLCUData().then(data => {
+    ipcMain.on(Channels.LCU_REQUEST, (event, eventData) => {
+      log.info(Channels.LCU_REQUEST, eventData);
+      fetch(getLcuUrl(data, eventData.endpoint, 'https'), {
+        method: eventData.options.method,
+      }).then(async (res: any) => {
+        const response = await res.json();
+        log.info(Channels.LCU_RESPONSE, response);
+        event.reply(Channels.LCU_RESPONSE, response)
+      }).catch(err => log.error(err))
+      // event.reply('lcu-response', {});
+    });
     socket = new LCUWebSocket(data as LCUData, '');
     socket.onOpen(() => {
       socket.on(LCUSocketTopic.JSON_API_EVENT, (event: any) => {
         if (typeof event?.uri === 'string') lcuEmitter.handleJsonApiEvent(event);
-        else console.error(`Unexpected event emitted by LCUWebSocket ${JSON.stringify(event)}`);
-        // if (event?.uri?.includes('champ-select')) console.log(event);
-        // else if (typeof event['uri'] === 'string') console.log(event.uri);
+        else log.error(`Unexpected event emitted by LCUWebSocket ${JSON.stringify(event)}`);
+        // if (event?.uri?.includes('champ-select')) log.info(event);
+        // else if (typeof event['uri'] === 'string') log.info(event.uri);
       });
       socket.subscribe(LCUSocketTopic.JSON_API_EVENT);
       lcuEmitter.registerWindowEmitters(mainWindow, Object.values(LCUPluginEvent))

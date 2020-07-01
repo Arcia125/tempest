@@ -1,4 +1,4 @@
-import { useReducer } from 'react';
+import { useReducer, useCallback } from 'react';
 
 import { LCUPluginEvent } from './shared/LCUPluginEvent';
 import { useEventEffect } from './useEventEffect';
@@ -59,8 +59,9 @@ function dispatchFromEvent<T>(dispatch: React.Dispatch<Lobby.Action<T>>, event: 
 
 export const useLobby = () => {
   const lobby = useLobbyReducer();
-  useEventEffect(LCUPluginEvent.LOBBY, (sender, event) => {
+  const callback = useCallback((sender, event) => {
     dispatchFromEvent(lobby.dispatch, event);
-  })
+  }, [lobby.dispatch]);
+  useEventEffect(LCUPluginEvent.LOBBY, callback);
   return lobby;
 }

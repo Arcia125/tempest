@@ -1,3 +1,5 @@
+import * as reducers from './reducerTypes';
+
 export interface GameConfig {
   allowablePremadeSizes: number[];
   customLobbyName: string;
@@ -105,19 +107,13 @@ export interface Data {
 }
 
 
-export interface Action<T> { type: ActionType; data: T; }
-
-
 export enum ActionType {
   Update = 'Update',
   UpdateLobbyMembers = 'UpdateLobbyMembers'
 }
 
+export type ActionDispatcher = reducers.BaseActionDispatcher<ActionType>;
 
-export type Dispatch<T = any> = React.Dispatch<Action<T>>;
+export type Action<D> = reducers.BaseAction<ActionType, D>;
 
-
-export type ActionDispatcher<T = any> = (dispatch: Dispatch<T>, data: T) => void;
-
-
-export type Actions = Record<string, ActionDispatcher>;
+export type Actions = reducers.BaseActions<ActionType>;

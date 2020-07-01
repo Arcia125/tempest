@@ -11,12 +11,16 @@ import useChampSelect from './useChampSelect';
 import { useEventEffect } from './useEventEffect';
 import { useLobby } from './lobby';
 import Header from './Header';
+import { useCurrentSummoner } from './currentSummoner';
 import { Provider } from './lcuData';
 
 const logEvent = (sender: any, event: any) => console.log(event.uri, event);
 const InnerApp = () => {
   const champSelect = useChampSelect();
   const lobby = useLobby();
+  const summoner = useCurrentSummoner();
+
+  console.log(summoner);
 
   // useEventEffect('lol-matchmaking', logEvent);
   // useEventEffect('lol-champ-select', logEvent);

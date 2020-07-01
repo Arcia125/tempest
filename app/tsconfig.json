@@ -13,5 +13,6 @@
     "lib": ["esnext", "DOM"],
     "moduleResolution": "node"
   },
+  "include": [".", "../src/shared"],
   "files": ["./electron.ts"]
 }
