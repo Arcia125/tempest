@@ -11,6 +11,7 @@ import useChampSelect from './useChampSelect';
 import { useEventEffect } from './useEventEffect';
 import { useLobby } from './lobby';
 import Header from './Header';
+import { Provider } from './lcuData';
 
 const logEvent = (sender: any, event: any) => console.log(event.uri, event);
 const InnerApp = () => {
@@ -51,8 +52,8 @@ const InnerApp = () => {
 const Providers: FC = ({ children }) => (
   <Router>
     <ErrorReporter>
-      {/* <Provider>{children}</Provider> */}
-      {children}
+      <Provider>{children}</Provider>
+      {/* {children} */}
     </ErrorReporter>
   </Router>
 );

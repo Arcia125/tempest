@@ -1,8 +1,8 @@
 import WebSocket from 'ws';
 
 import { Emitter, EventReceiver, EventKey, BaseEmitter } from '../Emitter';
-import { getLcuUrl } from './getLcuUrl';
 import { LCUData } from '../../src/shared/LCUData';
+import { getLcuUrl } from '../../src/shared/getLcuUrl';
 import { LCUSocketTopic } from './LCUSocketTopic';
 
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";

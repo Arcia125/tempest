@@ -7,8 +7,15 @@ import React, {
 } from 'react';
 
 import { LCUData } from './shared/LCUData';
+import { getLcuUrl } from './shared/getLcuUrl';
 
 const { ipcRenderer } = window.require('electron');
+
+export const lcuFetch = (
+  lcuData: LCUData,
+  endpoint: string,
+  options: RequestInit
+) => fetch(getLcuUrl(lcuData, endpoint), options);
 
 export const lcuContext = createContext<LCUData | {}>({});
 
