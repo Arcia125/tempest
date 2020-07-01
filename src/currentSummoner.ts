@@ -66,7 +66,6 @@ export const useCurrentSummoner = () => {
     if ('username' in lcuData) {
       console.log('getting summoner');
       getSummoner();
-      // lcuFetch()
     }
   }, [lcuData]);
   return {

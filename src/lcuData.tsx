@@ -11,22 +11,6 @@ import { Channels } from './shared/ipc';
 
 const { ipcRenderer } = window.require('electron');
 
-// export const lcuFetch = (
-//   lcuData: LCUData,
-//   endpoint: string,
-//   options: Partial<RequestInit>
-// ) => {
-//   console.log(options);
-//   return fetch(`${process.env.REACT_APP_API_URL || ''}${endpoint}`, {
-//     ...options,
-//     headers: {
-//       ...options.headers,
-//       Authorization: `Basic ${btoa(`${lcuData.username}:${lcuData.password}`)}`,
-//       Accept: 'application/json',
-//     },
-//   });
-// };
-
 export const lcuRequest = (endpoint: string, options: Partial<RequestInit>) => {
   return new Promise((resolve, reject) => {
     ipcRenderer.on(Channels.LCU_RESPONSE, (event: any, data: any) => {
