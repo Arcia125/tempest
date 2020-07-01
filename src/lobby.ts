@@ -1,5 +1,6 @@
 import { useReducer } from 'react';
 
+import { LCUPluginEvent } from './shared/LCUPluginEvent';
 import { useEventEffect } from './useEventEffect';
 import * as Lobby from './lobbyTypes';
 
@@ -50,16 +51,16 @@ const useLobbyReducer = () => {
   };
 };
 
-const dispatchFromEvent = (lobby: ReturnType<typeof useLobbyReducer>, event: { uri: string, eventType: string, data: any }) => {
+function dispatchFromEvent<T>(dispatch: React.Dispatch<Lobby.Action<T>>, event: { uri: string, eventType: string, data: any }) {
   const action = events[event.eventType]?.[event.uri];
   if (!action) console.warn(`Unsupported event uri and eventType combination ${event.uri} ${event.eventType}`)
-  else action?.(lobby.dispatch, event.data);
+  else action?.(dispatch, event.data);
 }
 
 export const useLobby = () => {
   const lobby = useLobbyReducer();
-  useEventEffect('lol-lobby', (sender, event) => {
-    dispatchFromEvent(lobby, event);
+  useEventEffect(LCUPluginEvent.LOBBY, (sender, event) => {
+    dispatchFromEvent(lobby.dispatch, event);
   })
   return lobby;
 }

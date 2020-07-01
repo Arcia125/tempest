@@ -3,8 +3,9 @@ import { app, BrowserWindow, nativeImage, ipcMain } from 'electron';
 import isDev from 'electron-is-dev';
 import LCUConnector from 'lcu-connector';
 
-import { LCUData, LCUSocketTopic, LCUConnection, LCUWebSocket, LCUEventEmitter, LCUPluginEvent } from './lcu';
-
+import { LCUPluginEvent } from '../src/shared/LCUPluginEvent';
+import { LCUData } from '../src/shared/LCUData';
+import { LCUSocketTopic, LCUConnection, LCUWebSocket, LCUEventEmitter } from './lcu';
 
 const iconUrl = path.resolve(__dirname, 'favicon.ico');
 

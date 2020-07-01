@@ -1,7 +1,7 @@
 import { ipcMain, BrowserWindow } from 'electron';
 
+import { LCUPluginEvent } from '../../src/shared/LCUPluginEvent';
 import { Emitter } from '../Emitter';
-import { LCUPluginEvent } from './LCUPluginEvent';
 
 const getPlugin = (eventUri: string): LCUPluginEvent => eventUri.split('/')[1] as LCUPluginEvent;
 

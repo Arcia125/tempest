@@ -10,6 +10,7 @@ import ErrorReporter from './ErrorReporter';
 import useChampSelect from './useChampSelect';
 import { useEventEffect } from './useEventEffect';
 import { useLobby } from './lobby';
+import Header from './Header';
 
 const logEvent = (sender: any, event: any) => console.log(event.uri, event);
 const InnerApp = () => {
@@ -34,11 +35,7 @@ const InnerApp = () => {
   // useEventEffect('lol-clash', logEvent);
   return (
     <div className="App">
-      <header className="App-header">
-        {/* <Link to="/">
-          <Logo />
-        </Link> */}
-      </header>
+      <Header />
       <Switch>
         <Route path="/" exact>
           <SearchPage />
