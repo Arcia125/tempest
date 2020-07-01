@@ -53,6 +53,7 @@ const actions: reducers.BaseActions<CurrentSummonerActions> = {
 export const useCurrentSummoner = () => {
   const lcuData = useContext(lcuContext);
   const [state, dispatch] = useReducer(currentSummonerReducer, initialState);
+
   useEffect(() => {
     async function getSummoner() {
       actions.load(dispatch);
@@ -68,6 +69,7 @@ export const useCurrentSummoner = () => {
       getSummoner();
     }
   }, [lcuData]);
+
   return {
     state,
     dispatch,

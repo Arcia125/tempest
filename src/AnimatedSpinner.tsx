@@ -1,9 +1,8 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { FC } from 'react';
 
 import './AnimatedSpinner.css';
 
-const AnimatedSpinner = (props) => {
+const AnimatedSpinner: FC = (props) => {
   return (
     <div className="AnimatedSpinner">
       <div></div>
@@ -11,6 +10,5 @@ const AnimatedSpinner = (props) => {
   );
 };
 
-AnimatedSpinner.propTypes = {};
 
 export default AnimatedSpinner;
