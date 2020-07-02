@@ -12,7 +12,9 @@ import { useCurrentSummoner } from './currentSummoner';
 import { Provider } from './lcuData';
 import { useMatchMaking } from './matchMaking';
 
-const logEvent = (sender: any, event: any) => console.log(event.uri, event);
+const log = window.require('electron-log');
+
+const logEvent = (sender: any, event: any) => log.info(event.uri, event);
 const InnerApp = () => {
   const champSelect = useChampSelect();
   const lobby = useLobby();
@@ -21,7 +23,7 @@ const InnerApp = () => {
 
   const matchMaking = useMatchMaking();
 
-  console.log(matchMaking);
+  log.debug(matchMaking);
 
   // useEventEffect(getPlugin('matchMaking').name, logEvent);
   // useEventEffect('lol-champ-select', logEvent);
