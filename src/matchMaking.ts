@@ -21,7 +21,7 @@ const events: Record<string, Record<string, MatchMaking.ActionDispatcher>> = {
 }
 
 const matchMakingReducer = (state: MatchMaking.Data, action: MatchMaking.Action<any>): MatchMaking.Data => {
-  console.log('lobby reducer activated', state, action);
+  console.log('matchMaking reducer activated', state, action);
   switch (action.type) {
     case MatchMaking.ActionType.CreateSearch: {
       return action.data;
@@ -48,10 +48,10 @@ function dispatchFromEvent<T>(dispatch: React.Dispatch<MatchMaking.Action<T>>, e
 }
 
 export const useMatchMaking = () => {
-  const lobby = useMatchMakingReducer();
+  const matchMaking = useMatchMakingReducer();
   const callback = useCallback((sender, event) => {
-    dispatchFromEvent(lobby.dispatch, event);
-  }, [lobby.dispatch]);
+    dispatchFromEvent(matchMaking.dispatch, event);
+  }, [matchMaking.dispatch]);
   useEventEffect(LCUPluginEvent.MATCHMAKING, callback);
-  return lobby;
+  return matchMaking;
 }
