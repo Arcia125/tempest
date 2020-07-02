@@ -5,6 +5,7 @@ export interface Data {
 
 export enum ActionType {
   CreateSearch = 'CreateSearch',
+  UpdateSearch = 'UpdateSearch'
 }
 
 export type ActionDispatcher = reducers.BaseActionDispatcher<ActionType>;

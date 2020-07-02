@@ -12,6 +12,9 @@ const actions: MatchMaking.Actions = {
   createSearch: (dispatch, data: MatchMaking.Data) => {
     dispatch({ type: MatchMaking.ActionType.CreateSearch, data });
   },
+  updateSearch: (dispatch, data: MatchMaking.Data) => {
+    dispatch({ type: MatchMaking.ActionType.UpdateSearch, data });
+  }
   // updateLobbyCountdown
   // updateLastQueuedLobby
 }
@@ -19,6 +22,9 @@ const actions: MatchMaking.Actions = {
 const events: Record<string, Record<string, MatchMaking.ActionDispatcher>> = {
   Create: {
     '/lol-matchmaking/v1/search': actions.createSearch,
+  },
+  Update: {
+    '/lol-matchmaking/v1/search': actions.updateSearch
   }
 }
 
@@ -26,6 +32,9 @@ const matchMakingReducer = (state: MatchMaking.Data, action: MatchMaking.Action<
   log.silly('matchMaking reducer activated', state, action);
   switch (action.type) {
     case MatchMaking.ActionType.CreateSearch: {
+      return action.data;
+    }
+    case MatchMaking.ActionType.UpdateSearch: {
       return action.data;
     }
     default:
