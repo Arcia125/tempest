@@ -1,4 +1,5 @@
-import { ipcMain, BrowserWindow } from 'electron';
+import { BrowserWindow } from 'electron';
+import log from 'electron-log';
 
 import { LCUPluginEvent } from '../../src/shared/LCUPluginEvent';
 import { Emitter } from '../Emitter';
@@ -13,7 +14,7 @@ export class LCUEventEmitter extends Emitter<Record<LCUPluginEvent, any>> {
     const plugin = getPlugin(event.uri);
     if (plugins.includes(plugin)) this.emit(plugin, event);
     else {
-      console.warn(`Unimplemented event plugin ${plugin} ${event.uri}`);
+      log.warn(`Unimplemented event plugin ${plugin} ${event.uri}`);
       this.emit(plugin, event);
     }
     // switch (plugin) {
@@ -30,7 +31,7 @@ export class LCUEventEmitter extends Emitter<Record<LCUPluginEvent, any>> {
 
   private emitOn(emit: LCUEventEmitter["emit"], pluginEventKey: LCUPluginEvent) {
     this.on(pluginEventKey, event => {
-      console.log('emitting', pluginEventKey);
+      log.info('emitting', pluginEventKey);
       emit(pluginEventKey, event);
     });
   }
@@ -39,9 +40,9 @@ export class LCUEventEmitter extends Emitter<Record<LCUPluginEvent, any>> {
   }
 
   public registerWindowEmitters(window: BrowserWindow, pluginEventKeys: LCUPluginEvent[]) {
-    console.log('Regisering plugins on window');
+    log.info('Registering plugins on window');
     pluginEventKeys.forEach(pluginEventKey => {
-      console.log(`   ${pluginEventKey}`);
+      log.info(`   ${pluginEventKey}`);
       this.emitOnWindow(window, pluginEventKey);
     })
   }

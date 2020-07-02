@@ -13,16 +13,22 @@ import { useLobby } from './lobby';
 import Header from './Header';
 import { useCurrentSummoner } from './currentSummoner';
 import { Provider } from './lcuData';
+import { getPlugin } from './shared/LCUPluginEvent';
+import { useMatchMaking } from './matchMaking';
 
 const logEvent = (sender: any, event: any) => console.log(event.uri, event);
 const InnerApp = () => {
   const champSelect = useChampSelect();
   const lobby = useLobby();
+  // const matchMaking =;
   const summoner = useCurrentSummoner();
 
   console.log(summoner);
+  const matchMaking = useMatchMaking();
 
-  // useEventEffect('lol-matchmaking', logEvent);
+  console.log(matchMaking);
+
+  // useEventEffect(getPlugin('matchMaking').name, logEvent);
   // useEventEffect('lol-champ-select', logEvent);
   // useEventEffect('lol-gameflow', logEvent);
 

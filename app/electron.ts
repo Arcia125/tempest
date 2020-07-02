@@ -11,7 +11,7 @@ import { LCUSocketTopic, LCUConnection, LCUWebSocket, LCUEventEmitter } from './
 import { getLcuUrl } from '../src/shared/getLcuUrl';
 import { Channels } from '../src/shared/ipc';
 
-const iconUrl = path.resolve(__dirname, 'favicon.ico');
+const iconUrl = path.resolve(__dirname, '..', '..', 'public', 'favicon.ico');
 
 let mainWindow: BrowserWindow | null,
   socket: LCUWebSocket;

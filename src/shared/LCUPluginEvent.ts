@@ -29,15 +29,37 @@ export enum LCUPluginEvent {
 // 
 // type PluginName = 'matchMaking' | 'champSelect' | 'gameflow' | 'patch' | 'patcher' | 'gameClientChat' | 'chat' | 'hovercard' | 'clubsPublic' | 'suggestedPlayers' | 'lobby' | 'lobbyTeamBuilder' | 'clash' | 'perks' | 'summoner';
 
-type Method = 'GET' | 'POST' | 'PUT' | 'DELETE';
+enum Method {
+  GET = 'GET',
+  POST = 'POST',
+  PUT = 'PUT',
+  DELETE = 'DELETE'
+};
+
+type Methods = keyof Method;
 
 export const lcuPlugins = {
-  // matchMaking: {
-  //   name: LCUPluginEvent.MATCHMAKING,
-  //   baseUri: '/lol-matchmaking/v1/', endpoints: {
-
-  //   }
-  // },
+  matchMaking: {
+    name: LCUPluginEvent.MATCHMAKING,
+    baseUri: '/lol-matchmaking/v1/', endpoints: {
+      readyCheck: {
+        uri: 'ready-check',
+        method: Method.GET,
+      },
+      readyCheckAccept: {
+        uri: 'ready-check/accept',
+        method: Method.POST
+      },
+      readyCheckDecline: {
+        uri: 'ready-check/decline',
+        method: Method.POST
+      },
+      search: {
+        uri: 'search',
+        method: Method.PUT
+      },
+    }
+  },
   // champSelect: {
   //   name: LCUPluginEvent.CHAMP_SELECT,
   //   baseUri: '/lol-champ-select/v1/', endpoints: {
@@ -120,7 +142,7 @@ export const lcuPlugins = {
     baseUri: '/lol-summoner/v1/', endpoints: {
       currentSummoner: {
         uri: 'current-summoner',
-        method: 'GET' as Method
+        method: Method.GET
       }
     }
   },
@@ -136,7 +158,7 @@ export type LCUEndpoints = LCUPlugin["endpoints"];
 
 export type EndpointKey = keyof LCUEndpoints;
 
-export type LCUEndpoint = LCUEndpoints[EndpointKey] & { uri: string; method: Method };
+export type LCUEndpoint = LCUEndpoints[EndpointKey] & { uri: string; method: Methods };
 
 export const getPlugin = (pluginKey: LCUPluginKey): LCUPlugin => {
   let plugin;
@@ -154,11 +176,11 @@ export const getEndpoint = (plugin: LCUPlugin, endpointKey: EndpointKey): LCUEnd
 
 export const getRequestArgs = (pluginKey: LCUPluginKey, endpointKey: EndpointKey, options: Partial<RequestInit>): [string, RequestInit] => {
   const plugin = getPlugin(pluginKey);
-  const endpoint = getEndpoint(plugin, endpointKey) as { uri: string; method: Method };
+  const endpoint = getEndpoint(plugin, endpointKey) as { uri: string; method: Methods };
   const endpointUri = `${plugin.baseUri}${endpoint.uri}`;
   return [endpointUri, {
     ...options,
-    method: endpoint.method
+    method: endpoint.method as string
   }];
   // `${plugin.baseUri}${}`
 };
