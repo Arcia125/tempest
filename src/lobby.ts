@@ -4,6 +4,8 @@ import { LCUPluginEvent } from './shared/LCUPluginEvent';
 import { useEventEffect } from './useEventEffect';
 import * as Lobby from './lobbyTypes';
 
+const log = window.require('electron-log');
+
 const initialState: Lobby.Data = {};
 
 const actions: Lobby.Actions = {
@@ -25,7 +27,7 @@ const events: Record<string, Record<string, Lobby.ActionDispatcher>> = {
 }
 
 const lobbyReducer = (state: Lobby.Data, action: Lobby.Action<any>): Lobby.Data => {
-  console.log('lobby reducer activated', state, action);
+  log.silly('lobby reducer activated', state, action);
   switch (action.type) {
     case Lobby.ActionType.Update: {
       return action.data;
@@ -37,7 +39,7 @@ const lobbyReducer = (state: Lobby.Data, action: Lobby.Action<any>): Lobby.Data 
       };
     }
     default:
-      console.warn(`Unsupported action type ${action.type}`);
+      log.warn(`Unsupported action type ${action.type}`);
       return state;
   }
 }
@@ -53,7 +55,7 @@ const useLobbyReducer = () => {
 
 function dispatchFromEvent<T>(dispatch: React.Dispatch<Lobby.Action<T>>, event: { uri: string, eventType: string, data: any }) {
   const action = events[event.eventType]?.[event.uri];
-  if (!action) console.warn(`Unsupported event uri and eventType combination ${event.uri} ${event.eventType}`)
+  if (!action) log.warn(`Unsupported event uri and eventType combination ${event.uri} ${event.eventType}`)
   else action?.(dispatch, event.data);
 }
 
