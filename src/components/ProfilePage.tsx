@@ -6,8 +6,8 @@ import {
   queueFromQueueType,
   romanNumeralToNumber,
   RomanNumeral,
-} from './rankedData';
-import { useSummonerQuery } from './operations';
+} from '../rankedData';
+import { useSummonerQuery } from '../operations';
 import { useParams } from 'react-router';
 
 const log = window.require('electron-log');

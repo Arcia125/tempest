@@ -4,7 +4,7 @@ import './Profile.css';
 import UsernamePlate from './UsernamePlate';
 import RankedBadge, { Props as RankedBadgeProps } from './RankedBadge';
 import MatchHistory from './MatchHistory';
-import { Maybe, MatchHistory as IMatchHistory } from './operations';
+import { Maybe, MatchHistory as IMatchHistory } from '../operations';
 
 export interface Props {
   profileIconId?: Maybe<string | number>;

@@ -5,12 +5,12 @@ import './App.css';
 import SearchPage from './SearchPage';
 import ProfilePage from './ProfilePage';
 import ErrorReporter from './ErrorReporter';
-import useChampSelect from './useChampSelect';
-import { useLobby } from './lobby';
+import useChampSelect from '../useChampSelect';
+import { useLobby } from '../lobby';
 import Header from './Header';
-import { useCurrentSummoner } from './currentSummoner';
-import { Provider } from './lcuData';
-import { useMatchMaking } from './matchMaking';
+import { useCurrentSummoner } from '../currentSummoner';
+import { Provider } from '../lcuData';
+import { useMatchMaking } from '../matchMaking';
 
 const log = window.require('electron-log');
 

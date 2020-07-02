@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import './RankedBadge.css';
 import Typography, { TypographyVariants } from './Typography';
-import { Maybe } from './operations';
+import { Maybe } from '../operations';
 
 export interface Props {
   tier?: Maybe<string>;

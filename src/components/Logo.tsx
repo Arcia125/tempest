@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 
-import { theme } from './theme';
+import { theme } from '../theme';
 
 const Logo: FC<{}> = (props) => {
   return (

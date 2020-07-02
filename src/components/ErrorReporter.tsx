@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 
-import { useErrorMutation } from './operations';
+import { useErrorMutation } from '../operations';
 import ErrorBoundary from './ErrorBoundary';
 
 const log = window.require('electron-log');

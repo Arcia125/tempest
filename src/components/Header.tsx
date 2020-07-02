@@ -3,9 +3,9 @@ import { Link } from 'react-router-dom';
 
 import './Header.css';
 import { RiotImage } from './RiotImage';
-import { RiotImageType } from './types';
+import { RiotImageType } from '../types';
 import Typography, { TypographyVariants } from './Typography';
-import { CurrentSummonerResponse } from './shared/LCUResponses';
+import { CurrentSummonerResponse } from '../shared/LCUResponses';
 
 interface Props {
   summoner?: CurrentSummonerResponse;

@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 
 import './SearchInput.css';
 import SearchIcon from './SearchIcon';
-import { classNames } from './utils';
+import { classNames } from '../utils';
 
 interface PropsBase {
   onSearch: () => void;
