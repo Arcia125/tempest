@@ -4,6 +4,8 @@ import * as reducers from './reducerTypes';
 import { lcuRequest, lcuContext } from './lcuData';
 import { getRequestArgs } from './shared/LCUPluginEvent';
 
+const log = window.require('electron-log');
+
 const getCurrentSummoner = () => lcuRequest(...getRequestArgs('summoner', 'currentSummoner', {}));
 
 interface CurrentSummonerData {
@@ -63,7 +65,7 @@ export const useCurrentSummoner = () => {
       }
     }
     if ('username' in lcuData) {
-      console.log('getting summoner');
+      log.silly('getting summoner');
       getSummoner();
     }
   }, [lcuData]);
