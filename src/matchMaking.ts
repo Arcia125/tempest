@@ -4,6 +4,8 @@ import { LCUPluginEvent } from './shared/LCUPluginEvent';
 import { useEventEffect } from './useEventEffect';
 import * as MatchMaking from './matchMakingTypes';
 
+const log = window.require('electron-log');
+
 const initialState: MatchMaking.Data = {};
 
 const actions: MatchMaking.Actions = {
@@ -21,13 +23,13 @@ const events: Record<string, Record<string, MatchMaking.ActionDispatcher>> = {
 }
 
 const matchMakingReducer = (state: MatchMaking.Data, action: MatchMaking.Action<any>): MatchMaking.Data => {
-  console.log('matchMaking reducer activated', state, action);
+  log.silly('matchMaking reducer activated', state, action);
   switch (action.type) {
     case MatchMaking.ActionType.CreateSearch: {
       return action.data;
     }
     default:
-      console.warn(`Unsupported action type ${action.type}`);
+      log.warn(`Unsupported action type ${action.type}`);
       return state;
   }
 }
@@ -43,7 +45,7 @@ const useMatchMakingReducer = () => {
 
 function dispatchFromEvent<T>(dispatch: React.Dispatch<MatchMaking.Action<T>>, event: { uri: string, eventType: string, data: any }) {
   const action = events[event.eventType]?.[event.uri];
-  if (!action) console.warn(`Unsupported event uri and eventType combination ${event.uri} ${event.eventType}`)
+  if (!action) log.warn(`Unsupported event uri and eventType combination ${event.uri} ${event.eventType}`)
   else action?.(dispatch, event.data);
 }
 
