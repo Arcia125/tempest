@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 
 const { ipcRenderer } = window.require('electron');
+const log = window.require('electron-log');
 
 export const useEventEffect = (
   channel: string,
@@ -10,7 +11,7 @@ export const useEventEffect = (
   ) => any
 ) =>
   useEffect(() => {
-    console.log(`listening to channel ${channel}`);
+    log.silly(`listening to channel ${channel}`);
     ipcRenderer.on(channel, onEvent);
     return () => {
       ipcRenderer.removeListener(channel, onEvent);
