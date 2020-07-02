@@ -10,6 +10,8 @@ import {
 import { useSummonerQuery } from './operations';
 import { useParams } from 'react-router';
 
+const log = window.require('electron-log');
+
 const ProfilePage: FC = () => {
   const params = useParams<{ summonerName: string }>();
   const { loading, error, data } = useSummonerQuery({
@@ -20,7 +22,7 @@ const ProfilePage: FC = () => {
 
   if (loading) return <AnimatedSpinner />;
   if (error) {
-    console.error(error);
+    log.error(error);
     return <p>Something went wrong</p>;
   }
   const summoner = data?.summoner;
