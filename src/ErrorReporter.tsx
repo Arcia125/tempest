@@ -1,6 +1,9 @@
 import React, { FC } from 'react';
+
 import { useErrorMutation } from './operations';
 import ErrorBoundary from './ErrorBoundary';
+
+const log = window.require('electron-log');
 
 const ErrorReporter: FC = ({ children }) => {
   const [reportError, errorMutation] = useErrorMutation();
@@ -8,7 +11,7 @@ const ErrorReporter: FC = ({ children }) => {
   return (
     <ErrorBoundary
       onError={(errorState) => {
-        console.error(errorState);
+        log.error(errorState);
         reportError({
           variables: {
             error: JSON.stringify({
