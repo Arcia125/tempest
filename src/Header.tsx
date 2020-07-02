@@ -1,13 +1,14 @@
 import React, { FC } from 'react';
 import { Link } from 'react-router-dom';
 
-import { Summoner } from './operations';
+import './Header.css';
 import { RiotImage } from './RiotImage';
 import { RiotImageType } from './types';
 import Typography, { TypographyVariants } from './Typography';
+import { CurrentSummonerResponse } from './shared/LCUResponses';
 
 interface Props {
-  summoner?: Summoner;
+  summoner?: CurrentSummonerResponse;
 }
 
 const Header: FC<Props> = ({ summoner }) => {
@@ -17,14 +18,14 @@ const Header: FC<Props> = ({ summoner }) => {
           <Logo />
         </Link> */}
       {summoner && (
-        <Link to={`/summon/profile/${summoner.name}`}>
+        <Link to={`/summoner/profile/${summoner.displayName}`}>
           <RiotImage
             className="profile-icon"
             type={RiotImageType.PROFILEICON}
             name={summoner.profileIconId?.toString() || ''}
           />
           <Typography variant={TypographyVariants.h2}>
-            {summoner.name}
+            {summoner.displayName}
           </Typography>
         </Link>
       )}

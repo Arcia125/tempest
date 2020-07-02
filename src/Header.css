@@ -1,0 +1,16 @@
+.App-header {
+  background-color: var(--gunmetal);
+  padding: 14px;
+}
+
+.App-header a {
+  display: flex;
+  flex-direction: row;
+  text-decoration: none;
+}
+
+.App-header img.profile-icon {
+  border-radius: 50%;
+  width: 36px;
+  margin-right: 8px;
+}
