@@ -1,3 +1,5 @@
+const log = window !== null && window.require ? window.require('electron-log') : require('electron-log');
+
 export enum LCUPluginEvent {
   MATCHMAKING = 'lol-matchmaking',
   CHAMP_SELECT = 'lol-champ-select',
@@ -164,13 +166,13 @@ export const getPlugin = (pluginKey: LCUPluginKey): LCUPlugin => {
   let plugin;
   if (pluginKey in LCUPluginEvent) plugin = Object.values(lcuPlugins).find(plugin => plugin.name === pluginKey);
   else if (pluginKey in lcuPlugins) plugin = lcuPlugins[pluginKey as keyof typeof lcuPlugins];
-  if (!plugin) console.error(new Error(`Invalid pluginKey ${pluginKey}`));
+  if (!plugin) log.error(new Error(`Invalid pluginKey ${pluginKey}`));
   return plugin as LCUPlugin;
 };
 
 export const getEndpoint = (plugin: LCUPlugin, endpointKey: EndpointKey): LCUEndpoint => {
   const endpoint = plugin.endpoints[endpointKey];
-  if (endpoint == null) console.error(new Error(`Invalid endpointKey ${endpointKey}`));
+  if (endpoint == null) log.error(new Error(`Invalid endpointKey ${endpointKey}`));
   return endpoint;
 }
 
