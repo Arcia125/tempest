@@ -1,3 +1,4 @@
+import log from 'electron-log';
 import WebSocket from 'ws';
 
 import { Emitter, EventReceiver, EventKey, BaseEmitter } from '../Emitter';
@@ -38,7 +39,7 @@ export class LCUWebSocket implements WebSocketEmitter {
     // super(getLcuUrl(lcuData, endpoint, 'ws', false), 'wamp');
     this.socket = new WebSocket(getLcuUrl(lcuData, endpoint, 'wss'), 'wamp');
     this.socket.addEventListener('message', this.onMessage.bind(this))
-    this.socket.addEventListener('error', console.error);
+    this.socket.addEventListener('error', log.error);
   }
 
   close() {
@@ -76,7 +77,7 @@ export class LCUWebSocket implements WebSocketEmitter {
 
   private onMessage(message: MessageEvent) {
     if (!message.data) {
-      console.warn('malformed message', message);
+      log.warn('malformed message', message);
       return;
     }
     const [type, ...data]: [WEB_SOCKET_MESSAGE, any[]] = JSON.parse(message.data);
@@ -85,12 +86,12 @@ export class LCUWebSocket implements WebSocketEmitter {
     switch (type) {
       case WEB_SOCKET_MESSAGE.WELCOME:
         this.session = data?.[0] as unknown as string;
-        console.log('session', this.session);
+        log.info('session', this.session);
         // this.protocolVersion = data[1];
         // this.details = data[2];
         break;
       case WEB_SOCKET_MESSAGE.CALLRESULT:
-        console.log('Unknown call, if you see this file an issue at https://discord.gg/hPtrMcx with the following data:', data);
+        log.warn('Unknown call, if you see this file an issue at https://discord.gg/hPtrMcx with the following data:', data);
         break;
       case WEB_SOCKET_MESSAGE.EVENT: {
         const [topic, payload] = data as unknown as [LCUSocketTopic, any];
@@ -98,7 +99,7 @@ export class LCUWebSocket implements WebSocketEmitter {
         break;
       }
       default:
-        console.log('Unknown type, if you see this file an issue with at https://discord.gg/hPtrMcx with the following data:', [type, data]);
+        log.warn('Unknown type, if you see this file an issue with at https://discord.gg/hPtrMcx with the following data:', [type, data]);
         break;
     }
   }
