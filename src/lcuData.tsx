@@ -10,11 +10,12 @@ import { LCUData } from './shared/LCUData';
 import { Channels } from './shared/ipc';
 
 const { ipcRenderer } = window.require('electron');
+const log = window.require('electron-log');
 
 export const lcuRequest = (endpoint: string, options: Partial<RequestInit>) => {
   return new Promise((resolve, reject) => {
     ipcRenderer.on(Channels.LCU_RESPONSE, (event: any, data: any) => {
-      console.log(event, data);
+      log.silly(event, data);
       resolve(data);
     });
     ipcRenderer.send(Channels.LCU_REQUEST, {
@@ -36,12 +37,12 @@ export const useLcuDataConnection = () => {
       event,
       data
     ) => {
-      console.log('received lcuData', data);
+      log.silly('received lcuData', data);
       setLcuData(data);
     };
     ipcRenderer.on(Channels.LCU_DATA, handleLcuData);
     ipcRenderer.send(Channels.GET_LCU_DATA, '');
-    console.log('asking for lcu-data');
+    log.silly('asking for lcu-data');
     return () => {
       ipcRenderer.off(Channels.LCU_DATA, handleLcuData);
     };
