@@ -1,16 +1,18 @@
 import React, { FC } from 'react';
 import { MemoryRouter as Router, Switch, Route } from 'react-router';
+import { ApolloProvider } from '@apollo/react-hooks';
 
 import './App.css';
 import SearchPage from './SearchPage';
 import ProfilePage from './ProfilePage';
 import ErrorReporter from './ErrorReporter';
+import Header from './Header';
 import useChampSelect from '../useChampSelect';
 import { useLobby } from '../lobby';
-import Header from './Header';
 import { useCurrentSummoner } from '../currentSummoner';
 import { Provider } from '../lcuData';
 import { useMatchMaking } from '../matchMaking';
+import { apolloClient } from '../apolloClient';
 
 const log = window.require('electron-log');
 
@@ -57,12 +59,14 @@ const InnerApp = () => {
 };
 
 const Providers: FC = ({ children }) => (
-  <Router>
-    <ErrorReporter>
-      <Provider>{children}</Provider>
-      {/* {children} */}
-    </ErrorReporter>
-  </Router>
+  <ApolloProvider client={apolloClient}>
+    <Router>
+      <ErrorReporter>
+        <Provider>{children}</Provider>
+        {/* {children} */}
+      </ErrorReporter>
+    </Router>
+  </ApolloProvider>
 );
 
 function App() {
