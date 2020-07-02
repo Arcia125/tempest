@@ -1,4 +1,4 @@
-const log = window !== null && window.require ? window.require('electron-log') : require('electron-log');
+const log = typeof window !== 'undefined' && window.require ? window.require('electron-log') : require('electron-log');
 
 export enum LCUPluginEvent {
   MATCHMAKING = 'lol-matchmaking',
