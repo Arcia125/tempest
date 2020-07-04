@@ -45,7 +45,7 @@ const InnerApp = () => {
   // useEventEffect('lol-clash', logEvent);
   return (
     <div className="App">
-      <Header summoner={summoner.state.data} />
+      <Header summoner={summoner.state.data} matchMaking={matchMaking.state} />
       <Switch>
         <Route path="/" exact>
           <SearchPage />

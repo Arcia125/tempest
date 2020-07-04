@@ -1,6 +1,11 @@
 .App-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   background-color: var(--gunmetal);
   padding: 14px;
+  height: 75px;
+  box-sizing: border-box;
 }
 
 .App-header a {
@@ -9,8 +14,20 @@
   text-decoration: none;
 }
 
-.App-header img.profile-icon {
-  border-radius: 50%;
+.App-header .profile-icon {
   width: 36px;
   margin-right: 8px;
+  position: relative;
+  display: inline-block;
+}
+
+.App-header .profile-icon img {
+  border-radius: 50%;
+  width: 100%;
+}
+
+.App-header .status-indicator {
+  position: absolute;
+  bottom: 5%;
+  right: 5%;
 }

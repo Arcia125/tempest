@@ -1,0 +1,13 @@
+.StatusIndicator {
+  height: 10px;
+  width: 10px;
+  border-radius: 100%;
+}
+
+.status-searching {
+  background-color: var(--baby-blue);
+}
+
+.status-creating {
+  background-color: var(--granny-smith-apple);
+}

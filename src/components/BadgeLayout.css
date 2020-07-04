@@ -1,0 +1,17 @@
+.BadgeLayout {
+  width: 36px;
+  margin-right: 8px;
+  position: relative;
+  display: inline-block;
+}
+
+.BadgeLayout>*:nth-child(1) {
+  border-radius: 50%;
+  width: 100%;
+}
+
+.BadgeLayout>*:nth-child(2) {
+  position: absolute;
+  bottom: 5%;
+  right: 5%;
+}

@@ -1,11 +1,13 @@
+import { MatchMakingResponse } from './shared/LCUResponses';
 import * as reducers from './reducerTypes';
-export interface Data {
-}
+
+export type Data = Partial<MatchMakingResponse>;
 
 
 export enum ActionType {
   CreateSearch = 'CreateSearch',
-  UpdateSearch = 'UpdateSearch'
+  UpdateSearch = 'UpdateSearch',
+  DeleteSearch = 'DeleteSearch'
 }
 
 export type ActionDispatcher = reducers.BaseActionDispatcher<ActionType>;

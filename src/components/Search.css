@@ -3,14 +3,14 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: calc(100vh - 73px);
+  height: calc(100vh - 75px);
 }
 
 .Search-storm {
   margin-bottom: 4px;
 }
 
-.Search #Search-label {
+.Search .Search-label {
   margin-bottom: 16px;
 }
 

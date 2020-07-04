@@ -8,6 +8,7 @@ const colors = {
   babyBlue: getCssPropertyValue('--baby-blue'),
   blizzardBlue: getCssPropertyValue('--blizzard-blue'),
   peach: getCssPropertyValue('--peach'),
+  grannySmithApple: getCssPropertyValue('--granny-smith-apple'),
 };
 
 export const theme = {
