@@ -1,4 +1,4 @@
-import { Remapped } from './types';
+import { Remapped } from '../types';
 
 export function mapBy<T extends {}>(arr: Array<T>, key: keyof T): Remapped<T> {
   return arr.reduce((acc, curr) => {
