@@ -1,4 +1,4 @@
-import * as reducers from './reducerTypes';
+import * as reducers from '../reducerTypes';
 
 export interface GameConfig {
   allowablePremadeSizes: number[];
