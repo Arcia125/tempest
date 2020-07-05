@@ -3,7 +3,7 @@ import React, { FC } from 'react';
 import './MatchHistoryPreview.css';
 import { RiotImageType } from '../types';
 import { RiotImage } from './RiotImage';
-import { getImageNameByChampionKey } from '../riotAsset';
+import { getImageNameByChampionKey } from '../data';
 import { championsByKey } from '../data';
 import {
   MatchHistoryItem,

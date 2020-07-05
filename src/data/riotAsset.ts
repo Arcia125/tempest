@@ -1,5 +1,5 @@
-import { RiotImageType } from './types';
-import { championsByKey } from './data/championData';
+import { RiotImageType } from '../types';
+import { championsByKey } from './championData';
 
 const CDN_BASE_URL = 'http://ddragon.leagueoflegends.com/cdn/'
 const PATCH_VERSION = '10.11.1';
