@@ -1,6 +1,6 @@
-import championJson from './static-data/champion.json';
-import { ChampionDTO } from './types';
-import { mapBy } from './utils';
+import championJson from '../static-data/champion.json';
+import { ChampionDTO } from '../types';
+import { mapBy } from '../utils';
 
 // const championNames = Object.keys(championJson.data);
 
