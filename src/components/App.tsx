@@ -7,8 +7,12 @@ import SearchPage from './SearchPage';
 import ProfilePage from './ProfilePage';
 import ErrorReporter from './ErrorReporter';
 import Header from './Header';
-import { useChampSelect, useLobby, useMatchMaking } from '../hooks';
-import { useCurrentSummoner } from '../currentSummoner';
+import {
+  useChampSelect,
+  useLobby,
+  useMatchMaking,
+  useCurrentSummoner,
+} from '../hooks';
 import { Provider } from '../lcuData';
 import { apolloClient } from '../apolloClient';
 import { log } from '../utils';

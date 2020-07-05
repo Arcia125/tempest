@@ -1,9 +1,9 @@
 import { useEffect, useReducer, useContext } from 'react';
 
-import * as reducers from './reducerTypes';
-import { lcuRequest, lcuContext } from './lcuData';
-import { getRequestArgs } from './shared/LCUPluginEvent';
-import { log } from './utils';
+import * as reducers from '../reducerTypes';
+import { lcuRequest, lcuContext } from '../lcuData';
+import { getRequestArgs } from '../shared/LCUPluginEvent';
+import { log } from '../utils';
 
 const getCurrentSummoner = () => lcuRequest(...getRequestArgs('summoner', 'currentSummoner', {}));
 

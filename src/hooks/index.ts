@@ -11,3 +11,5 @@ export { useSearch } from './useSearch';
 export { useLobby } from './useLobby';
 
 export { useMatchMaking } from './useMatchMaking';
+
+export { useCurrentSummoner } from './useCurrentSummoner';
