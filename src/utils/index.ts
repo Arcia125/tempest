@@ -1,5 +1,7 @@
 import { Remapped } from '../types';
 
+export { log } from './log';
+
 export function mapBy<T extends {}>(arr: Array<T>, key: keyof T): Remapped<T> {
   return arr.reduce((acc, curr) => {
     const newKey = curr[key];
