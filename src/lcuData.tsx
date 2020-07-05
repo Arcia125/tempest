@@ -2,10 +2,11 @@ import React, { createContext, FC, useContext } from 'react';
 
 import { LCUData } from './shared/LCUData';
 import { Channels } from './shared/ipc';
-import { useLcuDataConnection } from './useLcuDataConnection';
+import { useLcuDataConnection } from './hooks/useLcuDataConnection';
 import { log } from './utils';
 
 const { ipcRenderer } = window.require('electron');
+
 export const lcuRequest = (endpoint: string, options: Partial<RequestInit>) => {
   return new Promise((resolve, reject) => {
     ipcRenderer.on(Channels.LCU_RESPONSE, (event: any, data: any) => {
