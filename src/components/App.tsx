@@ -7,11 +7,9 @@ import SearchPage from './SearchPage';
 import ProfilePage from './ProfilePage';
 import ErrorReporter from './ErrorReporter';
 import Header from './Header';
-import { useChampSelect } from '../hooks';
-import { useLobby } from '../hooks';
+import { useChampSelect, useLobby, useMatchMaking } from '../hooks';
 import { useCurrentSummoner } from '../currentSummoner';
 import { Provider } from '../lcuData';
-import { useMatchMaking } from '../matchMaking';
 import { apolloClient } from '../apolloClient';
 import { log } from '../utils';
 
