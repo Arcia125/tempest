@@ -4,7 +4,7 @@ import './Search.css';
 import Typography, { TypographyVariants } from './Typography';
 import StormIcon from './StormIcon';
 import SearchInput from './SearchInput';
-import { useSearch } from '../hooks/useSearch';
+import { useSearch } from '../hooks';
 
 export interface Props {}
 

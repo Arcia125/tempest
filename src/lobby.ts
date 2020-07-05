@@ -1,7 +1,7 @@
 import { useReducer, useCallback } from 'react';
 
 import { LCUPluginEvent } from './shared/LCUPluginEvent';
-import { useEventEffect } from './hooks/useEventEffect';
+import { useEventEffect } from './hooks';
 import * as Lobby from './lobbyTypes';
 import { log } from './utils';
 

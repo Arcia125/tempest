@@ -2,7 +2,7 @@ import React, { createContext, FC, useContext } from 'react';
 
 import { LCUData } from './shared/LCUData';
 import { Channels } from './shared/ipc';
-import { useLcuDataConnection } from './hooks/useLcuDataConnection';
+import { useLcuDataConnection } from './hooks';
 import { log } from './utils';
 
 const { ipcRenderer } = window.require('electron');

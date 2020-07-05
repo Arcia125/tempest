@@ -7,7 +7,7 @@ import SearchPage from './SearchPage';
 import ProfilePage from './ProfilePage';
 import ErrorReporter from './ErrorReporter';
 import Header from './Header';
-import useChampSelect from '../hooks/useChampSelect';
+import useChampSelect from '../hooks';
 import { useLobby } from '../lobby';
 import { useCurrentSummoner } from '../currentSummoner';
 import { Provider } from '../lcuData';
