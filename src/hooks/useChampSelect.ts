@@ -5,7 +5,7 @@ import { useState, useEffect } from 'react';
 
 // const ws = new WebSocket();
 
-const useChampSelect = () => {
+export const useChampSelect = () => {
   // const lcuData = useLcuContext();
   // const listenToChampSelect = 
   const [inChampSelect, setInChampSelect] = useState(false);
@@ -29,5 +29,3 @@ const useChampSelect = () => {
   }, [])
   return null;
 };
-
-export default useChampSelect;

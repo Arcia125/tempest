@@ -1,4 +1,4 @@
-export { default as useChampSelect } from './useChampSelect';
+export { useChampSelect } from './useChampSelect';
 
 export { useEventEffect } from './useEventEffect';
 
