@@ -3,7 +3,7 @@ import React, { createContext, FC, useContext } from 'react';
 import { LCUData } from './shared/LCUData';
 import { Channels } from './shared/ipc';
 import { useLcuDataConnection } from './useLcuDataConnection';
-import { log } from './log';
+import { log } from './utils';
 
 const { ipcRenderer } = window.require('electron');
 export const lcuRequest = (endpoint: string, options: Partial<RequestInit>) => {

@@ -3,8 +3,7 @@ import { useReducer, useCallback } from 'react';
 import { LCUPluginEvent } from './shared/LCUPluginEvent';
 import { useEventEffect } from './hooks/useEventEffect';
 import * as MatchMaking from './matchMakingTypes';
-
-const log = window.require('electron-log');
+import { log } from './utils';
 
 const initialState: MatchMaking.Data = {};
 

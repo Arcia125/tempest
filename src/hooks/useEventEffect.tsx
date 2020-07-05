@@ -1,7 +1,8 @@
 import { useEffect } from 'react';
 
+import { log } from '../utils';
+
 const { ipcRenderer } = window.require('electron');
-const log = window.require('electron-log');
 
 export const useEventEffect = (
   channel: string,

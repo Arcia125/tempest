@@ -2,8 +2,7 @@ import React, { FC } from 'react';
 
 import { useErrorMutation } from '../operations';
 import ErrorBoundary from './ErrorBoundary';
-
-const log = window.require('electron-log');
+import { log } from '../utils';
 
 const ErrorReporter: FC = ({ children }) => {
   const [reportError, errorMutation] = useErrorMutation();

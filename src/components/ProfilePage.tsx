@@ -9,8 +9,7 @@ import {
 } from '../rankedData';
 import { useSummonerQuery } from '../operations';
 import { useParams } from 'react-router';
-
-const log = window.require('electron-log');
+import { log } from '../utils';
 
 const ProfilePage: FC = () => {
   const params = useParams<{ summonerName: string }>();

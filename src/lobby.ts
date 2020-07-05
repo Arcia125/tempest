@@ -3,8 +3,7 @@ import { useReducer, useCallback } from 'react';
 import { LCUPluginEvent } from './shared/LCUPluginEvent';
 import { useEventEffect } from './hooks/useEventEffect';
 import * as Lobby from './lobbyTypes';
-
-const log = window.require('electron-log');
+import { log } from './utils';
 
 const initialState: Lobby.Data = {};
 

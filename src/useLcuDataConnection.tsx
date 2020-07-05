@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
+
 import { Channels } from './shared/ipc';
-import { log } from './lcuData';
+import { log } from './utils';
 
 const { ipcRenderer } = window.require('electron');
 

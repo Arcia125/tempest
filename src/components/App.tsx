@@ -13,8 +13,7 @@ import { useCurrentSummoner } from '../currentSummoner';
 import { Provider } from '../lcuData';
 import { useMatchMaking } from '../matchMaking';
 import { apolloClient } from '../apolloClient';
-
-const log = window.require('electron-log');
+import { log } from '../utils';
 
 const logEvent = (sender: any, event: any) => log.info(event.uri, event);
 const InnerApp = () => {
