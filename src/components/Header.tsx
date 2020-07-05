@@ -27,7 +27,6 @@ const Header: FC<Props> = ({ summoner, matchMaking }) => {
         </Link> */}
       {summoner && (
         <Link to={`/summoner/profile/${summoner.displayName}`}>
-          {/* <div className="profile-icon"> */}
           <BadgeLayout>
             <RiotImage
               type={RiotImageType.PROFILEICON}
@@ -40,7 +39,6 @@ const Header: FC<Props> = ({ summoner, matchMaking }) => {
               className="status-indicator"
             />
           </BadgeLayout>
-          {/* </div> */}
           <Typography variant={TypographyVariants.h2}>
             {summoner.displayName}
           </Typography>
