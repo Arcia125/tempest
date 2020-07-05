@@ -13,7 +13,7 @@ import {
   MatchParticipantIdentity,
 } from '../operations';
 import Typography, { TypographyVariants } from './Typography';
-import { getQueueName } from '../queueData';
+import { getQueueName } from '../data';
 import { leftPad } from '../utils';
 
 export interface Props {
