@@ -558,3 +558,5 @@ export interface ChampionDTO {
     attackspeed: number;
   };
 }
+
+export * as Lobby from './lobby';
