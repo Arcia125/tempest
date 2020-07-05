@@ -1,4 +1,4 @@
-import queues from './queues.json';
+import queues from './static-data/queues.json';
 
 interface Queue {
   description: string | null;
