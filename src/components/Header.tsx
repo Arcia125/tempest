@@ -22,9 +22,6 @@ const Header: FC<Props> = ({ summoner, matchMaking }) => {
 
   return (
     <header className="App-header">
-      {/* <Link to="/">
-          <Logo />
-        </Link> */}
       {summoner && (
         <Link to={`/summoner/profile/${summoner.displayName}`}>
           <BadgeLayout>
