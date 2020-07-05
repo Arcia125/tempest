@@ -6,7 +6,7 @@ import { RiotImage } from './RiotImage';
 import { RiotImageType } from '../types';
 import Typography, { TypographyVariants } from './Typography';
 import { CurrentSummonerResponse } from '../shared/LCUResponses';
-import { useSearch } from '../useSearch';
+import { useSearch } from '../hooks/useSearch';
 import SearchInput from './SearchInput';
 import StatusIndicator from './StatusIndicator';
 import * as matchMakingTypes from '../matchMakingTypes';
