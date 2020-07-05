@@ -4,7 +4,7 @@ import './MatchHistoryPreview.css';
 import { RiotImageType } from '../types';
 import { RiotImage } from './RiotImage';
 import { getImageNameByChampionKey } from '../riotAsset';
-import { championsByKey } from '../data/championData';
+import { championsByKey } from '../data';
 import {
   MatchHistoryItem,
   Maybe,
