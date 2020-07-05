@@ -1,4 +1,4 @@
-import getCssPropertyValue from './getCssPropertyValue';
+import { getCssPropertyValue } from './utils';
 
 const colors = {
   richBlack: getCssPropertyValue('--rich-black'),
