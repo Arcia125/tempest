@@ -35,3 +35,5 @@ export type { ChampionDTO } from './ChampionDTO';
 export * as Lobby from './lobby';
 
 export * as Reducer from './reducer';
+
+export * as MatchMaking from './matchMaking';

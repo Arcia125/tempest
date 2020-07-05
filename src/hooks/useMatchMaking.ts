@@ -2,7 +2,7 @@ import { useReducer, useCallback } from 'react';
 
 import { LCUPluginEvent } from '../shared/LCUPluginEvent';
 import { useEventEffect } from './useEventEffect';
-import * as MatchMaking from '../matchMakingTypes';
+import { MatchMaking } from '../types';
 import { log } from '../utils';
 
 const initialState: MatchMaking.Data = {};

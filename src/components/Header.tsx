@@ -9,12 +9,12 @@ import { CurrentSummonerResponse } from '../shared/LCUResponses';
 import { useSearch } from '../hooks';
 import SearchInput from './SearchInput';
 import StatusIndicator from './StatusIndicator';
-import * as matchMakingTypes from '../matchMakingTypes';
+import { MatchMaking } from '../types';
 import BadgeLayout from './BadgeLayout';
 
 interface Props {
   summoner?: CurrentSummonerResponse;
-  matchMaking: matchMakingTypes.Data;
+  matchMaking: MatchMaking.Data;
 }
 
 const Header: FC<Props> = ({ summoner, matchMaking }) => {
