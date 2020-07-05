@@ -6,7 +6,7 @@ import {
   queueFromQueueType,
   romanNumeralToNumber,
   RomanNumeral,
-} from '../rankedData';
+} from '../data';
 import { useSummonerQuery } from '../operations';
 import { useParams } from 'react-router';
 import { log } from '../utils';
