@@ -1,5 +1,5 @@
 import { MatchMakingResponse } from './shared/LCUResponses';
-import * as reducers from './reducerTypes';
+import * as reducers from './types/reducer';
 
 export type Data = Partial<MatchMakingResponse>;
 

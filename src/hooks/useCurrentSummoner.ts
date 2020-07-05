@@ -1,6 +1,6 @@
 import { useEffect, useReducer, useContext } from 'react';
 
-import * as reducers from '../reducerTypes';
+import { Reducer } from '../types';
 import { lcuRequest, lcuContext } from '../lcuData';
 import { getRequestArgs } from '../shared/LCUPluginEvent';
 import { log } from '../utils';
@@ -24,7 +24,7 @@ enum CurrentSummonerActions {
   GET,
 }
 
-const currentSummonerReducer = (state: CurrentSummonerData, action: reducers.BaseAction<CurrentSummonerActions, any>): CurrentSummonerData => {
+const currentSummonerReducer = (state: CurrentSummonerData, action: Reducer.BaseAction<CurrentSummonerActions, any>): CurrentSummonerData => {
   switch (action.type) {
     case CurrentSummonerActions.LOAD:
       return { loading: true };
@@ -37,7 +37,7 @@ const currentSummonerReducer = (state: CurrentSummonerData, action: reducers.Bas
   }
 }
 
-const actions: reducers.BaseActions<CurrentSummonerActions> = {
+const actions: Reducer.BaseActions<CurrentSummonerActions> = {
   load: (dispatch) => {
     dispatch({ type: CurrentSummonerActions.LOAD });
   },
