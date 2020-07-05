@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 
 import './UsernamePlate.css';
 import Typography, { TypographyVariants } from './Typography';
-import { createClassNameGenerator } from '../createClassNameGenerator';
+import { createClassNameGenerator } from '../utils';
 import { RiotImage } from './RiotImage';
 import { RiotImageType } from '../types';
 import { Maybe } from '../operations';

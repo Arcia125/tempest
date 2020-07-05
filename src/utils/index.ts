@@ -20,3 +20,5 @@ export function leftPad(val: string | number, pad: string, length: number) {
 export function classNames(...classes: Array<string | undefined>) {
   return classes.filter(v => !!v).join(' ');
 }
+
+export { createClassNameGenerator } from './createClassNameGenerator';

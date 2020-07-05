@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 
 import './Typography.css';
-import { createClassNameGenerator } from '../createClassNameGenerator';
+import { createClassNameGenerator } from '../utils';
 import { theme } from '../theme';
 
 export enum TypographyVariants {
