@@ -1,4 +1,4 @@
-import championJson from './champion.json';
+import championJson from './static-data/champion.json';
 import { ChampionDTO } from './types';
 import { mapBy } from './utils';
 
