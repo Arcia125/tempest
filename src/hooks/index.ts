@@ -7,3 +7,5 @@ export { useLcuDataConnection } from './useLcuDataConnection';
 export { useMockQuery } from './useMockQuery';
 
 export { useSearch } from './useSearch';
+
+export { useLobby } from './useLobby';

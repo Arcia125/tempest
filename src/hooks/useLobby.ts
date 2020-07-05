@@ -1,9 +1,9 @@
 import { useReducer, useCallback } from 'react';
 
-import { LCUPluginEvent } from './shared/LCUPluginEvent';
-import { useEventEffect } from './hooks';
-import * as Lobby from './lobbyTypes';
-import { log } from './utils';
+import { LCUPluginEvent } from '../shared/LCUPluginEvent';
+import { useEventEffect } from './useEventEffect';
+import * as Lobby from '../lobbyTypes';
+import { log } from '../utils';
 
 const initialState: Lobby.Data = {};
 

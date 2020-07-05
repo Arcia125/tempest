@@ -8,7 +8,7 @@ import ProfilePage from './ProfilePage';
 import ErrorReporter from './ErrorReporter';
 import Header from './Header';
 import { useChampSelect } from '../hooks';
-import { useLobby } from '../lobby';
+import { useLobby } from '../hooks';
 import { useCurrentSummoner } from '../currentSummoner';
 import { Provider } from '../lcuData';
 import { useMatchMaking } from '../matchMaking';
