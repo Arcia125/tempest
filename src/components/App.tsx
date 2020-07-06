@@ -18,6 +18,7 @@ import { apolloClient } from '../apolloClient';
 import { log } from '../utils';
 
 const logEvent = (sender: any, event: any) => log.info(event.uri, event);
+
 const InnerApp = () => {
   const champSelect = useChampSelect();
   const lobby = useLobby();
@@ -25,8 +26,6 @@ const InnerApp = () => {
   const summoner = useCurrentSummoner();
 
   const matchMaking = useMatchMaking();
-
-  log.debug(matchMaking);
 
   // useEventEffect(getPlugin('matchMaking').name, logEvent);
   // useEventEffect('lol-champ-select', logEvent);

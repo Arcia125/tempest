@@ -5,7 +5,8 @@ import { lcuRequest, lcuContext } from '../lcuData';
 import { getRequestArgs } from '../shared/LCUPluginEvent';
 import { log } from '../utils';
 
-const getCurrentSummoner = () => lcuRequest(...getRequestArgs('summoner', 'currentSummoner', {}));
+// TODO: fix never casting
+const getCurrentSummoner = () => lcuRequest(...getRequestArgs('summoner', 'currentSummoner' as never, {}));
 
 interface CurrentSummonerData {
   loading: boolean;
