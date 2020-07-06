@@ -5,7 +5,6 @@ import { ApolloProvider } from '@apollo/react-hooks';
 
 import '../../components/App.css';
 
-// import { Provider } from '../lcuData';
 import { apolloClient } from '../../apolloClient';
 import ErrorReporter from '../../components/ErrorReporter';
 import SearchPage from '../../components/SearchPage';

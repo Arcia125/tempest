@@ -1,15 +1,18 @@
-export { useChampSelect } from './useChampSelect';
-
-export { useEventEffect } from './useEventEffect';
-
-export { useLcuDataConnection } from './useLcuDataConnection';
 
 export { useMockQuery } from './useMockQuery';
 
 export { useSearch } from './useSearch';
 
-export { useLobby } from './useLobby';
+const isElectronEnv = typeof window.require === 'function';
 
-export { useMatchMaking } from './useMatchMaking';
+export const useChampSelect = isElectronEnv ? require('./useChampSelect').champSelect : null;
 
-export { useCurrentSummoner } from './useCurrentSummoner';
+export const useCurrentSummoner = isElectronEnv ? require('./useCurrentSummoner').useCurrentSummoner : null;
+
+export const useMatchMaking = isElectronEnv ? require('./useMatchMaking').useMatchMaking : null;
+
+export const useLobby = isElectronEnv ? require('./useLobby').useLobby : null;
+
+export const useEventEffect = isElectronEnv ? require('./useEventEffect').useEventEffect : null;
+
+export const useLcuDataConnection = isElectronEnv ? require('./useLcuDataConnection').useLcuDataConnection : null;
