@@ -14,7 +14,6 @@ import { Header } from './Header';
 const InnerApp = () => {
   return (
     <div className="App">
-      {/* <Header summoner={summoner.state.data} matchMaking={matchMaking.state} /> */}
       <Header />
       <Switch>
         <Route path="/" exact>
