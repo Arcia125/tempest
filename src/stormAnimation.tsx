@@ -25,32 +25,33 @@ export const initialSceneState: SceneState = {
 
 // const loadTexture = (url: string, )
 
-const texturesLoaded = new Promise<LoadedTextures>((resolve) => {
-  loader.setCrossOrigin('anonymous');
-  loader.load(
-    'https://s3-us-west-2.amazonaws.com/s.cdpn.io/982762/noise.png',
-    (tex) => {
-      const texture = tex;
-      texture.wrapS = THREE.RepeatWrapping;
-      texture.wrapT = THREE.RepeatWrapping;
-      texture.minFilter = THREE.LinearFilter;
-      loader.load(
-        'https://s3-us-west-2.amazonaws.com/s.cdpn.io/982762/clouds-1-tile.jpg',
-        (tex) => {
-          const bg = tex;
-          bg.wrapS = THREE.RepeatWrapping;
-          bg.wrapT = THREE.RepeatWrapping;
-          bg.minFilter = THREE.LinearFilter;
-          resolve({ texture, bg });
-        }
-      );
-    }
-  );
-});
+const loadTextures = () =>
+  new Promise<LoadedTextures>((resolve) => {
+    loader.setCrossOrigin('anonymous');
+    loader.load(
+      'https://s3-us-west-2.amazonaws.com/s.cdpn.io/982762/noise.png',
+      (tex) => {
+        const texture = tex;
+        texture.wrapS = THREE.RepeatWrapping;
+        texture.wrapT = THREE.RepeatWrapping;
+        texture.minFilter = THREE.LinearFilter;
+        loader.load(
+          'https://s3-us-west-2.amazonaws.com/s.cdpn.io/982762/clouds-1-tile.jpg',
+          (tex) => {
+            const bg = tex;
+            bg.wrapS = THREE.RepeatWrapping;
+            bg.wrapT = THREE.RepeatWrapping;
+            bg.minFilter = THREE.LinearFilter;
+            resolve({ texture, bg });
+          }
+        );
+      }
+    );
+  });
 
 export function init(container: Element, sceneState: SceneState) {
   // container = document.getElementById('container');
-  return texturesLoaded.then(({ texture, bg }) => {
+  return loadTextures().then(({ texture, bg }) => {
     sceneState.camera = new THREE.Camera();
     sceneState.camera.position.z = 1;
 
