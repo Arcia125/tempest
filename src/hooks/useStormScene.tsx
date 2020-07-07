@@ -6,14 +6,11 @@ export const useStormScene = () => {
   const sceneState = useRef(initialSceneState);
   const element = useRef(null);
   useEffect(() => {
-    console.log('effect started');
-    console.log(element.current);
     if (element.current == null)
       throw new Error(
         'Make sure to pass the ref returned from useStormScene to a domElement'
       );
     init(element.current!, sceneState.current).then(() => {
-      // animate();
       const render = createRenderer(sceneState.current);
       const animate = function animate(delta?: number) {
         requestAnimationFrame(animate);
@@ -24,7 +21,7 @@ export const useStormScene = () => {
     return () => {
       console.log('effect cleanup');
     };
-  });
+  }, []);
 
   return element;
 };
