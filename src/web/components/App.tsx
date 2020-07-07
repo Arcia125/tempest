@@ -8,18 +8,21 @@ import '../../components/App.css';
 import { apolloClient } from '../../apolloClient';
 import ErrorReporter from '../../components/ErrorReporter';
 import SearchPage from '../../components/SearchPage';
+import ProfilePage from '../../components/ProfilePage';
+import { Header } from './Header';
 
 const InnerApp = () => {
   return (
     <div className="App">
       {/* <Header summoner={summoner.state.data} matchMaking={matchMaking.state} /> */}
+      <Header />
       <Switch>
         <Route path="/" exact>
           <SearchPage />
         </Route>
-        {/* <Route path="/summoner/profile/:summonerName">
+        <Route path="/summoner/profile/:summonerName">
           <ProfilePage />
-        </Route> */}
+        </Route>
       </Switch>
     </div>
   );

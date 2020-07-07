@@ -1,7 +1,6 @@
 import React, { FC } from 'react';
 import { Link } from 'react-router-dom';
 
-import './Header.css';
 import { RiotImage } from './RiotImage';
 import { RiotImageType } from '../types';
 import Typography, { TypographyVariants } from './Typography';
@@ -11,6 +10,7 @@ import SearchInput from './SearchInput';
 import StatusIndicator from './StatusIndicator';
 import { MatchMaking } from '../types';
 import BadgeLayout from './BadgeLayout';
+import { HeaderContainer } from './HeaderContainer';
 
 interface Props {
   summoner?: CurrentSummonerResponse;
@@ -21,7 +21,7 @@ const Header: FC<Props> = ({ summoner, matchMaking }) => {
   const { search, handleSearch, setter } = useSearch();
 
   return (
-    <header className="App-header">
+    <HeaderContainer>
       {summoner && (
         <Link to={`/summoner/profile/${summoner.displayName}`}>
           <BadgeLayout>
@@ -42,7 +42,7 @@ const Header: FC<Props> = ({ summoner, matchMaking }) => {
         </Link>
       )}
       <SearchInput value={search} onChange={setter} onSearch={handleSearch} />
-    </header>
+    </HeaderContainer>
   );
 };
 
