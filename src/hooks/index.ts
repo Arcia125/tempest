@@ -5,7 +5,7 @@ export { useSearch } from './useSearch';
 
 const isElectronEnv = typeof window.require === 'function';
 
-export const useChampSelect = isElectronEnv ? require('./useChampSelect').champSelect : null;
+export const useChampSelect = isElectronEnv ? require('./useChampSelect').useChampSelect : null;
 
 export const useCurrentSummoner = isElectronEnv ? require('./useCurrentSummoner').useCurrentSummoner : null;
 

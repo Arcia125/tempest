@@ -1,0 +1,118 @@
+import * as THREE from 'three';
+
+const loader = new THREE.TextureLoader();
+let texture: THREE.Texture, bg: THREE.Texture;
+
+interface SceneState {
+  camera: THREE.Camera | null;
+  scene: THREE.Scene | null;
+  renderer: THREE.WebGLRenderer | null;
+  uniforms: {
+    [uniform: string]: THREE.IUniform;
+  } | null;
+}
+
+export const initialSceneState: SceneState = {
+  camera: null,
+  scene: null,
+  renderer: null,
+  uniforms: null,
+};
+
+const texturesLoaded = new Promise((resolve) => {
+  loader.setCrossOrigin('anonymous');
+  loader.load(
+    'https://s3-us-west-2.amazonaws.com/s.cdpn.io/982762/noise.png',
+    (tex) => {
+      texture = tex;
+      texture.wrapS = THREE.RepeatWrapping;
+      texture.wrapT = THREE.RepeatWrapping;
+      texture.minFilter = THREE.LinearFilter;
+      loader.load(
+        'https://s3-us-west-2.amazonaws.com/s.cdpn.io/982762/clouds-1-tile.jpg',
+        (tex) => {
+          bg = tex;
+          bg.wrapS = THREE.RepeatWrapping;
+          bg.wrapT = THREE.RepeatWrapping;
+          bg.minFilter = THREE.LinearFilter;
+          resolve();
+        }
+      );
+    }
+  );
+});
+
+export function init(container: Element, sceneState: SceneState) {
+  // container = document.getElementById('container');
+  return texturesLoaded.then(() => {
+    sceneState.camera = new THREE.Camera();
+    sceneState.camera.position.z = 1;
+
+    sceneState.scene = new THREE.Scene();
+
+    const geometry = new THREE.PlaneBufferGeometry(2, 2);
+
+    sceneState.uniforms = {
+      u_time: { type: 'f', value: 1.0 } as THREE.IUniform,
+      u_resolution: {
+        type: 'v2',
+        value: new THREE.Vector2(),
+      } as THREE.IUniform,
+      u_noise: { type: 't', value: texture } as THREE.IUniform,
+      u_bg: { type: 't', value: bg } as THREE.IUniform,
+      u_mouse: { type: 'v2', value: new THREE.Vector2() } as THREE.IUniform,
+      u_scroll: { type: 'f', value: 0 } as THREE.IUniform,
+    };
+
+    const material = new THREE.ShaderMaterial({
+      uniforms: sceneState.uniforms,
+      vertexShader: document.getElementById('vertexShader')!
+        .textContent as THREE.ShaderMaterialParameters['vertexShader'],
+      fragmentShader: document.getElementById('fragmentShader')!
+        .textContent as THREE.ShaderMaterialParameters['fragmentShader'],
+    });
+    material.extensions.derivatives = true;
+
+    const mesh = new THREE.Mesh(geometry, material);
+    sceneState.scene.add(mesh);
+
+    sceneState.renderer = new THREE.WebGLRenderer();
+    sceneState.renderer.setPixelRatio(window.devicePixelRatio);
+
+    container.appendChild(sceneState.renderer.domElement);
+
+    function onWindowResize() {
+      sceneState.renderer!.setSize(window.innerWidth, window.innerHeight);
+      sceneState.uniforms!.u_resolution.value.x = sceneState.renderer!.domElement.width;
+      sceneState.uniforms!.u_resolution.value.y = sceneState.renderer!.domElement.height;
+    }
+
+    onWindowResize();
+    window.addEventListener('resize', onWindowResize, false);
+
+    document.addEventListener('pointermove', (e) => {
+      let ratio = window.innerHeight / window.innerWidth;
+      sceneState.uniforms!.u_mouse.value.x =
+        (e.pageX - window.innerWidth / 2) / window.innerWidth / ratio;
+      sceneState.uniforms!.u_mouse.value.y =
+        ((e.pageY - window.innerHeight / 2) / window.innerHeight) * -1;
+
+      e.preventDefault();
+    });
+  });
+}
+
+export function createRenderer({
+  scene,
+  camera,
+  renderer,
+  uniforms,
+}: SceneState) {
+  return function render(delta?: number) {
+    if (typeof delta === 'number') {
+      uniforms!.u_time.value = -1000 + delta * 0.0005;
+    }
+    uniforms!.u_scroll.value = window.scrollY;
+    renderer!.render(scene!, camera!);
+  };
+}
