@@ -1,29 +1,27 @@
-import React, { FC } from 'react';
+import React, { FC, forwardRef } from 'react';
 
 import './Button.css';
 import { classNames } from '../utils';
 import Typography, { Props as TypographyProps } from './Typography';
+import { useStormScene } from '../hooks/useStormScene';
 
 export interface Props extends TypographyProps {
   onClick: React.EventHandler<React.MouseEvent>;
 }
 
-export const Button: FC<Props> = ({
-  children,
-  className,
-  color,
-  onClick,
-  ...restProps
-}) => {
-  return (
-    <button
-      onClick={onClick}
-      className={classNames('AppButton', className, color)}
-    >
-      <Typography {...restProps}>{children}</Typography>
-    </button>
-  );
-};
+export const Button: FC<Props> = forwardRef(
+  ({ children, className, color, onClick, ...restProps }, ref) => {
+    return (
+      <button
+        onClick={onClick}
+        ref={ref}
+        className={classNames('AppButton', className, color)}
+      >
+        <Typography {...restProps}>{children}</Typography>
+      </button>
+    );
+  }
+);
 
 export const ContainedButton: FC<Props> = ({ className, ...restProps }) => {
   return (
@@ -33,4 +31,21 @@ export const ContainedButton: FC<Props> = ({ className, ...restProps }) => {
 
 ContainedButton.defaultProps = {
   color: 'charcoal',
+};
+
+export const AnimatedButton: FC<Props> = ({
+  className,
+  children,
+  ...restProps
+}) => {
+  const el = useStormScene();
+  return (
+    <Button
+      {...restProps}
+      ref={el}
+      className={classNames('Animated', className)}
+    >
+      {children}
+    </Button>
+  );
 };

@@ -1,7 +1,7 @@
 import * as THREE from 'three';
 
 const loader = new THREE.TextureLoader();
-let texture: THREE.Texture, bg: THREE.Texture;
+// let texture: THREE.Texture, bg: THREE.Texture;
 
 interface SceneState {
   camera: THREE.Camera | null;
@@ -11,6 +11,10 @@ interface SceneState {
     [uniform: string]: THREE.IUniform;
   } | null;
 }
+interface LoadedTextures {
+  texture: THREE.Texture;
+  bg: THREE.Texture;
+}
 
 export const initialSceneState: SceneState = {
   camera: null,
@@ -19,23 +23,25 @@ export const initialSceneState: SceneState = {
   uniforms: null,
 };
 
-const texturesLoaded = new Promise((resolve) => {
+// const loadTexture = (url: string, )
+
+const texturesLoaded = new Promise<LoadedTextures>((resolve) => {
   loader.setCrossOrigin('anonymous');
   loader.load(
     'https://s3-us-west-2.amazonaws.com/s.cdpn.io/982762/noise.png',
     (tex) => {
-      texture = tex;
+      const texture = tex;
       texture.wrapS = THREE.RepeatWrapping;
       texture.wrapT = THREE.RepeatWrapping;
       texture.minFilter = THREE.LinearFilter;
       loader.load(
         'https://s3-us-west-2.amazonaws.com/s.cdpn.io/982762/clouds-1-tile.jpg',
         (tex) => {
-          bg = tex;
+          const bg = tex;
           bg.wrapS = THREE.RepeatWrapping;
           bg.wrapT = THREE.RepeatWrapping;
           bg.minFilter = THREE.LinearFilter;
-          resolve();
+          resolve({ texture, bg });
         }
       );
     }
@@ -44,7 +50,7 @@ const texturesLoaded = new Promise((resolve) => {
 
 export function init(container: Element, sceneState: SceneState) {
   // container = document.getElementById('container');
-  return texturesLoaded.then(() => {
+  return texturesLoaded.then(({ texture, bg }) => {
     sceneState.camera = new THREE.Camera();
     sceneState.camera.position.z = 1;
 
@@ -82,7 +88,11 @@ export function init(container: Element, sceneState: SceneState) {
     container.appendChild(sceneState.renderer.domElement);
 
     function onWindowResize() {
-      sceneState.renderer!.setSize(window.innerWidth, window.innerHeight);
+      const size: [number, number] = [
+        container.clientWidth,
+        container.clientHeight,
+      ];
+      sceneState.renderer!.setSize(...size);
       sceneState.uniforms!.u_resolution.value.x = sceneState.renderer!.domElement.width;
       sceneState.uniforms!.u_resolution.value.y = sceneState.renderer!.domElement.height;
     }
@@ -91,7 +101,7 @@ export function init(container: Element, sceneState: SceneState) {
     window.addEventListener('resize', onWindowResize, false);
 
     document.addEventListener('pointermove', (e) => {
-      let ratio = window.innerHeight / window.innerWidth;
+      const ratio = window.innerHeight / window.innerWidth;
       sceneState.uniforms!.u_mouse.value.x =
         (e.pageX - window.innerWidth / 2) / window.innerWidth / ratio;
       sceneState.uniforms!.u_mouse.value.y =

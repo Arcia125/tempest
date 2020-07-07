@@ -11,6 +11,7 @@ import StatusIndicator from './StatusIndicator';
 import { MatchMaking } from '../types';
 import BadgeLayout from './BadgeLayout';
 import { HeaderContainer } from './HeaderContainer';
+import { AnimatedButton } from './Button';
 
 interface Props {
   summoner?: CurrentSummonerResponse;
@@ -42,6 +43,12 @@ const Header: FC<Props> = ({ summoner, matchMaking }) => {
         </Link>
       )}
       <SearchInput value={search} onChange={setter} onSearch={handleSearch} />
+      <AnimatedButton onClick={console.log} variant={TypographyVariants.p}>
+        Test
+      </AnimatedButton>
+      <AnimatedButton onClick={console.log} variant={TypographyVariants.p}>
+        2
+      </AnimatedButton>
     </HeaderContainer>
   );
 };

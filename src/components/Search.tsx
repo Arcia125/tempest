@@ -13,7 +13,7 @@ const Search: FC<Props> = (props) => {
 
   return (
     <div className="Search">
-      <StormIcon className="Search-storm" />
+      {/* <StormIcon className="Search-storm" /> */}
       <main className="Search-main">
         <Typography className="Search-label" variant={TypographyVariants.h2}>
           Find a summoner

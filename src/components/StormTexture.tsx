@@ -7,36 +7,9 @@ The above copyright notice and this permission notice shall be included in all c
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-import React, { FC, useRef, useEffect } from 'react';
+import React, { FC } from 'react';
 
-import { initialSceneState, init, createRenderer } from '../stormAnimation';
-
-const useStormScene = () => {
-  const sceneState = useRef(initialSceneState);
-  const element = useRef(null);
-  useEffect(() => {
-    console.log('effect started');
-    console.log(element.current);
-    if (element.current == null)
-      throw new Error(
-        'Make sure to pass the ref returned from useStormScene to a domElement'
-      );
-    init(element.current!, sceneState.current).then(() => {
-      // animate();
-      const render = createRenderer(sceneState.current);
-      const animate = function animate(delta?: number) {
-        requestAnimationFrame(animate);
-        render(delta);
-      };
-      animate();
-    });
-    return () => {
-      console.log('effect cleanup');
-    };
-  });
-
-  return element;
-};
+import { useStormScene } from '../hooks/useStormScene';
 
 export const StormTexture: FC = (props) => {
   const el = useStormScene();

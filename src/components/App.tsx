@@ -55,7 +55,7 @@ const InnerApp = () => {
           <ProfilePage />
         </Route>
       </Switch>
-      <StormTexture />
+      {/* <StormTexture /> */}
     </div>
   );
 };
