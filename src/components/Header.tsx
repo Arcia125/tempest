@@ -1,6 +1,7 @@
 import React, { FC } from 'react';
 import { Link } from 'react-router-dom';
 
+import './Header.css';
 import { RiotImage } from './RiotImage';
 import { RiotImageType } from '../types';
 import Typography, { TypographyVariants } from './Typography';
@@ -21,7 +22,7 @@ const Header: FC<Props> = ({ summoner, matchMaking }) => {
   const { search, handleSearch, setter } = useSearch();
 
   return (
-    <HeaderContainer>
+    <HeaderContainer className="HeaderContainer">
       {summoner && (
         <Link to={`/summoner/profile/${summoner.displayName}`}>
           <BadgeLayout>

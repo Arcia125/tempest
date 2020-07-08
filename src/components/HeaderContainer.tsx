@@ -1,7 +1,12 @@
 import React, { FC } from 'react';
 
 import './HeaderContainer.css';
+import { classNames } from '../utils';
 
-export const HeaderContainer: FC = ({ children }) => (
-  <header className="App-header">{children}</header>
+export interface Props {
+  className?: string;
+}
+
+export const HeaderContainer: FC<Props> = ({ children, className }) => (
+  <header className={classNames('App-header', className)}>{children}</header>
 );

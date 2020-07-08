@@ -2,7 +2,6 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: var(--gunmetal);
   padding: 14px;
   height: 75px;
   box-sizing: border-box;
