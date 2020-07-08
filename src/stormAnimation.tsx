@@ -25,8 +25,6 @@ export const initialSceneState: Animation.SceneState = {
   uniforms: null,
 };
 
-// const loadTexture = (url: string, )
-
 const loadTextures = () =>
   new Promise<LoadedTextures>((resolve) => {
     loader.setCrossOrigin('anonymous');
