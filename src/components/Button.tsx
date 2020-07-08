@@ -1,20 +1,20 @@
-import React, { FC, forwardRef } from 'react';
+import React, { FC, forwardRef, PropsWithChildren } from 'react';
 
 import './Button.css';
 import { classNames } from '../utils';
 import Typography, { Props as TypographyProps } from './Typography';
 import { useStormScene } from '../hooks/useStormScene';
 
-export interface Props extends TypographyProps {
+export interface Props extends PropsWithChildren<TypographyProps> {
   onClick: React.EventHandler<React.MouseEvent>;
 }
 
-export const Button: FC<Props> = forwardRef(
+export const Button = forwardRef<FC<Props>, Props>(
   ({ children, className, color, onClick, ...restProps }, ref) => {
     return (
       <button
         onClick={onClick}
-        ref={ref}
+        ref={ref as any}
         className={classNames('AppButton', className, color)}
       >
         <Typography {...restProps}>{children}</Typography>
