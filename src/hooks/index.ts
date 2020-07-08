@@ -3,6 +3,8 @@ export { useMockQuery } from './useMockQuery';
 
 export { useSearch } from './useSearch';
 
+export { useStormScene } from './useStormScene';
+
 const isElectronEnv = typeof window.require === 'function';
 
 export const useChampSelect = isElectronEnv ? require('./useChampSelect').useChampSelect : null;

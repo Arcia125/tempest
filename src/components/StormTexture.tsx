@@ -9,7 +9,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
  */
 import React, { FC } from 'react';
 
-import { useStormScene } from '../hooks/useStormScene';
+import { useStormScene } from '../hooks';
 
 export const StormTexture: FC = (props) => {
   const el = useStormScene();

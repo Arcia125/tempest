@@ -3,7 +3,7 @@ import React, { FC, forwardRef, PropsWithChildren } from 'react';
 import './Button.css';
 import { classNames } from '../utils';
 import Typography, { Props as TypographyProps } from './Typography';
-import { useStormScene } from '../hooks/useStormScene';
+import { useStormScene } from '../hooks';
 
 export interface Props extends PropsWithChildren<TypographyProps> {
   onClick: React.EventHandler<React.MouseEvent>;
