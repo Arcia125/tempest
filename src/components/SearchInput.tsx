@@ -30,7 +30,7 @@ const SearchInput: FC<Props> = ({
         }}
       />
       <button className="SearchInput-submit" type="submit" onClick={onSearch}>
-        <SearchIcon />
+        <SearchIcon variant={variant} />
       </button>
     </div>
   );
