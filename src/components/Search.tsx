@@ -6,7 +6,9 @@ import StormIcon from './StormIcon';
 import SearchInput from './SearchInput';
 import { useSearch } from '../hooks';
 
-export interface Props {}
+export interface Props {
+  variant: 'window' | 'opaque';
+}
 
 const Search: FC<Props> = (props) => {
   const { search, handleSearch, setter } = useSearch();
@@ -18,7 +20,12 @@ const Search: FC<Props> = (props) => {
         <Typography className="Search-label" variant={TypographyVariants.h2}>
           Find a summoner
         </Typography>
-        <SearchInput value={search} onChange={setter} onSearch={handleSearch} />
+        <SearchInput
+          variant={props.variant}
+          value={search}
+          onChange={setter}
+          onSearch={handleSearch}
+        />
       </main>
     </div>
   );

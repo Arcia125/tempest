@@ -42,7 +42,12 @@ const Header: FC<Props> = ({ summoner, matchMaking }) => {
           </Typography>
         </Link>
       )}
-      <SearchInput value={search} onChange={setter} onSearch={handleSearch} />
+      <SearchInput
+        variant="opaque"
+        value={search}
+        onChange={setter}
+        onSearch={handleSearch}
+      />
     </HeaderContainer>
   );
 };

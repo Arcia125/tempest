@@ -48,7 +48,7 @@ const InnerApp = () => {
       <Header summoner={summoner.state.data} matchMaking={matchMaking.state} />
       <Switch>
         <Route path="/" exact>
-          <SearchPage />
+          <SearchPage variant="opaque" />
         </Route>
         <Route path="/summoner/profile/:summonerName">
           <ProfilePage />

@@ -19,7 +19,7 @@ const InnerApp = () => {
       <Header />
       <Switch>
         <Route path="/" exact>
-          <SearchPage />
+          <SearchPage variant="window" />
         </Route>
         <Route path="/summoner/profile/:summonerName">
           <ProfilePage />

@@ -1,7 +1,17 @@
 .SearchInput {
-  background-color: var(--charcoal);
   display: flex;
   align-items: center;
+}
+
+.SearchInput.variant-opaque {
+  background-color: var(--charcoal);
+}
+
+.SearchInput.variant-window {
+  /* background-color: rgba(20, 9, 72, .8); */
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(158, 175, 208, 0.3);
+  border-radius: 9px;
 }
 
 .SearchInput-input {

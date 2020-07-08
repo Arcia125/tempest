@@ -1,0 +1,5 @@
+.HeaderContainer {
+  background: rgb(20, 9, 72);
+  background: linear-gradient(180deg, rgba(20, 9, 72, 0.6) 0%, rgba(20, 9, 72, 0.2) 35%, rgba(20, 9, 72, 0) 100%);
+  backdrop-filter: blur(10px);
+}

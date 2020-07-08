@@ -1,6 +1,7 @@
 import React, { FC } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 
+import './Header.css';
 import { HeaderContainer } from '../../components/HeaderContainer';
 import SearchInput from '../../components/SearchInput';
 import { useSearch } from '../../hooks';
@@ -34,11 +35,16 @@ export const Header: FC = (props) => {
   const { search, setter, handleSearch } = useSearch();
 
   return (
-    <HeaderContainer>
+    <HeaderContainer className="HeaderContainer">
       <Link to="/">
         <Logo />
       </Link>
-      <SearchInput value={search} onChange={setter} onSearch={handleSearch} />
+      <SearchInput
+        variant="window"
+        value={search}
+        onChange={setter}
+        onSearch={handleSearch}
+      />
       <LoginLinks />
     </HeaderContainer>
   );
