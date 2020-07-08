@@ -14,8 +14,8 @@ import { Animation } from './types';
 const loader = new THREE.TextureLoader();
 
 interface LoadedTextures {
-  texture: THREE.Texture;
-  bg: THREE.Texture;
+  noise: THREE.Texture;
+  clouds: THREE.Texture;
 }
 
 export const initialSceneState: Animation.SceneState = {
@@ -31,18 +31,18 @@ const loadTextures = () =>
     loader.load(
       'https://s3-us-west-2.amazonaws.com/s.cdpn.io/982762/noise.png',
       (tex) => {
-        const texture = tex;
-        texture.wrapS = THREE.RepeatWrapping;
-        texture.wrapT = THREE.RepeatWrapping;
-        texture.minFilter = THREE.LinearFilter;
+        const noise = tex;
+        noise.wrapS = THREE.RepeatWrapping;
+        noise.wrapT = THREE.RepeatWrapping;
+        noise.minFilter = THREE.LinearFilter;
         loader.load(
           'https://s3-us-west-2.amazonaws.com/s.cdpn.io/982762/clouds-1-tile.jpg',
           (tex) => {
-            const bg = tex;
-            bg.wrapS = THREE.RepeatWrapping;
-            bg.wrapT = THREE.RepeatWrapping;
-            bg.minFilter = THREE.LinearFilter;
-            resolve({ texture, bg });
+            const clouds = tex;
+            clouds.wrapS = THREE.RepeatWrapping;
+            clouds.wrapT = THREE.RepeatWrapping;
+            clouds.minFilter = THREE.LinearFilter;
+            resolve({ noise, clouds });
           }
         );
       }
@@ -51,7 +51,7 @@ const loadTextures = () =>
 
 export function init(container: HTMLElement, sceneState: Animation.SceneState) {
   // container = document.getElementById('container');
-  return loadTextures().then(({ texture, bg }) => {
+  return loadTextures().then(({ noise, clouds }) => {
     sceneState.camera = new THREE.Camera();
     sceneState.camera.position.z = 1;
 
@@ -65,8 +65,8 @@ export function init(container: HTMLElement, sceneState: Animation.SceneState) {
         type: 'v2',
         value: new THREE.Vector2(),
       } as THREE.IUniform,
-      u_noise: { type: 't', value: texture } as THREE.IUniform,
-      u_bg: { type: 't', value: bg } as THREE.IUniform,
+      u_noise: { type: 't', value: noise } as THREE.IUniform,
+      u_bg: { type: 't', value: clouds } as THREE.IUniform,
       u_mouse: {
         type: 'v2',
         value: new THREE.Vector2(),
