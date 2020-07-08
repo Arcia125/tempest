@@ -1,15 +1,15 @@
 import { getCssPropertyValue } from './utils';
 
 const colors = {
-  richBlack: getCssPropertyValue('--rich-black'),
-  gunmetal: getCssPropertyValue('--gunmetal'),
-  charcoal: getCssPropertyValue('--charcoal'),
-  eggshell: getCssPropertyValue('--eggshell'),
-  babyBlue: getCssPropertyValue('--baby-blue'),
-  blizzardBlue: getCssPropertyValue('--blizzard-blue'),
-  orangeRed: getCssPropertyValue('--orange-red'),
-  peach: getCssPropertyValue('--peach'),
-  grannySmithApple: getCssPropertyValue('--granny-smith-apple'),
+  background: getCssPropertyValue('--background'),
+  fg0: getCssPropertyValue('--fg0'),
+  fg1: getCssPropertyValue('--fg1'),
+  text: getCssPropertyValue('--text'),
+  accent0: getCssPropertyValue('--accent0'),
+  accent4: getCssPropertyValue('--accent4'),
+  important0: getCssPropertyValue('--important0'),
+  important4: getCssPropertyValue('--important4'),
+  success0: getCssPropertyValue('--success0'),
 };
 
 export const theme = {

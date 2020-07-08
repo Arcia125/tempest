@@ -5,9 +5,9 @@
 }
 
 .status-searching {
-  background-color: var(--baby-blue);
+  background-color: var(--accent0);
 }
 
 .status-creating {
-  background-color: var(--granny-smith-apple);
+  background-color: var(--success0);
 }

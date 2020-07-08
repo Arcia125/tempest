@@ -8,12 +8,12 @@
 
 .AppButton.Contained {}
 
-.AppButton.Contained.orangeRed {
-  background-color: var(--orange-red);
+.AppButton.Contained.important0 {
+  background-color: var(--important0);
 }
 
-.AppButton.Contained.charcoal {
-  background-color: var(--charcoal);
+.AppButton.Contained.fg1 {
+  background-color: var(--fg1);
 }
 
 .AppButton.Animated {

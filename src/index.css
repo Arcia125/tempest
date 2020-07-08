@@ -1,15 +1,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap');
 
 :root {
-  --rich-black: #001a23;
-  --gunmetal: #183139;
-  --charcoal: #2f484f;
-  --eggshell: #e5ebef;
-  --baby-blue: #91c4f2;
-  --blizzard-blue: #bfedfb;
-  --orange-red: #cf3737;
-  --peach: #e28888;
-  --granny-smith-apple: #b3efb2;
+  --background: #001a23;
+  --fg0: #183139;
+  --fg1: #2f484f;
+  --text: #e5ebef;
+  --accent0: #91c4f2;
+  --accent4: #bfedfb;
+  --important0: #cf3737;
+  --important4: #e28888;
+  --success0: #b3efb2;
 }
 
 body {
@@ -19,7 +19,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  color: var(--eggshell);
+  color: var(--text);
 }
 
 code {

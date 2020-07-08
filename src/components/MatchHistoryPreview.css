@@ -5,7 +5,7 @@
   display: flex;
   justify-content: flex-start;
   align-content: center;
-  background-color: var(--charcoal);
+  background-color: var(--fg1);
 }
 
 .MatchHistoryPreview-wl-tab {
@@ -14,15 +14,15 @@
 }
 
 .MatchHistoryPreview_Draw .MatchHistoryPreview-wl-tab {
-  background-color: var(--eggshell);
+  background-color: var(--text);
 }
 
 .MatchHistoryPreview_Victory .MatchHistoryPreview-wl-tab {
-  background-color: var(--baby-blue);
+  background-color: var(--accent0);
 }
 
 .MatchHistoryPreview_Defeat .MatchHistoryPreview-wl-tab {
-  background-color: var(--peach);
+  background-color: var(--important4);
 }
 
 .MatchHistoryPreview-details {

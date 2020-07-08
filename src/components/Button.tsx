@@ -30,7 +30,7 @@ export const ContainedButton: FC<Props> = ({ className, ...restProps }) => {
 };
 
 ContainedButton.defaultProps = {
-  color: 'charcoal',
+  color: 'fg1',
 };
 
 export const AnimatedButton: FC<Props> = ({

@@ -4,7 +4,8 @@ body {
 }
 
 .App {
-  height: 10000px;
+  min-height: 100vh;
+  padding-top: 75px;
 }
 
 /* The storm texture background canvas that gets created by useStormScene in App.tsx */

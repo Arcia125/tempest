@@ -1,11 +1,12 @@
 .App-header {
   position: fixed;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  top: 0;
   padding: 14px;
   height: 75px;
   width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   box-sizing: border-box;
 }
 

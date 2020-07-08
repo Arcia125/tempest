@@ -64,7 +64,7 @@ const Typography: FC<Props> = ({
   className,
   variant,
   textTransform,
-  color = 'eggshell',
+  color = 'text',
   Component: PropsComponent,
   children,
 }) => {

@@ -4,7 +4,7 @@
 }
 
 .SearchInput.variant-opaque {
-  background-color: var(--charcoal);
+  background-color: var(--fg1);
 }
 
 .SearchInput.variant-window {
@@ -18,13 +18,13 @@
   border: none;
   background-color: transparent;
   padding: 16px;
-  color: var(--eggshell);
+  color: var(--text);
   width: 100%;
 }
 
 .SearchInput-input::placeholder {
   opacity: 0.9;
-  color: var(--eggshell);
+  color: var(--text);
 }
 
 .SearchInput-submit {

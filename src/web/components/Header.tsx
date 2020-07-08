@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { Link, useHistory, Route, Switch } from 'react-router-dom';
 
 import './Header.css';
 import { HeaderContainer } from '../../components/HeaderContainer';
@@ -22,7 +22,7 @@ const LoginLinks: FC<{ className?: string }> = ({ className }) => {
       </Button>
       <ContainedButton
         variant={TypographyVariants.p}
-        color="orangeRed"
+        color="important0"
         onClick={(e) => history.push('/create-account')}
       >
         Create Account
@@ -39,12 +39,17 @@ export const Header: FC = (props) => {
       <Link to="/">
         <Logo />
       </Link>
-      <SearchInput
-        variant="window"
-        value={search}
-        onChange={setter}
-        onSearch={handleSearch}
-      />
+      <Switch>
+        <Route exact path="/"></Route>
+        <Route>
+          <SearchInput
+            variant="window"
+            value={search}
+            onChange={setter}
+            onSearch={handleSearch}
+          />
+        </Route>
+      </Switch>
       <LoginLinks />
     </HeaderContainer>
   );

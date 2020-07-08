@@ -2,20 +2,20 @@
   margin: 0;
 }
 
-.Typography-eggshell {
-  color: var(--eggshell);
+.Typography-text {
+  color: var(--text);
 }
 
-.Typography-babyBlue {
-  color: var(--baby-blue);
+.Typography-accent0 {
+  color: var(--accent0);
 }
 
-.Typography-blizzardBlue {
-  color: var(--blizzard-blue);
+.Typography-accent4 {
+  color: var(--accent4);
 }
 
-.Typography-peach {
-  color: var(--peach);
+.Typography-important4 {
+  color: var(--important4);
 }
 
 .Typography.Typography-capitalize {

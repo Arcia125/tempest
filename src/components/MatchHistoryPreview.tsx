@@ -50,7 +50,7 @@ export const MatchHistoryPreview: FC<Props> = ({
         <Typography
           variant={TypographyVariants.p}
           className="MatchHistoryPreview-details_outcome"
-          color={won(win) ? 'babyBlue' : lost(win) ? 'peach' : 'eggshell'}
+          color={won(win) ? 'accent0' : lost(win) ? 'important4' : 'text'}
         >
           {gameOutcome}
         </Typography>
@@ -63,7 +63,7 @@ export const MatchHistoryPreview: FC<Props> = ({
         <Typography
           variant={TypographyVariants.p}
           className="MatchHistoryPreview-details_cs"
-          color="blizzardBlue"
+          color="accent4"
         >
           {getCs(participant)}
         </Typography>
@@ -76,7 +76,7 @@ export const MatchHistoryPreview: FC<Props> = ({
         <Typography
           variant={TypographyVariants.p}
           className="MatchHistoryPreview-details_queue"
-          color="blizzardBlue"
+          color="accent4"
         >
           {getQueue(matchHistoryItem)}
         </Typography>
