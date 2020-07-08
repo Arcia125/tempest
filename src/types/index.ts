@@ -1,6 +1,7 @@
 import * as Lobby from './lobby';
 import * as Reducer from './reducer';
 import * as MatchMaking from './matchMaking';
+import * as Animation from './animation';
 
 export type { Entry } from './Entry';
 
@@ -36,4 +37,4 @@ export { RiotImageType } from './RiotImageType';
 
 export type { ChampionDTO } from './ChampionDTO';
 
-export { Lobby, MatchMaking, Reducer };
+export { Lobby, MatchMaking, Reducer, Animation };

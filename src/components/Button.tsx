@@ -38,11 +38,11 @@ export const AnimatedButton: FC<Props> = ({
   children,
   ...restProps
 }) => {
-  const el = useStormScene();
+  const [el] = useStormScene();
   return (
     <Button
       {...restProps}
-      ref={el}
+      ref={el as any}
       className={classNames('Animated', className)}
     >
       {children}

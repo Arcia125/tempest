@@ -1,22 +1,24 @@
+/**
+Copyright (c) 2020 by Liam Egan (https://codepen.io/shubniggurath/pen/BVKgJK)
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ */
 import * as THREE from 'three';
 
-const loader = new THREE.TextureLoader();
-// let texture: THREE.Texture, bg: THREE.Texture;
+import { Animation } from './types';
 
-interface SceneState {
-  camera: THREE.Camera | null;
-  scene: THREE.Scene | null;
-  renderer: THREE.WebGLRenderer | null;
-  uniforms: {
-    [uniform: string]: THREE.IUniform;
-  } | null;
-}
+const loader = new THREE.TextureLoader();
+
 interface LoadedTextures {
   texture: THREE.Texture;
   bg: THREE.Texture;
 }
 
-export const initialSceneState: SceneState = {
+export const initialSceneState: Animation.SceneState = {
   camera: null,
   scene: null,
   renderer: null,
@@ -49,7 +51,7 @@ const loadTextures = () =>
     );
   });
 
-export function init(container: Element, sceneState: SceneState) {
+export function init(container: HTMLElement, sceneState: Animation.SceneState) {
   // container = document.getElementById('container');
   return loadTextures().then(({ texture, bg }) => {
     sceneState.camera = new THREE.Camera();
@@ -67,7 +69,10 @@ export function init(container: Element, sceneState: SceneState) {
       } as THREE.IUniform,
       u_noise: { type: 't', value: texture } as THREE.IUniform,
       u_bg: { type: 't', value: bg } as THREE.IUniform,
-      u_mouse: { type: 'v2', value: new THREE.Vector2() } as THREE.IUniform,
+      u_mouse: {
+        type: 'v2',
+        value: new THREE.Vector2(),
+      } as THREE.IUniform,
       u_scroll: { type: 'f', value: 0 } as THREE.IUniform,
     };
 
@@ -118,7 +123,7 @@ export function createRenderer({
   camera,
   renderer,
   uniforms,
-}: SceneState) {
+}: Animation.SceneState) {
   return function render(delta?: number) {
     if (typeof delta === 'number') {
       uniforms!.u_time.value = -1000 + delta * 0.0005;
