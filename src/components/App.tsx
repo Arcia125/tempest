@@ -16,13 +16,12 @@ import {
 import { Provider } from '../lcuData';
 import { apolloClient } from '../apolloClient';
 import { log } from '../utils';
-import { StormTexture } from './StormTexture';
 
 const logEvent = (sender: any, event: any) => log.info(event.uri, event);
 
 const InnerApp = () => {
-  const champSelect = useChampSelect();
-  const lobby = useLobby();
+  // const champSelect = useChampSelect();
+  // const lobby = useLobby();
   // const matchMaking =;
   const summoner = useCurrentSummoner();
 
@@ -55,7 +54,6 @@ const InnerApp = () => {
           <ProfilePage />
         </Route>
       </Switch>
-      {/* <StormTexture /> */}
     </div>
   );
 };
