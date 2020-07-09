@@ -9,6 +9,8 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
  */
 import * as THREE from 'three';
 
+import cloudsUrl from './assets/clouds.jpg';
+import noiseUrl from './assets/noise.png';
 import { Animation } from './types';
 
 const loader = new THREE.TextureLoader();
@@ -31,25 +33,19 @@ export const initialSceneState: Animation.SceneState = {
 const loadTextures = () =>
   new Promise<LoadedTextures>((resolve) => {
     loader.setCrossOrigin('anonymous');
-    loader.load(
-      'https://s3-us-west-2.amazonaws.com/s.cdpn.io/982762/noise.png',
-      (tex) => {
-        const noise = tex;
-        noise.wrapS = THREE.RepeatWrapping;
-        noise.wrapT = THREE.RepeatWrapping;
-        noise.minFilter = THREE.LinearFilter;
-        loader.load(
-          'https://s3-us-west-2.amazonaws.com/s.cdpn.io/982762/clouds-1-tile.jpg',
-          (tex) => {
-            const clouds = tex;
-            clouds.wrapS = THREE.RepeatWrapping;
-            clouds.wrapT = THREE.RepeatWrapping;
-            clouds.minFilter = THREE.LinearFilter;
-            resolve({ noise, clouds });
-          }
-        );
-      }
-    );
+    loader.load(noiseUrl, (tex) => {
+      const noise = tex;
+      noise.wrapS = THREE.RepeatWrapping;
+      noise.wrapT = THREE.RepeatWrapping;
+      noise.minFilter = THREE.LinearFilter;
+      loader.load(cloudsUrl, (tex) => {
+        const clouds = tex;
+        clouds.wrapS = THREE.RepeatWrapping;
+        clouds.wrapT = THREE.RepeatWrapping;
+        clouds.minFilter = THREE.LinearFilter;
+        resolve({ noise, clouds });
+      });
+    });
   });
 
 export function init(container: HTMLElement, sceneState: Animation.SceneState) {
