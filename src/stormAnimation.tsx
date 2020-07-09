@@ -12,13 +12,11 @@ import * as THREE from 'three';
 import cloudsUrl from './assets/clouds.jpg';
 import noiseUrl from './assets/noise.png';
 import { Animation } from './types';
+import { loadTextures } from './loadTextures';
 
 const loader = new THREE.TextureLoader();
 
-interface LoadedTextures {
-  noise: THREE.Texture;
-  clouds: THREE.Texture;
-}
+loader.setCrossOrigin('anonymous');
 
 export const initialSceneState: Animation.SceneState = {
   camera: null,
@@ -27,30 +25,9 @@ export const initialSceneState: Animation.SceneState = {
   uniforms: null,
 };
 
-/**
- * @TODO load in parallel
- */
-const loadTextures = () =>
-  new Promise<LoadedTextures>((resolve) => {
-    loader.setCrossOrigin('anonymous');
-    loader.load(noiseUrl, (tex) => {
-      const noise = tex;
-      noise.wrapS = THREE.RepeatWrapping;
-      noise.wrapT = THREE.RepeatWrapping;
-      noise.minFilter = THREE.LinearFilter;
-      loader.load(cloudsUrl, (tex) => {
-        const clouds = tex;
-        clouds.wrapS = THREE.RepeatWrapping;
-        clouds.wrapT = THREE.RepeatWrapping;
-        clouds.minFilter = THREE.LinearFilter;
-        resolve({ noise, clouds });
-      });
-    });
-  });
-
 export function init(container: HTMLElement, sceneState: Animation.SceneState) {
   // container = document.getElementById('container');
-  return loadTextures().then(({ noise, clouds }) => {
+  return loadTextures(loader, [noiseUrl, cloudsUrl]).then(([noise, clouds]) => {
     sceneState.camera = new THREE.Camera();
     sceneState.camera.position.z = 1;
 
