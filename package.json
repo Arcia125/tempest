@@ -6,16 +6,18 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "main": "build-main/app/electron.js",
+  "main": "./build-main/app/electron.js",
   "build": {
     "appId": "nonExistentID",
     "files": [
+      "build-main/**/*",
       "build/**/*",
       "node_modules/**/*"
     ],
     "directories": {
       "buildResources": "assets"
-    }
+    },
+    "extends": null
   },
   "dependencies": {
     "@apollo/react-common": "^3.1.4",

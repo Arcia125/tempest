@@ -16,7 +16,7 @@ const iconUrl = path.resolve(__dirname, '..', '..', 'public', 'favicon.ico');
 let mainWindow: BrowserWindow | null,
   socket: LCUWebSocket;
 
-const indexHtmlPath = path.join(__dirname, './build/index.html');
+const indexHtmlPath = path.join(__dirname, '../../build/index.html');
 const indexHtmlUrl = `file://${indexHtmlPath}`;
 const lcuConnector = new LCUConnector();
 const lcuConnection = new LCUConnection(lcuConnector).init();
