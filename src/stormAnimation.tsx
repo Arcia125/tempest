@@ -25,6 +25,9 @@ export const initialSceneState: Animation.SceneState = {
   uniforms: null,
 };
 
+/**
+ * @TODO load in parallel
+ */
 const loadTextures = () =>
   new Promise<LoadedTextures>((resolve) => {
     loader.setCrossOrigin('anonymous');

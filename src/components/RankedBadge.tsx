@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import './RankedBadge.css';
 import Typography, { TypographyVariants } from './Typography';
 import { Maybe } from '../operations';
+import { pubUrl } from '../utils';
 
 export interface Props {
   tier?: Maybe<string>;
@@ -11,15 +12,19 @@ export interface Props {
   queue?: Maybe<string>;
 }
 
+const getEmblemUrl = (tier: string) =>
+  pubUrl(`ranked-emblems/${tier.toLowerCase()}.png`);
+
 const RankedBadge: FC<Props> = ({ tier, rank, queue }) => {
   return !(tier && rank && queue) ? null : (
     <div className="RankedBadge">
       <Typography variant={TypographyVariants.p}>{queue}</Typography>
       <img
         className="RankedBadge-emblem"
-        src={`${
-          process.env.PUBLIC_URL || '/'
-        }ranked-emblems/${tier.toLowerCase()}.png`}
+        // src={`${
+        //   process.env.PUBLIC_URL
+        // }/ranked-emblems/${tier.toLowerCase()}.png`}
+        src={getEmblemUrl(tier)}
         alt={`Ranked emblem - ${tier}`}
       />
       <div className="RankedBadge-tier-rank">
