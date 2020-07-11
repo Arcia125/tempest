@@ -1,17 +1,17 @@
-import React, { FC } from 'react';
+import React, { FC, useContext } from 'react';
 
 import './Search.css';
 import Typography, { TypographyVariants } from './Typography';
 import StormIcon from './StormIcon';
 import SearchInput from './SearchInput';
 import { useSearch } from '../hooks';
+import { themeContext, ThemeMode } from '../theme';
 
-export interface Props {
-  variant: 'window' | 'opaque';
-}
+export interface Props {}
 
 const Search: FC<Props> = (props) => {
   const { search, handleSearch, setter } = useSearch();
+  const { theme } = useContext(themeContext);
 
   return (
     <div className="Search">
@@ -21,7 +21,7 @@ const Search: FC<Props> = (props) => {
           Find a summoner
         </Typography>
         <SearchInput
-          variant={props.variant}
+          variant={theme.mode === ThemeMode.DARK_GPU ? 'window' : 'opaque'}
           value={search}
           onChange={setter}
           onSearch={handleSearch}

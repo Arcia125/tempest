@@ -3,6 +3,8 @@
   padding-left: 16px;
   padding-right: 16px;
   width: calc(100% - 6px - 16px);
+  max-width: 1000px;
+  margin: auto;
   box-sizing: border-box;
   margin-top: 32px;
 }

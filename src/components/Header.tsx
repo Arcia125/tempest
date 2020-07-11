@@ -1,5 +1,5 @@
-import React, { FC } from 'react';
-import { Link } from 'react-router-dom';
+import React, { FC, useContext } from 'react';
+import { Link, Route, Switch } from 'react-router-dom';
 
 import './Header.css';
 import { RiotImage } from './RiotImage';
@@ -12,6 +12,7 @@ import StatusIndicator from './StatusIndicator';
 import { MatchMaking } from '../types';
 import BadgeLayout from './BadgeLayout';
 import { HeaderContainer } from './HeaderContainer';
+import { themeContext, ThemeMode } from '../theme';
 
 interface Props {
   summoner?: CurrentSummonerResponse;
@@ -20,6 +21,8 @@ interface Props {
 
 const Header: FC<Props> = ({ summoner, matchMaking }) => {
   const { search, handleSearch, setter } = useSearch();
+
+  const { theme } = useContext(themeContext);
 
   return (
     <HeaderContainer className="HeaderContainer">
@@ -42,12 +45,17 @@ const Header: FC<Props> = ({ summoner, matchMaking }) => {
           </Typography>
         </Link>
       )}
-      <SearchInput
-        variant="opaque"
-        value={search}
-        onChange={setter}
-        onSearch={handleSearch}
-      />
+      <Switch>
+        <Route exact path="/"></Route>
+        <Route>
+          <SearchInput
+            variant={theme.mode === ThemeMode.DARK_GPU ? 'window' : 'opaque'}
+            value={search}
+            onChange={setter}
+            onSearch={handleSearch}
+          />
+        </Route>
+      </Switch>
     </HeaderContainer>
   );
 };

@@ -4,3 +4,8 @@
   padding: 7px 7px 10px 7px;
   width: 100%;
 }
+
+.App.darkGPU .MatchHistory {
+  background: rgba(var(--backgroundrgb), .4);
+  backdrop-filter: var(--backdropFilter);
+}

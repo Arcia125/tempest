@@ -1,11 +1,17 @@
 .RankedBadge {
-  background: linear-gradient(180deg, #2f484f 0%, var(--fg0) 100%),
+  background: linear-gradient(180deg, var(--background) 0%, var(--fg0) 100%),
     var(--fg0);
   border-radius: 5px;
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 6px 0;
+}
+
+.App.darkGPU .RankedBadge {
+  background: linear-gradient(180deg, rgba(var(--backgroundrgb), .4) 0%, rgba(var(--fg0rgb), .4) 100%),
+    rgba(var(--fg0rgb), .4);
+  backdrop-filter: var(--backdropFilter);
 }
 
 .RankedBadge-emblem {

@@ -4,12 +4,38 @@
     {
       "type": "npm",
       "options": {
-        "shell": { "executable": "cmd.exe", "args": ["/d", "/c"] }
+        "shell": {
+          "executable": "cmd.exe",
+          "args": [
+            "/d",
+            "/c"
+          ]
+        }
       },
       "script": "electron-dev",
       "problemMatcher": [],
       "label": "npm: electron-dev",
-      "detail": "concurrently \"cross-env BROWSER=none yarn start\" \"wait-on http://localhost:3000 && electron .\""
+      "detail": "concurrently \"cross-env BROWSER=none yarn start\" \"wait-on http://localhost:3000 && electron .\"",
+      "group": "build"
+    },
+    {
+      "type": "npm",
+      "script": "eb",
+      "problemMatcher": [],
+      "label": "npm: eb",
+      "detail": "electron-builder",
+      "group": "build"
+    },
+    {
+      "type": "npm",
+      "script": "electron-pack",
+      "problemMatcher": [],
+      "label": "npm: electron-pack",
+      "detail": "electron-builder build",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      }
     }
   ]
 }

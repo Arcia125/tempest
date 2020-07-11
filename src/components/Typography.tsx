@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 
 import './Typography.css';
 import { createClassNameGenerator } from '../utils';
-import { theme } from '../theme';
+import { ActiveTheme } from '../theme';
 
 export enum TypographyVariants {
   h1 = 'header1',
@@ -17,7 +17,7 @@ export interface Props {
   className?: string;
   variant: TypographyVariants;
   textTransform?: 'capitalize' | 'uppercase' | 'lowercase';
-  color?: keyof typeof theme.colors;
+  color?: keyof ActiveTheme['colors'];
   Component?: React.ElementType;
 }
 

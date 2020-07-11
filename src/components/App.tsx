@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useContext } from 'react';
 import { MemoryRouter as Router, Switch, Route } from 'react-router';
 import { ApolloProvider } from '@apollo/react-hooks';
 
@@ -12,10 +12,12 @@ import {
   useLobby,
   useMatchMaking,
   useCurrentSummoner,
+  useStormScene,
 } from '../hooks';
-import { Provider } from '../lcuData';
+import { Provider as LCUDataProvider } from '../lcuData';
+import { Provider as ThemeProvider, ThemeMode, themeContext } from '../theme';
 import { apolloClient } from '../apolloClient';
-import { log } from '../utils';
+import { log, classNames } from '../utils';
 
 const logEvent = (sender: any, event: any) => log.info(event.uri, event);
 
@@ -23,6 +25,8 @@ const InnerApp = () => {
   // const champSelect = useChampSelect();
   // const lobby = useLobby();
   // const matchMaking =;
+  const [elRef] = useStormScene();
+  const themeCtx = useContext(themeContext);
   const summoner = useCurrentSummoner();
 
   const matchMaking = useMatchMaking();
@@ -44,11 +48,11 @@ const InnerApp = () => {
 
   // useEventEffect('lol-clash', logEvent);
   return (
-    <div className="App">
+    <div className={classNames('App', themeCtx.theme.mode)} ref={elRef as any}>
       <Header summoner={summoner.state.data} matchMaking={matchMaking.state} />
       <Switch>
         <Route path="/" exact>
-          <SearchPage variant="opaque" />
+          <SearchPage />
         </Route>
         <Route path="/summoner/profile/:summonerName">
           <ProfilePage />
@@ -61,10 +65,12 @@ const InnerApp = () => {
 const Providers: FC = ({ children }) => (
   <ApolloProvider client={apolloClient}>
     <Router>
-      <ErrorReporter>
-        <Provider>{children}</Provider>
-        {/* {children} */}
-      </ErrorReporter>
+      <ThemeProvider initialThemeMode={ThemeMode.DARK_GPU}>
+        <ErrorReporter>
+          <LCUDataProvider>{children}</LCUDataProvider>
+          {/* {children} */}
+        </ErrorReporter>
+      </ThemeProvider>
     </Router>
   </ApolloProvider>
 );

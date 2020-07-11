@@ -50,7 +50,14 @@ export const Header: FC = (props) => {
           />
         </Route>
       </Switch>
-      <LoginLinks />
+      {/* <LoginLinks /> */}
+      {/* <ContainedButton
+        variant={TypographyVariants.p}
+        color="important0"
+        onClick={console.log}
+      >
+        Download
+      </ContainedButton> */}
     </HeaderContainer>
   );
 };

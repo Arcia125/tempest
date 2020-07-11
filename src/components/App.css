@@ -1,21 +1,43 @@
-.App {
+:root {
+  --backgroundrgb: 20, 9, 72;
+  --background: rgb(var(--backgroundrgb));
+  --fg0rgb: 27, 11, 100;
+  --fg0: rgb(var(--fg0rgb));
+  --fg1rgb: 33, 13, 128;
+  --fg1: rgb(var(--fg1rgb));
+  --text: #e5ebef;
+  --accent0: #91c4f2;
+  --accent4: #bfedfb;
+  --important0: #cf3737;
+  --important4: #e28888;
+  --success0: #b3efb2;
+}
+
+body {
+  /* Fallback color while the app loads */
   background-color: var(--background);
+}
+
+.App {
   min-height: 100vh;
+  padding-top: 75px;
 }
 
 .App-logo {
   padding: 16px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
 
-.App-header {
-}
+.App-header {}
 
 .App-link {
   color: #61dafb;
+}
+
+/* The storm texture background canvas that gets created by useStormScene in App.tsx */
+.App>canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
 }

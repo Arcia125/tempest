@@ -9,7 +9,7 @@
 
 .SearchInput.variant-window {
   /* background-color: rgba(20, 9, 72, .8); */
-  backdrop-filter: blur(10px);
+  backdrop-filter: var(--backdropFilter);
   border: 1px solid rgba(158, 175, 208, 0.3);
   border-radius: 9px;
 }
