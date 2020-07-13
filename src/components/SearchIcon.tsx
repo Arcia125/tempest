@@ -1,12 +1,13 @@
-import React, { FC, SVGProps } from 'react';
+import React, { FC, SVGProps, useContext } from 'react';
 
-interface BaseProps {
-  variant: 'window' | 'opaque';
-}
+import { themeContext } from '../theme';
+
+interface BaseProps {}
 
 type Props = SVGProps<SVGSVGElement> & BaseProps;
 
 const SearchIcon: FC<Props> = (props) => {
+  const { theme } = useContext(themeContext);
   return (
     <svg width={27} height={25} fill="none" {...props}>
       <defs>
@@ -18,18 +19,17 @@ const SearchIcon: FC<Props> = (props) => {
       <g>
         <use
           xlinkHref="#outer-mag"
-          stroke="#5E767B"
+          stroke={theme.colors.accent0}
           strokeWidth="6"
           clipPath="url(#clip)"
         />
       </g>
-      <path stroke="#5E767B" strokeWidth={3} d="M7.061 5.939l18 18" />
-      <circle
-        cx={10.5}
-        cy={10.5}
-        r={8.5}
-        fill={props.variant === 'window' ? 'rgb(20, 9, 72)' : '#2F484F'}
+      <path
+        stroke={theme.colors.accent0}
+        strokeWidth={3}
+        d="M7.061 5.939l18 18"
       />
+      <circle cx={10.5} cy={10.5} r={8.5} fill={theme.colors.background} />
     </svg>
   );
 };
