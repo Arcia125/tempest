@@ -1,7 +1,6 @@
 import React, { FC } from 'react';
 import { Link, useHistory, Route, Switch } from 'react-router-dom';
 
-import './Header.css';
 import { HeaderContainer } from '../../components/HeaderContainer';
 import SearchInput from '../../components/SearchInput';
 import { useSearch } from '../../hooks';
