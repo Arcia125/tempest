@@ -6,6 +6,6 @@
 }
 
 .App.darkGPU .MatchHistory {
-  background: rgba(var(--backgroundrgb), .4);
+  background: rgba(var(--backgroundrgb), .1);
   backdrop-filter: var(--backdropFilter);
 }

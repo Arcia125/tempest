@@ -9,8 +9,8 @@
 }
 
 .App.darkGPU .UsernamePlate {
-  background: linear-gradient(180deg, rgba(var(--backgroundrgb), .4) 0%, rgba(var(--fg0rgb), .4) 100%),
-    rgba(var(--fg0rgb), .4);
+  background: linear-gradient(180deg, rgba(var(--backgroundrgb), .1) 0%, rgba(var(--fg0rgb), .1) 100%),
+    rgba(var(--fg0rgb), .1);
   backdrop-filter: var(--backdropFilter);
 }
 
