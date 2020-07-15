@@ -12,7 +12,7 @@ import * as THREE from 'three';
 import cloudsUrl from './assets/clouds.jpg';
 import noiseUrl from './assets/noise.png';
 import { Animation } from './types';
-import { loadTextures } from './loadTextures';
+import { loadTextures } from './utils/loadTextures';
 import { onDOMChange } from './utils';
 
 const loader = new THREE.TextureLoader();
@@ -25,6 +25,21 @@ export const initialSceneState: Animation.SceneState = {
   renderer: null,
   uniforms: null,
 };
+
+const vertexShaderEl = document.getElementById('vertexShader')!;
+
+const fragmentShaderEl = document.getElementById('fragmentShader')!;
+
+function calcMousePosUniforms(
+  x: number,
+  y: number,
+  width: number,
+  height: number
+) {
+  const ratio = height / width;
+
+  return [(x - width / 2) / width / ratio, ((y - height / 2) / height) * -1];
+}
 
 export function init(container: HTMLElement, sceneState: Animation.SceneState) {
   // container = document.getElementById('container');
@@ -53,9 +68,9 @@ export function init(container: HTMLElement, sceneState: Animation.SceneState) {
 
     const material = new THREE.ShaderMaterial({
       uniforms: sceneState.uniforms,
-      vertexShader: document.getElementById('vertexShader')!
+      vertexShader: vertexShaderEl
         .textContent as THREE.ShaderMaterialParameters['vertexShader'],
-      fragmentShader: document.getElementById('fragmentShader')!
+      fragmentShader: fragmentShaderEl
         .textContent as THREE.ShaderMaterialParameters['fragmentShader'],
     });
     material.extensions.derivatives = true;
@@ -68,30 +83,6 @@ export function init(container: HTMLElement, sceneState: Animation.SceneState) {
 
     container.appendChild(sceneState.renderer.domElement);
 
-    function updateSizeUniforms() {
-      const size: [number, number] = [
-        container.clientWidth,
-        container.clientHeight,
-      ];
-      sceneState.renderer!.setSize(...size);
-      sceneState.uniforms!.u_resolution.value.x = sceneState.renderer!.domElement.width;
-      sceneState.uniforms!.u_resolution.value.y = sceneState.renderer!.domElement.height;
-    }
-
-    function calcMousePosUniforms(
-      x: number,
-      y: number,
-      width: number,
-      height: number
-    ) {
-      const ratio = height / width;
-
-      return [
-        (x - width / 2) / width / ratio,
-        ((y - height / 2) / height) * -1,
-      ];
-    }
-
     function updateMousePos(
       x: number,
       y: number,
@@ -103,11 +94,21 @@ export function init(container: HTMLElement, sceneState: Animation.SceneState) {
       sceneState.uniforms!.u_mouse.value.y = mouseY;
     }
 
-    updateSizeUniforms();
-    window.addEventListener('resize', updateSizeUniforms, false);
+    function updateSize() {
+      const size: [number, number] = [
+        container.clientWidth,
+        container.clientHeight,
+      ];
+      sceneState.renderer!.setSize(...size);
+      sceneState.uniforms!.u_resolution.value.x = sceneState.renderer!.domElement.width;
+      sceneState.uniforms!.u_resolution.value.y = sceneState.renderer!.domElement.height;
+    }
+
+    updateSize();
+    window.addEventListener('resize', updateSize, false);
 
     onDOMChange(window.document, (arg0) => {
-      updateSizeUniforms();
+      updateSize();
     });
 
     document.addEventListener('pointermove', (e) => {
