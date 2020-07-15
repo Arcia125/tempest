@@ -13,6 +13,7 @@ import cloudsUrl from './assets/clouds.jpg';
 import noiseUrl from './assets/noise.png';
 import { Animation } from './types';
 import { loadTextures } from './loadTextures';
+import { onDOMChange } from './utils';
 
 const loader = new THREE.TextureLoader();
 
@@ -67,7 +68,7 @@ export function init(container: HTMLElement, sceneState: Animation.SceneState) {
 
     container.appendChild(sceneState.renderer.domElement);
 
-    function onWindowResize() {
+    function updateSizeUniforms() {
       const size: [number, number] = [
         container.clientWidth,
         container.clientHeight,
@@ -77,17 +78,46 @@ export function init(container: HTMLElement, sceneState: Animation.SceneState) {
       sceneState.uniforms!.u_resolution.value.y = sceneState.renderer!.domElement.height;
     }
 
-    onWindowResize();
-    window.addEventListener('resize', onWindowResize, false);
+    function calcMousePosUniforms(
+      x: number,
+      y: number,
+      width: number,
+      height: number
+    ) {
+      const ratio = height / width;
+
+      return [
+        (x - width / 2) / width / ratio,
+        ((y - height / 2) / height) * -1,
+      ];
+    }
+
+    function updateMousePos(
+      x: number,
+      y: number,
+      width: number,
+      height: number
+    ) {
+      const [mouseX, mouseY] = calcMousePosUniforms(x, y, width, height);
+      sceneState.uniforms!.u_mouse.value.x = mouseX;
+      sceneState.uniforms!.u_mouse.value.y = mouseY;
+    }
+
+    updateSizeUniforms();
+    window.addEventListener('resize', updateSizeUniforms, false);
+
+    onDOMChange(window.document, (arg0) => {
+      updateSizeUniforms();
+    });
 
     document.addEventListener('pointermove', (e) => {
-      const ratio = window.innerHeight / window.innerWidth;
-      sceneState.uniforms!.u_mouse.value.x =
-        (e.pageX - window.innerWidth / 2) / window.innerWidth / ratio;
-      sceneState.uniforms!.u_mouse.value.y =
-        ((e.pageY - window.innerHeight / 2) / window.innerHeight) * -1;
-
       e.preventDefault();
+      updateMousePos(
+        e.clientX,
+        e.clientY,
+        window.innerWidth,
+        window.innerHeight
+      );
     });
   });
 }

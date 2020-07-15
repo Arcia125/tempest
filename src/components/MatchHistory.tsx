@@ -12,7 +12,7 @@ export interface Props {
 const MatchHistory: FC<Props> = ({ matchHistory, summonerId }) => {
   return (
     <div className="MatchHistory">
-      {<MatchHistoryList matchHistory={matchHistory} summonerId={summonerId} />}
+      <MatchHistoryList matchHistory={matchHistory} summonerId={summonerId} />
     </div>
   );
 };

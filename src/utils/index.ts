@@ -4,6 +4,8 @@ export { mapBy } from './mapBy';
 
 export { leftPad } from './leftPad';
 
+export { onDOMChange } from './onDOMChange';
+
 export { classNames } from './classNames';
 
 export { createClassNameGenerator } from './createClassNameGenerator';
