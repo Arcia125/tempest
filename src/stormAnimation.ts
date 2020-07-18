@@ -13,7 +13,7 @@ import cloudsUrl from './assets/clouds.jpg';
 import noiseUrl from './assets/noise.png';
 import { Animation } from './types';
 import { loadTextures } from './utils/loadTextures';
-import { onDOMChange } from './utils';
+import { onDOMChange, call, listen } from './utils';
 
 const loader = new THREE.TextureLoader();
 
@@ -104,22 +104,26 @@ export function init(container: HTMLElement, sceneState: Animation.SceneState) {
       sceneState.uniforms!.u_resolution.value.y = sceneState.renderer!.domElement.height;
     }
 
-    updateSize();
-    window.addEventListener('resize', updateSize, false);
+    requestAnimationFrame(updateSize);
+    const unlistens = [
+      listen(window, 'resize', updateSize, false),
+      listen(container, 'pointermove', (e: any) => {
+        e.preventDefault();
+        updateMousePos(
+          e.clientX,
+          e.clientY,
+          window.innerWidth,
+          window.innerHeight
+        );
+      }),
+      onDOMChange(window.document, (arg0) => {
+        updateSize();
+      })
+    ];
 
-    onDOMChange(window.document, (arg0) => {
-      updateSize();
-    });
-
-    document.addEventListener('pointermove', (e) => {
-      e.preventDefault();
-      updateMousePos(
-        e.clientX,
-        e.clientY,
-        window.innerWidth,
-        window.innerHeight
-      );
-    });
+    return function cleanup() {
+      unlistens.forEach(call);
+    }
   });
 }
 

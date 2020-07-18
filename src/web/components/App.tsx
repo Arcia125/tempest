@@ -43,11 +43,7 @@ const Providers: FC = ({ children }) => (
 );
 
 function App() {
-  return (
-    <Providers>
-      <InnerApp />
-    </Providers>
-  );
+  return <InnerApp />;
 }
 
-export default App;
+export { App, Providers };

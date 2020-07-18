@@ -1,5 +1,4 @@
 import React, { FC } from 'react';
-import PropTypes from 'prop-types';
 
 import './RankedBadge.css';
 import Typography, { TypographyVariants } from './Typography';
@@ -18,7 +17,6 @@ const getEmblemUrl = (tier: string) =>
 const RankedBadge: FC<Props> = ({ tier, rank, queue }) => {
   return !(tier && rank && queue) ? null : (
     <div className="RankedBadge">
-      <Typography variant={TypographyVariants.p}>{queue}</Typography>
       <img
         className="RankedBadge-emblem"
         // src={`${
@@ -28,6 +26,7 @@ const RankedBadge: FC<Props> = ({ tier, rank, queue }) => {
         alt={`Ranked emblem - ${tier}`}
       />
       <div className="RankedBadge-tier-rank">
+        <Typography variant={TypographyVariants.p}>{queue}</Typography>
         <Typography variant={TypographyVariants.p} textTransform="capitalize">
           {tier}
         </Typography>

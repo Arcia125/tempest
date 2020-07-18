@@ -11,6 +11,10 @@ import { LCUSocketTopic, LCUConnection, LCUWebSocket, LCUEventEmitter } from './
 import { getLcuUrl } from '../src/shared/getLcuUrl';
 import { Channels } from '../src/shared/ipc';
 
+// if (isDev) {
+//   require('electron-reload')(__dirname);
+// }
+
 const iconUrl = path.resolve(__dirname, '..', '..', 'public', 'favicon.ico');
 
 let mainWindow: BrowserWindow | null,

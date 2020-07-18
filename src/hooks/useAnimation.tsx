@@ -7,7 +7,7 @@ export function useAnimation(
   initFn: (
     container: HTMLElement,
     sceneRef: Animation.SceneState
-  ) => Promise<void>,
+  ) => Promise<() => any>,
   createRenderFn: (sceneRef: Animation.SceneState) => (delta?: number) => void
 ): [
   MutableRefObject<HTMLElement | null>,
@@ -22,7 +22,10 @@ export function useAnimation(
         'Make sure to pass the ref returned from useAnimation to a domElement'
       );
 
-    initFn(elRef.current!, sceneRef.current).then(() => {
+    let cleanupEffect = () => {};
+
+    initFn(elRef.current!, sceneRef.current).then((cleanup) => {
+      cleanupEffect = cleanup;
       const render = createRenderFn(sceneRef.current);
       const animate = function animate(delta?: number) {
         requestAnimationFrame(animate);
@@ -31,9 +34,7 @@ export function useAnimation(
       animate();
     });
 
-    return () => {
-      console.log('effect cleanup');
-    };
+    return cleanupEffect;
   }, [createRenderFn, initFn]);
 
   return [elRef, sceneRef];

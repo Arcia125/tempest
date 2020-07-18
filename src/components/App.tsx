@@ -1,11 +1,9 @@
-import React, { FC, useContext } from 'react';
-import { MemoryRouter as Router, Switch, Route } from 'react-router';
-import { ApolloProvider } from '@apollo/react-hooks';
+import React, { useContext } from 'react';
+import { Switch, Route } from 'react-router';
 
 import './App.css';
 import SearchPage from './SearchPage';
 import ProfilePage from './ProfilePage';
-import ErrorReporter from './ErrorReporter';
 import Header from './Header';
 import {
   useChampSelect,
@@ -14,10 +12,9 @@ import {
   useCurrentSummoner,
   useStormScene,
 } from '../hooks';
-import { Provider as LCUDataProvider } from '../lcuData';
-import { Provider as ThemeProvider, ThemeMode, themeContext } from '../theme';
-import { apolloClient } from '../apolloClient';
+import { themeContext } from '../theme';
 import { log, classNames } from '../utils';
+import { Providers } from './Providers';
 
 const logEvent = (sender: any, event: any) => log.info(event.uri, event);
 
@@ -62,19 +59,6 @@ const InnerApp = () => {
   );
 };
 
-const Providers: FC = ({ children }) => (
-  <ApolloProvider client={apolloClient}>
-    <Router>
-      <ThemeProvider initialThemeMode={ThemeMode.DARK_GPU}>
-        <ErrorReporter>
-          <LCUDataProvider>{children}</LCUDataProvider>
-          {/* {children} */}
-        </ErrorReporter>
-      </ThemeProvider>
-    </Router>
-  </ApolloProvider>
-);
-
 function App() {
   return (
     <Providers>
@@ -83,4 +67,4 @@ function App() {
   );
 }
 
-export default App;
+export { App, Providers };
