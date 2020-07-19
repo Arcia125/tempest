@@ -76,8 +76,6 @@ app.on('browser-window-created', (event) => {
       socket.on(LCUSocketTopic.JSON_API_EVENT, (event: any) => {
         if (typeof event?.uri === 'string') lcuEmitter.handleJsonApiEvent(event);
         else log.error(`Unexpected event emitted by LCUWebSocket ${JSON.stringify(event)}`);
-        // if (event?.uri?.includes('champ-select')) log.info(event);
-        // else if (typeof event['uri'] === 'string') log.info(event.uri);
       });
       socket.subscribe(LCUSocketTopic.JSON_API_EVENT);
       lcuEmitter.registerWindowEmitters(mainWindow, Object.values(LCUPluginEvent))
