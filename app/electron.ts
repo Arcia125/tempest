@@ -69,7 +69,6 @@ app.on('browser-window-created', (event) => {
         log.info(Channels.LCU_RESPONSE, response);
         event.reply(Channels.LCU_RESPONSE, response)
       }).catch(err => log.error(err))
-      // event.reply('lcu-response', {});
     });
     socket = new LCUWebSocket(data as LCUData, '');
     socket.onOpen(() => {
