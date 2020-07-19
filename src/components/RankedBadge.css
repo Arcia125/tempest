@@ -3,14 +3,19 @@
     var(--fg0);
   border-radius: 5px;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  justify-content: center;
   align-items: center;
   padding: 6px 0;
 }
 
 .App.darkGPU .RankedBadge {
-  background: linear-gradient(180deg, rgba(var(--backgroundrgb), .1) 0%, rgba(var(--fg0rgb), .1) 100%),
-    rgba(var(--fg0rgb), .1);
+  background: linear-gradient(
+      180deg,
+      rgba(var(--backgroundrgb), 0.1) 0%,
+      rgba(var(--fg0rgb), 0.1) 100%
+    ),
+    rgba(var(--fg0rgb), 0.1);
   backdrop-filter: var(--backdropFilter);
 }
 
@@ -22,10 +27,10 @@
 
 .RankedBadge-tier-rank {
   display: flex;
+  flex-direction: column;
   justify-content: center;
-  align-items: center;
 }
 
-.RankedBadge-rank {
-  margin-left: 4px;
+.RankedBadge-queue {
+  margin-bottom: 9px;
 }

@@ -18,6 +18,7 @@ export interface Props {
   variant: TypographyVariants;
   textTransform?: 'capitalize' | 'uppercase' | 'lowercase';
   color?: keyof ActiveTheme['colors'];
+  fontWeight?: '300' | '400' | '600';
   Component?: React.ElementType;
 }
 
@@ -66,6 +67,7 @@ const Typography: FC<Props> = ({
   textTransform,
   color = 'text',
   Component: PropsComponent,
+  fontWeight,
   children,
 }) => {
   const { Component: VariantComponent, props } = variantConfigs[variant];
@@ -76,6 +78,7 @@ const Typography: FC<Props> = ({
   return (
     <Component
       {...props}
+      style={{ fontWeight }}
       className={classNameGenerator(className, ...classNames)}
       id={id}
     >

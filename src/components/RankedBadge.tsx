@@ -26,12 +26,20 @@ const RankedBadge: FC<Props> = ({ tier, rank, queue }) => {
         alt={`Ranked emblem - ${tier}`}
       />
       <div className="RankedBadge-tier-rank">
-        <Typography variant={TypographyVariants.p}>{queue}</Typography>
-        <Typography variant={TypographyVariants.p} textTransform="capitalize">
-          {tier}
+        <Typography
+          className="RankedBadge-queue"
+          variant={TypographyVariants.p}
+          fontWeight="300"
+        >
+          {queue}
         </Typography>
-        <Typography className="RankedBadge-rank" variant={TypographyVariants.p}>
-          {rank}
+        <Typography
+          variant={TypographyVariants.p}
+          textTransform="capitalize"
+          fontWeight="600"
+          color="accent4"
+        >
+          {tier} {rank}
         </Typography>
       </div>
     </div>
