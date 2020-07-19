@@ -19,7 +19,7 @@ render(App);
 
 if ((module as any).hot) {
   (module as any).hot.accept('./components/App', () => {
-    console.log('App hot reload');
+    console.log('App hot reload', window.location.href);
     const NextApp = require('./components/App').App;
     render(NextApp);
   });

@@ -14,7 +14,6 @@ import {
 } from '../hooks';
 import { themeContext } from '../theme';
 import { log, classNames } from '../utils';
-import { Providers } from './Providers';
 
 const logEvent = (sender: any, event: any) => log.info(event.uri, event);
 
@@ -60,11 +59,7 @@ const InnerApp = () => {
 };
 
 function App() {
-  return (
-    <Providers>
-      <InnerApp />
-    </Providers>
-  );
+  return <InnerApp />;
 }
 
-export { App, Providers };
+export { App };
