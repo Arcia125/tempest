@@ -1,21 +1,14 @@
-import './index.css';
-import { App } from './components/App';
-import { Providers } from './components/Providers';
 import * as serviceWorker from './serviceWorker';
+import { App } from './components/App';
 import { createRenderer } from './utils';
+import { Providers } from './components/Providers';
+import './index.css';
 
 const root = document.getElementById('root');
 
 const render = createRenderer(Providers, root);
 
 render(App);
-
-// ReactDOM.render(
-//   <React.StrictMode>
-//     <App />
-//   </React.StrictMode>,
-//   document.getElementById('root')
-// );
 
 if ((module as any).hot) {
   (module as any).hot.accept('./components/App', () => {
