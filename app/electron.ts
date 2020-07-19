@@ -1,15 +1,25 @@
-import path from 'path';
-import { app, BrowserWindow, nativeImage, ipcMain } from 'electron';
+import {
+  app,
+  BrowserWindow,
+  ipcMain,
+  nativeImage
+  } from 'electron';
 import isDev from 'electron-is-dev';
+import log from 'electron-log';
 import LCUConnector from 'lcu-connector';
 import fetch from 'node-fetch';
-import log from 'electron-log';
-
-import { LCUPluginEvent } from '../src/shared/LCUPluginEvent';
-import { LCUData } from '../src/shared/LCUData';
-import { LCUSocketTopic, LCUConnection, LCUWebSocket, LCUEventEmitter } from './lcu';
+import path from 'path';
+import {
+  LCUConnection,
+  LCUEventEmitter,
+  LCUSocketTopic,
+  LCUWebSocket
+  } from './lcu';
 import { getLcuUrl } from '../src/shared/getLcuUrl';
 import { Channels } from '../src/shared/ipc';
+import { LCUData } from '../src/shared/LCUData';
+import { LCUPluginEvent } from '../src/shared/LCUPluginEvent';
+
 
 // if (isDev) {
 //   require('electron-reload')(__dirname);

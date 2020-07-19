@@ -1,6 +1,6 @@
 import React, { FC, SVGProps } from 'react';
-
 import './StormIcon.css';
+
 
 const StormIcon: FC<SVGProps<SVGSVGElement>> = (props) => {
   return (

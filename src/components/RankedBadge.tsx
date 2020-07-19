@@ -1,9 +1,9 @@
 import React, { FC } from 'react';
-
 import './RankedBadge.css';
 import Typography, { TypographyVariants } from './Typography';
 import { Maybe } from '../operations';
 import { pubUrl } from '../utils';
+
 
 export interface Props {
   tier?: Maybe<string>;

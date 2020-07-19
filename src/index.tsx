@@ -1,8 +1,9 @@
-import * as serviceWorker from './serviceWorker';
 import { App } from './components/App';
-import { createRenderer } from './utils';
 import { Providers } from './components/Providers';
 import './index.css';
+import * as serviceWorker from './serviceWorker';
+import { defaultActiveTheme } from './theme';
+import { createRenderer } from './utils';
 
 const root = document.getElementById('root');
 
@@ -12,7 +13,14 @@ render(App);
 
 if ((module as any).hot) {
   (module as any).hot.accept('./components/App', () => {
-    console.log('App hot reload', window.location.href);
+    console.log(
+      '%cApp hot reload',
+      `
+        font-size: 24px;
+        color: ${defaultActiveTheme.colors.accent0};
+        font-family: 'Lato';
+    `
+    );
     const NextApp = require('./components/App').App;
     render(NextApp);
   });

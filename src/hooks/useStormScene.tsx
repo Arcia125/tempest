@@ -1,5 +1,5 @@
-import { initialSceneState, init, createRenderer } from '../stormAnimation';
 import { useAnimation } from './useAnimation';
+import { createRenderer, init, initialSceneState } from '../stormAnimation';
 
 /**
  * @example

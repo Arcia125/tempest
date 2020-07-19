@@ -1,6 +1,6 @@
-import { useState, useEffect, useRef } from 'react';
-
+import { useEffect, useRef, useState } from 'react';
 import { ErrorLike } from '../types';
+
 
 export const useMockQuery = (
   data: any = null,

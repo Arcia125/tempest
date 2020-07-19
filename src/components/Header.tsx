@@ -1,18 +1,18 @@
 import React, { FC, useContext } from 'react';
 import { Link, Route, Switch } from 'react-router-dom';
-
+import BadgeLayout from './BadgeLayout';
 import './Header.css';
+import { HeaderContainer } from './HeaderContainer';
 import { RiotImage } from './RiotImage';
-import { RiotImageType } from '../types';
-import Typography, { TypographyVariants } from './Typography';
-import { CurrentSummonerResponse } from '../shared/LCUResponses';
-import { useSearch } from '../hooks';
 import SearchInput from './SearchInput';
 import StatusIndicator from './StatusIndicator';
-import { MatchMaking } from '../types';
-import BadgeLayout from './BadgeLayout';
-import { HeaderContainer } from './HeaderContainer';
+import Typography, { TypographyVariants } from './Typography';
+import { useSearch } from '../hooks';
+import { CurrentSummonerResponse } from '../shared/LCUResponses';
 import { themeContext, ThemeMode } from '../theme';
+import { RiotImageType } from '../types';
+import { MatchMaking } from '../types';
+
 
 interface Props {
   summoner?: CurrentSummonerResponse;

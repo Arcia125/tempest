@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
-
-import { RiotImageType } from '../types';
 import { getImageAssetUrl } from '../data';
+import { RiotImageType } from '../types';
+
 
 export interface Props
   extends React.DetailedHTMLProps<

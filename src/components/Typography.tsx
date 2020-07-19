@@ -1,8 +1,8 @@
 import React, { FC } from 'react';
-
 import './Typography.css';
-import { createClassNameGenerator } from '../utils';
 import { ActiveTheme } from '../theme';
+import { createClassNameGenerator } from '../utils';
+
 
 export enum TypographyVariants {
   h1 = 'header1',

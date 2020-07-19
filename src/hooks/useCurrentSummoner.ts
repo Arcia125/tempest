@@ -1,9 +1,9 @@
-import { useEffect, useReducer, useContext } from 'react';
-
-import { Reducer } from '../types';
-import { lcuRequest, lcuContext } from '../lcuData';
+import { useContext, useEffect, useReducer } from 'react';
+import { lcuContext, lcuRequest } from '../lcuData';
 import { getRequestArgs } from '../shared/LCUPluginEvent';
+import { Reducer } from '../types';
 import { log } from '../utils';
+
 
 // TODO: fix never casting
 const getCurrentSummoner = () => lcuRequest(...getRequestArgs('summoner', 'currentSummoner' as never, {}));

@@ -1,17 +1,15 @@
-import React, { FC, useContext } from 'react';
-import { Switch, Route } from 'react-router';
-import { BrowserRouter as Router } from 'react-router-dom';
 import { ApolloProvider } from '@apollo/react-hooks';
-
-import '../../components/App.css';
-
-import { apolloClient } from '../../apolloClient';
-import ErrorReporter from '../../components/ErrorReporter';
-import SearchPage from '../../components/SearchPage';
-import ProfilePage from '../../components/ProfilePage';
+import React, { FC, useContext } from 'react';
+import { Route, Switch } from 'react-router';
+import { BrowserRouter as Router } from 'react-router-dom';
 import { Header } from './Header';
+import { apolloClient } from '../../apolloClient';
+import '../../components/App.css';
+import ErrorReporter from '../../components/ErrorReporter';
+import ProfilePage from '../../components/ProfilePage';
+import SearchPage from '../../components/SearchPage';
 import { useStormScene } from '../../hooks';
-import { Provider, ThemeMode, themeContext } from '../../theme';
+import { Provider, themeContext, ThemeMode } from '../../theme';
 import { classNames } from '../../utils';
 
 const InnerApp = () => {

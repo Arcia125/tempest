@@ -1,6 +1,6 @@
 import * as THREE from 'three';
-
 import { loadTexture, LoadTextureOptions } from './loadTexture';
+
 
 export const loadTextures = (
   loader: THREE.TextureLoader,

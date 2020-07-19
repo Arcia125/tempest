@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
-
 import { useStormScene } from '../hooks';
+
 
 export const StormTexture: FC = (props) => {
   const [el] = useStormScene();

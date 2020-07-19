@@ -1,11 +1,11 @@
 import React, { FC, useContext } from 'react';
-
 import './Search.css';
-import Typography, { TypographyVariants } from './Typography';
-import StormIcon from './StormIcon';
 import SearchInput from './SearchInput';
+import StormIcon from './StormIcon';
+import Typography, { TypographyVariants } from './Typography';
 import { useSearch } from '../hooks';
 import { themeContext, ThemeMode } from '../theme';
+
 
 export interface Props {}
 

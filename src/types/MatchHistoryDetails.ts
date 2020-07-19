@@ -1,6 +1,6 @@
-import { MatchV4TeamStatsDTO } from './MatchV4TeamStatsDTO';
 import { MatchV4ParticipantDTO } from './MatchV4ParticipantDTO';
 import { MatchV4ParticipantIdentityDTO } from './MatchV4ParticipantIdentityDTO';
+import { MatchV4TeamStatsDTO } from './MatchV4TeamStatsDTO';
 
 export interface MatchHistoryDetails {
   /**

@@ -1,19 +1,12 @@
 import React, { useContext } from 'react';
-import { Switch, Route } from 'react-router';
-
+import { Route, Switch } from 'react-router';
 import './App.css';
-import SearchPage from './SearchPage';
-import ProfilePage from './ProfilePage';
 import Header from './Header';
-import {
-  useChampSelect,
-  useLobby,
-  useMatchMaking,
-  useCurrentSummoner,
-  useStormScene,
-} from '../hooks';
+import ProfilePage from './ProfilePage';
+import SearchPage from './SearchPage';
+import { useCurrentSummoner, useMatchMaking, useStormScene } from '../hooks';
 import { themeContext } from '../theme';
-import { log, classNames } from '../utils';
+import { classNames, log } from '../utils';
 
 const logEvent = (sender: any, event: any) => log.info(event.uri, event);
 

@@ -1,6 +1,6 @@
-import { useRef, useEffect, MutableRefObject } from 'react';
-
+import { MutableRefObject, useEffect, useRef } from 'react';
 import { Animation } from '../types';
+
 
 export function useAnimation(
   initialScene: Animation.SceneState,

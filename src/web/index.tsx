@@ -1,17 +1,8 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-
-import '../index.css';
 import { App, Providers } from './components/App';
+import '../index.css';
 import * as serviceWorker from '../serviceWorker';
+import { defaultActiveTheme } from '../theme';
 import { createRenderer } from '../utils';
-
-// ReactDOM.render(
-//   <React.StrictMode>
-//     <App />
-//   </React.StrictMode>,
-//   document.getElementById('root')
-// );
 
 const root = document.getElementById('root');
 const render = createRenderer(Providers, root);
@@ -23,10 +14,9 @@ if ((module as any).hot) {
     console.log(
       '%cApp hot reload',
       `
-        font-size: 60px;
-        color: #fcb11a;
-        font-family: sans-serif;
-        text-align: center;
+        font-size: 24px;
+        color: ${defaultActiveTheme.colors.accent0};
+        font-family: 'Lato';
     `
     );
     const NextApp = require('./components/App').App;

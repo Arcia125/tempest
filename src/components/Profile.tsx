@@ -1,10 +1,10 @@
 import React, { FC } from 'react';
-
-import './Profile.css';
-import UsernamePlate from './UsernamePlate';
-import RankedBadge, { Props as RankedBadgeProps } from './RankedBadge';
 import MatchHistory from './MatchHistory';
-import { Maybe, MatchHistory as IMatchHistory } from '../operations';
+import './Profile.css';
+import RankedBadge, { Props as RankedBadgeProps } from './RankedBadge';
+import UsernamePlate from './UsernamePlate';
+import { MatchHistory as IMatchHistory, Maybe } from '../operations';
+
 
 export interface Props {
   profileIconId?: Maybe<string | number>;

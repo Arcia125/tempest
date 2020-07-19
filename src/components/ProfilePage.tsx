@@ -1,15 +1,15 @@
 import React, { FC } from 'react';
-
-import { Profile } from './Profile';
+import { useParams } from 'react-router';
 import AnimatedSpinner from './AnimatedSpinner';
+import { Profile } from './Profile';
+import { useSummonerQuery } from '../operations';
+import { log } from '../utils';
+
 import {
   queueFromQueueType,
   romanNumeralToNumber,
   RomanNumeral,
 } from '../data';
-import { useSummonerQuery } from '../operations';
-import { useParams } from 'react-router';
-import { log } from '../utils';
 
 const ProfilePage: FC = () => {
   const params = useParams<{ summonerName: string }>();

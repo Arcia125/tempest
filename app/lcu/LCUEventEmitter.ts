@@ -1,8 +1,8 @@
 import { BrowserWindow } from 'electron';
 import log from 'electron-log';
-
 import { LCUPluginEvent } from '../../src/shared/LCUPluginEvent';
 import { Emitter } from '../Emitter';
+
 
 const getPlugin = (eventUri: string): LCUPluginEvent => eventUri.split('/')[1] as LCUPluginEvent;
 

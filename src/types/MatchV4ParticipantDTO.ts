@@ -1,7 +1,7 @@
-import { MatchV4ParticipantStatsDTO } from './MatchV4ParticipantStatsDTO';
-import { MatchV4RuneDTO } from './MatchV4RuneDTO';
-import { MatchV4ParticipantTimelineDTO } from './MatchV4ParticipantTimelineDTO';
 import { MatchV4MasteryDTO } from './MatchV4MasteryDTO';
+import { MatchV4ParticipantStatsDTO } from './MatchV4ParticipantStatsDTO';
+import { MatchV4ParticipantTimelineDTO } from './MatchV4ParticipantTimelineDTO';
+import { MatchV4RuneDTO } from './MatchV4RuneDTO';
 
 export interface MatchV4ParticipantDTO {
   /**

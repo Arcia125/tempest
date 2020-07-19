@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
-
 import './AnimatedSpinner.css';
+
 
 const AnimatedSpinner: FC = (props) => {
   return (
@@ -9,6 +9,5 @@ const AnimatedSpinner: FC = (props) => {
     </div>
   );
 };
-
 
 export default AnimatedSpinner;

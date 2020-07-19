@@ -1,10 +1,15 @@
 import log from 'electron-log';
 import WebSocket from 'ws';
-
-import { Emitter, EventReceiver, EventKey, BaseEmitter } from '../Emitter';
-import { LCUData } from '../../src/shared/LCUData';
-import { getLcuUrl } from '../../src/shared/getLcuUrl';
 import { LCUSocketTopic } from './LCUSocketTopic';
+import { getLcuUrl } from '../../src/shared/getLcuUrl';
+import { LCUData } from '../../src/shared/LCUData';
+import {
+  BaseEmitter,
+  Emitter,
+  EventKey,
+  EventReceiver
+  } from '../Emitter';
+
 
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
 

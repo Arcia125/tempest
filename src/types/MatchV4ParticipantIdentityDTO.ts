@@ -1,4 +1,4 @@
-import { MatchV4PlayerDTO } from "./MatchV4PlayerDTO";
+import { MatchV4PlayerDTO } from './MatchV4PlayerDTO';
 
 export interface MatchV4ParticipantIdentityDTO {
   /**

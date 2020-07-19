@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
-
 import { log } from '../utils';
+
 
 const { ipcRenderer } = window.require('electron');
 

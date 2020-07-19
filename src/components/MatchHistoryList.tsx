@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { MatchHistoryPreview } from './MatchHistoryPreview';
-import { Maybe, MatchHistory } from '../operations';
+import { MatchHistory, Maybe } from '../operations';
 
 export interface Props {
   matchHistory?: Maybe<MatchHistory>;

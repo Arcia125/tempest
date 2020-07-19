@@ -1,8 +1,8 @@
 import React, { FC } from 'react';
-
-import './SearchInput.css';
 import SearchIcon from './SearchIcon';
+import './SearchInput.css';
 import { classNames } from '../utils';
+
 
 interface PropsBase {
   onSearch: () => void;

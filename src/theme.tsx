@@ -1,5 +1,4 @@
-import React, { createContext, useContext, FC, useState } from 'react';
-
+import React, { createContext, FC, useState } from 'react';
 import { getCssPropertyValue } from './utils';
 
 const colors = {
@@ -49,7 +48,7 @@ interface ThemeContext {
   setTheme: ((themeMode: ThemeMode) => void) | null;
 }
 
-const defaultActiveTheme: ActiveTheme = themes.modes.darkGPU;
+export const defaultActiveTheme: ActiveTheme = themes.modes.darkGPU;
 
 export const themeContext = createContext<ThemeContext>({
   theme: defaultActiveTheme,

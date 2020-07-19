@@ -1,12 +1,16 @@
 import React, { FC } from 'react';
-import { Link, useHistory, Route, Switch } from 'react-router-dom';
-
+import {
+  Link,
+  Route,
+  Switch,
+  useHistory
+  } from 'react-router-dom';
+import { Button, ContainedButton } from '../../components/Button';
 import { HeaderContainer } from '../../components/HeaderContainer';
-import SearchInput from '../../components/SearchInput';
-import { useSearch } from '../../hooks';
 import { Logo } from '../../components/Logo';
-import { ContainedButton, Button } from '../../components/Button';
+import SearchInput from '../../components/SearchInput';
 import { TypographyVariants } from '../../components/Typography';
+import { useSearch } from '../../hooks';
 import { classNames } from '../../utils';
 
 const LoginLinks: FC<{ className?: string }> = ({ className }) => {

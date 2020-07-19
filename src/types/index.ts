@@ -1,7 +1,7 @@
-import * as Lobby from './lobby';
-import * as Reducer from './reducer';
-import * as MatchMaking from './matchMaking';
 import * as Animation from './animation';
+import * as Lobby from './lobby';
+import * as MatchMaking from './matchMaking';
+import * as Reducer from './reducer';
 
 export type { Entry } from './Entry';
 

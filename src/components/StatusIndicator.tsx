@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
-
 import './StatusIndicator.css';
 import { classNames } from '../utils';
+
 
 interface Props {
   className?: string;

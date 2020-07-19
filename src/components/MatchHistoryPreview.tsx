@@ -1,10 +1,12 @@
 import React, { FC } from 'react';
-
 import './MatchHistoryPreview.css';
-import { RiotImageType } from '../types';
 import { RiotImage } from './RiotImage';
+import Typography, { TypographyVariants } from './Typography';
 import { getImageNameByChampionKey } from '../data';
 import { championsByKey } from '../data';
+import { getQueueName } from '../data';
+import { RiotImageType } from '../types';
+import { leftPad } from '../utils';
 import {
   MatchHistoryItem,
   Maybe,
@@ -12,9 +14,6 @@ import {
   MatchParticipant,
   MatchParticipantIdentity,
 } from '../operations';
-import Typography, { TypographyVariants } from './Typography';
-import { getQueueName } from '../data';
-import { leftPad } from '../utils';
 
 export interface Props {
   matchHistoryItem?: Maybe<MatchHistoryItem>;
