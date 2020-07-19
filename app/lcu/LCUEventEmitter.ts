@@ -17,16 +17,6 @@ export class LCUEventEmitter extends Emitter<Record<LCUPluginEvent, any>> {
       log.warn(`Unimplemented event plugin ${plugin} ${event.uri}`);
       this.emit(plugin, event);
     }
-    // switch (plugin) {
-    //   case LCUPluginEvent.CHAMP_SELECT:
-    //   case LCUPluginEvent.MATCHMAKING:
-    //     this.emit(plugin, event);
-    //     break;
-    //   default: {
-    //     console.warn(`Unimplemented event plugin ${plugin} ${event.uri}`);
-    //     this.emit(plugin as LCUPluginEvent, event);
-    //   }
-    // }
   }
 
   private emitOn(emit: LCUEventEmitter["emit"], pluginEventKey: LCUPluginEvent) {
