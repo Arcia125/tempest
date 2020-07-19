@@ -83,12 +83,6 @@ app.on('browser-window-created', (event) => {
   })
 });
 
-
-
-// lcuEmitter.on(LCUPluginEvent.CHAMP_SELECT, event => {
-//   ipcMain.emit(LCUPluginEvent.CHAMP_SELECT, event);
-// });
-
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') app.quit();
 });
