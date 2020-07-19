@@ -19,9 +19,6 @@ const RankedBadge: FC<Props> = ({ tier, rank, queue }) => {
     <div className="RankedBadge">
       <img
         className="RankedBadge-emblem"
-        // src={`${
-        //   process.env.PUBLIC_URL
-        // }/ranked-emblems/${tier.toLowerCase()}.png`}
         src={getEmblemUrl(tier)}
         alt={`Ranked emblem - ${tier}`}
       />
