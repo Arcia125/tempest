@@ -36,7 +36,6 @@ export class LCUWebSocket implements WebSocketEmitter {
   private emitter = new Emitter();
 
   constructor(lcuData: LCUData, endpoint: string) {
-    // super(getLcuUrl(lcuData, endpoint, 'ws', false), 'wamp');
     this.socket = new WebSocket(getLcuUrl(lcuData, endpoint, 'wss'), 'wamp');
     this.socket.addEventListener('message', this.onMessage.bind(this))
     this.socket.addEventListener('error', log.error);
