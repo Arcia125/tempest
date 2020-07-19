@@ -42,7 +42,6 @@ function createWindow() {
     },
   });
   // and load the index.html of the app.     win.loadFile('index.html')
-  // mainWindow.loadURL('http://localhost:3000');
   mainWindow.loadURL(isDev ? 'http://localhost:3000' : indexHtmlUrl);
   mainWindow.on('closed', () => (mainWindow = null));
 }
