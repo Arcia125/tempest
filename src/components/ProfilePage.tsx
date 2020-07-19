@@ -4,7 +4,6 @@ import AnimatedSpinner from './AnimatedSpinner';
 import { Profile } from './Profile';
 import { useSummonerQuery } from '../operations';
 import { log } from '../utils';
-
 import {
   queueFromQueueType,
   romanNumeralToNumber,

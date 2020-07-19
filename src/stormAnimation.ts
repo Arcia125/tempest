@@ -1,3 +1,9 @@
+import * as THREE from 'three';
+import cloudsUrl from './assets/clouds.jpg';
+import noiseUrl from './assets/noise.png';
+import { Animation } from './types';
+import { call, listen, onDOMChange } from './utils';
+import { loadTextures } from './utils/loadTextures';
 /**
 Copyright (c) 2020 by Liam Egan (https://codepen.io/shubniggurath/pen/BVKgJK)
 
@@ -7,13 +13,6 @@ The above copyright notice and this permission notice shall be included in all c
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-import * as THREE from 'three';
-
-import cloudsUrl from './assets/clouds.jpg';
-import noiseUrl from './assets/noise.png';
-import { Animation } from './types';
-import { loadTextures } from './utils/loadTextures';
-import { onDOMChange, call, listen } from './utils';
 
 const loader = new THREE.TextureLoader();
 

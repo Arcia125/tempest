@@ -1,7 +1,6 @@
-import { useReducer, useCallback } from 'react';
-
-import { LCUPluginEvent } from '../shared/LCUPluginEvent';
+import { useCallback, useReducer } from 'react';
 import { useEventEffect } from './useEventEffect';
+import { LCUPluginEvent } from '../shared/LCUPluginEvent';
 import { Lobby } from '../types';
 import { log } from '../utils';
 
