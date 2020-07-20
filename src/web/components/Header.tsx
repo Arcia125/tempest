@@ -13,26 +13,26 @@ import { TypographyVariants } from '../../components/Typography';
 import { useSearch } from '../../hooks';
 import { classNames } from '../../utils';
 
-const LoginLinks: FC<{ className?: string }> = ({ className }) => {
-  const history = useHistory();
-  return (
-    <div className={classNames('LoginLinks', className)}>
-      <Button
-        variant={TypographyVariants.p}
-        onClick={(e) => history.push('/login')}
-      >
-        Login
-      </Button>
-      <ContainedButton
-        variant={TypographyVariants.p}
-        color="important0"
-        onClick={(e) => history.push('/create-account')}
-      >
-        Create Account
-      </ContainedButton>
-    </div>
-  );
-};
+// const LoginLinks: FC<{ className?: string }> = ({ className }) => {
+//   const history = useHistory();
+//   return (
+//     <div className={classNames('LoginLinks', className)}>
+//       <Button
+//         variant={TypographyVariants.p}
+//         onClick={(e) => history.push('/login')}
+//       >
+//         Login
+//       </Button>
+//       <ContainedButton
+//         variant={TypographyVariants.p}
+//         color="important0"
+//         onClick={(e) => history.push('/create-account')}
+//       >
+//         Create Account
+//       </ContainedButton>
+//     </div>
+//   );
+// };
 
 export const Header: FC = (props) => {
   const { search, setter, handleSearch } = useSearch();

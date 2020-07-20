@@ -8,7 +8,7 @@ import { useEffect, useState } from 'react';
 export const useChampSelect = () => {
   // const lcuData = useLcuContext();
   // const listenToChampSelect = 
-  const [inChampSelect, setInChampSelect] = useState(false);
+  // const [inChampSelect, setInChampSelect] = useState(false);
   useEffect(() => {
     // if (!('username' in lcuData)) return;
     // let websocket = new LCUWebSocket(lcuData, '');

@@ -3,9 +3,8 @@ import ErrorBoundary from './ErrorBoundary';
 import { useErrorMutation } from '../operations';
 import { log } from '../utils';
 
-
 const ErrorReporter: FC = ({ children }) => {
-  const [reportError, errorMutation] = useErrorMutation();
+  const [reportError] = useErrorMutation();
 
   return (
     <ErrorBoundary
