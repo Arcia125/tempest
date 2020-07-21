@@ -18,7 +18,7 @@ const ProfilePage: FC = () => {
     },
   });
 
-  if (loading) return <AnimatedSpinner />;
+  if (1 > 0) return <AnimatedSpinner />;
   if (error) {
     log.error(error);
     return <p>Something went wrong</p>;

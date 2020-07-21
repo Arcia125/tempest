@@ -19,6 +19,8 @@ body {
 }
 
 .App {
+  display: flex;
+  flex-direction: column;
   min-height: 100vh;
   padding-top: 75px;
 }
@@ -27,15 +29,15 @@ body {
   padding: 16px;
 }
 
-
-.App-header {}
+.App-header {
+}
 
 .App-link {
   color: #61dafb;
 }
 
 /* The storm texture background canvas that gets created by useStormScene in App.tsx */
-.App>canvas {
+.App > canvas {
   position: absolute;
   top: 0;
   left: 0;

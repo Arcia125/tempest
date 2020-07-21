@@ -15,6 +15,8 @@ const colors = {
 
 const vars = {
   backdropFilter: getCssPropertyValue('--backdropFilter'),
+  appWidth: getCssPropertyValue('--appWidth'),
+  appMaxWidth: getCssPropertyValue('--appMaxWidth'),
 };
 
 export enum ThemeMode {

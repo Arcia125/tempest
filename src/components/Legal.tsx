@@ -1,4 +1,5 @@
 import React, { FC, HTMLAttributes } from 'react';
+import './Legal.css';
 import { classNames } from '../utils';
 
 export type Props = HTMLAttributes<HTMLParagraphElement>;

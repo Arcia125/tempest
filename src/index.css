@@ -11,6 +11,8 @@
   --important4: #e28888;
   --success0: #b3efb2;
   --backdropFilter: blur(10px);
+  --appWidth: calc(100% - 6px - 16px);
+  --appMaxWidth: 1000px;
 }
 
 body {
