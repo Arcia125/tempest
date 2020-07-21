@@ -1,5 +1,7 @@
 # Tempest
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/f5a216a2-4df1-42eb-ae3d-dddda699c3c3/deploy-status)](https://app.netlify.com/sites/tempest/deploys)
+
 League of Legends companion app.
 
 ## Getting Started
