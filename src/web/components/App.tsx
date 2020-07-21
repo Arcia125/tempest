@@ -6,6 +6,7 @@ import { Header } from './Header';
 import { apolloClient } from '../../apolloClient';
 import '../../components/App.css';
 import ErrorReporter from '../../components/ErrorReporter';
+import { Legal } from '../../components/Legal';
 import ProfilePage from '../../components/ProfilePage';
 import SearchPage from '../../components/SearchPage';
 import { useStormScene } from '../../hooks';
@@ -26,6 +27,7 @@ const InnerApp = () => {
           <ProfilePage />
         </Route>
       </Switch>
+      <Legal />
     </div>
   );
 };

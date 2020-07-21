@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { Route, Switch } from 'react-router';
 import './App.css';
 import Header from './Header';
+import { Legal } from './Legal';
 import ProfilePage from './ProfilePage';
 import SearchPage from './SearchPage';
 import { useCurrentSummoner, useMatchMaking, useStormScene } from '../hooks';
@@ -47,6 +48,7 @@ const InnerApp = () => {
           <ProfilePage />
         </Route>
       </Switch>
+      <Legal />
     </div>
   );
 };
