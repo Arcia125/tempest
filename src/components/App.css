@@ -1,9 +1,9 @@
 :root {
-  --backgroundrgb: 68, 61, 143;
+  --backgroundrgb: 34, 30, 72;
   --background: rgb(var(--backgroundrgb));
-  --fg0rgb: 85, 77, 179;
+  --fg0rgb: 51, 46, 107;
   --fg0: rgb(var(--fg0rgb));
-  --fg1rgb: 119, 112, 194;
+  --fg1rgb: 68, 61, 143;
   --fg1: rgb(var(--fg1rgb));
   --text: #e5ebef;
   --accent0: #91c4f2;
@@ -29,15 +29,14 @@ body {
   padding: 16px;
 }
 
-.App-header {
-}
+.App-header {}
 
 .App-link {
   color: #61dafb;
 }
 
 /* The storm texture background canvas that gets created by useStormScene in App.tsx */
-.App > canvas {
+.App>canvas {
   position: absolute;
   top: 0;
   left: 0;
