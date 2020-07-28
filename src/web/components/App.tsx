@@ -1,17 +1,20 @@
 import { ApolloProvider } from '@apollo/react-hooks';
-import React, { FC, useContext } from 'react';
+import React, { FC, Suspense, useContext } from 'react';
 import { Route, Switch } from 'react-router';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { Header } from './Header';
 import { apolloClient } from '../../apolloClient';
+import AnimatedSpinner from '../../components/AnimatedSpinner';
 import '../../components/App.css';
 import ErrorReporter from '../../components/ErrorReporter';
 import { Legal } from '../../components/Legal';
-import ProfilePage from '../../components/ProfilePage';
-import SearchPage from '../../components/SearchPage';
 import { useStormScene } from '../../hooks';
 import { Provider, themeContext, ThemeMode } from '../../theme';
 import { classNames } from '../../utils';
+
+const SearchPage = React.lazy(() => import('../../components/SearchPage'));
+
+const ProfilePage = React.lazy(() => import('../../components/ProfilePage'));
 
 const InnerApp = () => {
   const [elRef] = useStormScene();
@@ -21,10 +24,14 @@ const InnerApp = () => {
       <Header />
       <Switch>
         <Route path="/" exact>
-          <SearchPage />
+          <Suspense fallback={AnimatedSpinner}>
+            <SearchPage />
+          </Suspense>
         </Route>
         <Route path="/summoner/profile/:summonerName">
-          <ProfilePage />
+          <Suspense fallback={AnimatedSpinner}>
+            <ProfilePage />
+          </Suspense>
         </Route>
       </Switch>
       <Legal />
