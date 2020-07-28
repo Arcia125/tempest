@@ -21,6 +21,7 @@ const SearchInput: FC<Props> = ({
     <div className={classNames('SearchInput', className, `variant-${variant}`)}>
       <input
         {...restProps}
+        title="Summoner Name Search"
         className="SearchInput-input"
         type="search"
         placeholder="Search a summoner"
