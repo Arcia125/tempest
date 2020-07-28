@@ -3,24 +3,22 @@ import { LCUData } from '../../src/shared/LCUData';
 
 
 export class LCUConnection {
+  public lcuData: LCUData;
   private lcuConnectionPromise: Promise<LCUData> | null = null;
 
-  private static createLCUConnection(lcuConnector: LCUConnector) {
+  private createLCUConnection() {
     return new Promise<LCUData>((resolve, reject) => {
       let resolved = false;
-      lcuConnector.on('connect', (data) => {
+      this.lcuConnector.on('connect', (data) => {
+        const lcuData = data as unknown as LCUData;
+        this.lcuData = lcuData
         if (!resolved) {
-          resolve(data as unknown as LCUData);
+          resolve(lcuData);
           resolved = true;
         }
       });
-      lcuConnector.start();
+      this.lcuConnector.start();
     });
-  }
-
-
-  private createLCUConnection() {
-    return LCUConnection.createLCUConnection(this.lcuConnector);
   }
 
   private resetLCUConnection() {

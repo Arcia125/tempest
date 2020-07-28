@@ -2,11 +2,10 @@ import { useEffect, useState } from 'react';
 import { Channels } from '../shared/ipc';
 import { log } from '../utils';
 
-
 const { ipcRenderer } = window.require('electron');
 
 export const useLcuDataConnection = () => {
-  const [lcuData, setLcuData] = useState({});
+  const [lcuData, setLcuData] = useState(null);
 
   useEffect(() => {
     const handleLcuData: (event: any, ...args: any[]) => void = (
@@ -17,8 +16,8 @@ export const useLcuDataConnection = () => {
       setLcuData(data);
     };
     ipcRenderer.on(Channels.LCU_DATA, handleLcuData);
-    ipcRenderer.send(Channels.GET_LCU_DATA, '');
     log.silly('asking for lcu-data');
+    ipcRenderer.send(Channels.GET_LCU_DATA, '');
     return () => {
       ipcRenderer.off(Channels.LCU_DATA, handleLcuData);
     };

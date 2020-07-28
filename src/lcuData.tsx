@@ -8,10 +8,16 @@ const { ipcRenderer } = window.require('electron');
 
 export const lcuRequest = (endpoint: string, options: Partial<RequestInit>) => {
   return new Promise((resolve, reject) => {
-    ipcRenderer.on(Channels.LCU_RESPONSE, (event: any, data: any) => {
+    const handleIpcResponse = (event: any, data: any) => {
       log.silly(event, data);
-      resolve(data);
-    });
+      if (data.error) {
+        reject(data.error);
+      } else {
+        resolve(data);
+      }
+      ipcRenderer.off(Channels.LCU_RESPONSE, handleIpcResponse);
+    };
+    ipcRenderer.on(Channels.LCU_RESPONSE, handleIpcResponse);
     ipcRenderer.send(Channels.LCU_REQUEST, {
       endpoint,
       options: { ...options },
@@ -19,7 +25,7 @@ export const lcuRequest = (endpoint: string, options: Partial<RequestInit>) => {
   });
 };
 
-export const lcuContext = createContext<LCUData | {}>({});
+export const lcuContext = createContext<LCUData | null>(null);
 
 export const useLcuContext = () => useContext(lcuContext);
 
