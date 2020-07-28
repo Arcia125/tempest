@@ -31,7 +31,7 @@ const SearchInput: FC<Props> = ({
       <button
         className="SearchInput-submit"
         type="submit"
-        aria-label="Search"
+        aria-label="Search for summoner by name"
         onClick={onSearch}
       >
         <SearchIcon />
