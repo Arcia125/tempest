@@ -64,7 +64,7 @@ export const useCurrentSummoner = () => {
         actions.err(dispatch, e);
       }
     }
-    if ('username' in lcuData) {
+    if (lcuData != null) {
       log.silly('getting summoner');
       getSummoner();
     }
