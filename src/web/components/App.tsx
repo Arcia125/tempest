@@ -8,11 +8,10 @@ import AnimatedSpinner from '../../components/AnimatedSpinner';
 import '../../components/App.css';
 import ErrorReporter from '../../components/ErrorReporter';
 import { Legal } from '../../components/Legal';
+import SearchPage from '../../components/SearchPage';
 import { useStormScene } from '../../hooks';
 import { Provider, themeContext, ThemeMode } from '../../theme';
 import { classNames } from '../../utils';
-
-const SearchPage = React.lazy(() => import('../../components/SearchPage'));
 
 const ProfilePage = React.lazy(() => import('../../components/ProfilePage'));
 
@@ -24,9 +23,7 @@ const InnerApp = () => {
       <Header />
       <Switch>
         <Route path="/" exact>
-          <Suspense fallback={AnimatedSpinner}>
-            <SearchPage />
-          </Suspense>
+          <SearchPage />
         </Route>
         <Route path="/summoner/profile/:summonerName">
           <Suspense fallback={AnimatedSpinner}>
