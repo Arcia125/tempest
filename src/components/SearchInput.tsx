@@ -3,7 +3,6 @@ import SearchIcon from './SearchIcon';
 import './SearchInput.css';
 import { classNames } from '../utils';
 
-
 interface PropsBase {
   onSearch: () => void;
   variant: 'window' | 'opaque';
@@ -29,7 +28,12 @@ const SearchInput: FC<Props> = ({
           if (e.key === 'Enter') onSearch();
         }}
       />
-      <button className="SearchInput-submit" type="submit" onClick={onSearch}>
+      <button
+        className="SearchInput-submit"
+        type="submit"
+        aria-label="Search"
+        onClick={onSearch}
+      >
         <SearchIcon />
       </button>
     </div>
