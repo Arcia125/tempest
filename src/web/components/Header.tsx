@@ -39,7 +39,7 @@ export const Header: FC = (props) => {
 
   return (
     <HeaderContainer className="HeaderContainer">
-      <Link to="/">
+      <Link to="/" title="Home">
         <Logo />
       </Link>
       <Switch>
