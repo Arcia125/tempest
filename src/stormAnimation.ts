@@ -1,6 +1,6 @@
 import * as THREE from 'three';
-import cloudsUrl from './assets/clouds.jpg';
-import noiseUrl from './assets/noise.png';
+import cloudsUrl from './assets/clouds.webp';
+import noiseUrl from './assets/noise.webp';
 import { Animation } from './types';
 import { call, listen, onDOMChange } from './utils';
 import { loadTextures } from './utils/loadTextures';
