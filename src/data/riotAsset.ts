@@ -1,7 +1,7 @@
 import { championsByKey } from './championData';
 import { RiotImageType } from '../types';
 
-const CDN_BASE_URL = 'http://ddragon.leagueoflegends.com/cdn/'
+const CDN_BASE_URL = 'https://ddragon.leagueoflegends.com/cdn/'
 const PATCH_VERSION = '10.15.1';
 // const PATCH_VERSION = '10.14.1';
 // const PATCH_VERSION = '10.10.3216176';
@@ -21,7 +21,7 @@ const getBaseImageAssetUrl = (imageType: RiotImageType) => {
  * @description Determines the url for an image asset
  * @param imageType The image type, eg. "champion", "spell", or "item"
  * @param imageName The image name, eg. "Ryze", "SummonerFlash", or "FlashFrost"
- * @example getImageAssetUrl('champion', 'Ryze') // http://ddragon.leagueoflegends.com/cdn/10.11.1/img/champion/Aatrox.png
+ * @example getImageAssetUrl('champion', 'Ryze') // https://ddragon.leagueoflegends.com/cdn/10.11.1/img/champion/Aatrox.png
  */
 export const getImageAssetUrl = (imageType: RiotImageType, imageName: string) => {
   const baseUrl = getBaseImageAssetUrl(imageType);
