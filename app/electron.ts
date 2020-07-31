@@ -3,7 +3,7 @@ import {
   BrowserWindow,
   ipcMain,
   nativeImage
-  } from 'electron';
+} from 'electron';
 import isDev from 'electron-is-dev';
 import log from 'electron-log';
 import LCUConnector from 'lcu-connector';
@@ -14,7 +14,7 @@ import {
   LCUEventEmitter,
   LCUSocketTopic,
   LCUWebSocket
-  } from './lcu';
+} from './lcu';
 import { getLcuUrl } from '../src/shared/getLcuUrl';
 import { Channels } from '../src/shared/ipc';
 import { LCUData } from '../src/shared/LCUData';
@@ -43,6 +43,7 @@ function createWindow() {
   mainWindow = new BrowserWindow({
     width,
     height,
+    frame: false,
     icon: nativeImage.createFromPath(iconUrl),
     autoHideMenuBar: true,
     minWidth: width * .9,
@@ -52,7 +53,12 @@ function createWindow() {
     },
   });
   // and load the index.html of the app.     win.loadFile('index.html')
-  mainWindow.loadURL(isDev ? 'http://localhost:3000' : indexHtmlUrl);
+  if (isDev) {
+    mainWindow.loadURL('http://localhost:3000');
+    mainWindow.webContents.openDevTools();
+  } else {
+    mainWindow.loadURL(indexHtmlUrl);
+  }
   mainWindow.on('closed', () => (mainWindow = null));
 }
 
