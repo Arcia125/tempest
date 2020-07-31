@@ -3,6 +3,6 @@
   -webkit-app-region: drag;
 }
 
-.HeaderContainer * {
+.HeaderContainer>* {
   -webkit-app-region: no-drag;
 }
