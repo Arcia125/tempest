@@ -1,3 +1,8 @@
 .HeaderContainer {
   background: var(--fg0);
+  -webkit-app-region: drag;
+}
+
+.HeaderContainer * {
+  -webkit-app-region: no-drag;
 }
