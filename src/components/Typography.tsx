@@ -3,7 +3,6 @@ import './Typography.css';
 import { ActiveTheme } from '../theme';
 import { createClassNameGenerator } from '../utils';
 
-
 export enum TypographyVariants {
   h1 = 'header1',
   h2 = 'header2',

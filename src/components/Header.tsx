@@ -12,7 +12,7 @@ import { CurrentSummonerResponse } from '../shared/LCUResponses';
 import { themeContext, ThemeMode } from '../theme';
 import { RiotImageType } from '../types';
 import { MatchMaking } from '../types';
-
+import WindowControls from './WindowControls';
 
 interface Props {
   summoner?: CurrentSummonerResponse;
@@ -56,6 +56,7 @@ const Header: FC<Props> = ({ summoner, matchMaking }) => {
           />
         </Route>
       </Switch>
+      <WindowControls />
     </HeaderContainer>
   );
 };
