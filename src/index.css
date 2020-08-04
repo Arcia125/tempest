@@ -1,9 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap');
 
 :root {
-  --background: #001a23;
-  --fg0: #183139;
-  --fg1: #2f484f;
+  --backgroundrgb: 34, 30, 72;
+  --background: rgb(var(--backgroundrgb));
+  --fg0rgb: 51, 46, 107;
+  --fg0: rgb(var(--fg0rgb));
+  --fg1rgb: 68, 61, 143;
+  --fg1: rgb(var(--fg1rgb));
   --text: #e5ebef;
   --accent0: #91c4f2;
   --accent4: #bfedfb;

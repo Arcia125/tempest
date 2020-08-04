@@ -1,7 +1,6 @@
 import React, { FC, useContext } from 'react';
 import { themeContext } from '../theme';
 
-
 const Logo: FC<{}> = (props) => {
   const context = useContext(themeContext);
   return (

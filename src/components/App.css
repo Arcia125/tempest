@@ -1,18 +1,3 @@
-:root {
-  --backgroundrgb: 34, 30, 72;
-  --background: rgb(var(--backgroundrgb));
-  --fg0rgb: 51, 46, 107;
-  --fg0: rgb(var(--fg0rgb));
-  --fg1rgb: 68, 61, 143;
-  --fg1: rgb(var(--fg1rgb));
-  --text: #e5ebef;
-  --accent0: #91c4f2;
-  --accent4: #bfedfb;
-  --important0: #cf3737;
-  --important4: #e28888;
-  --success0: #b3efb2;
-}
-
 body {
   /* Fallback color while the app loads */
   background-color: var(--background);
