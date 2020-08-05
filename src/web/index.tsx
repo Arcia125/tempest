@@ -1,5 +1,5 @@
-import { App, Providers } from './components/App';
 import '../index.css';
+import { App, Providers } from './components/App';
 import * as serviceWorker from '../serviceWorker';
 import { defaultActiveTheme } from '../theme';
 import { createRenderer } from '../utils';

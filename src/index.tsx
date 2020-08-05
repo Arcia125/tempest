@@ -1,6 +1,6 @@
+import './index.css';
 import { App } from './components/App';
 import { Providers } from './components/Providers';
-import './index.css';
 import * as serviceWorker from './serviceWorker';
 import { defaultActiveTheme } from './theme';
 import { createRenderer } from './utils';
