@@ -4,7 +4,7 @@ import { classNames } from '../utils';
 import { Button } from './Button';
 import { TypographyVariants } from './Typography';
 import { useWindowControls } from '../hooks/useWindowControls';
-
+import './WindowControls.css';
 interface Props {
   className?: string;
 }
