@@ -2,7 +2,7 @@
   position: fixed;
   top: 0;
   padding: 14px;
-  height: 75px;
+  height: var(--appHeaderHeight);
   width: 100%;
   z-index: 10;
   display: flex;
@@ -35,9 +35,13 @@
   right: 5%;
 }
 
-
 .App.darkGPU .App-header {
   background: rgb(20, 9, 72);
-  background: linear-gradient(180deg, rgba(20, 9, 72, 0.6) 0%, rgba(20, 9, 72, 0.2) 35%, rgba(20, 9, 72, 0) 100%);
+  background: linear-gradient(
+    180deg,
+    rgba(20, 9, 72, 0.6) 0%,
+    rgba(20, 9, 72, 0.2) 35%,
+    rgba(20, 9, 72, 0) 100%
+  );
   backdrop-filter: var(--backdropFilter);
 }

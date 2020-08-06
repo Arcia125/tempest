@@ -19,7 +19,10 @@ const InnerApp = () => {
   const [elRef] = useStormScene();
   const themeCtx = useContext(themeContext);
   return (
-    <div className={classNames('App', themeCtx.theme.mode)} ref={elRef as any}>
+    <div
+      className={classNames('App', 'App-web', themeCtx.theme.mode)}
+      ref={elRef as any}
+    >
       <Header />
       <Switch>
         <Route path="/" exact>

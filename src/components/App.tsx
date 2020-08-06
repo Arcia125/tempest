@@ -39,16 +39,21 @@ const InnerApp = () => {
   // useEventEffect('lol-clash', logEvent);
   return (
     <div className={classNames('App', themeCtx.theme.mode)} ref={elRef as any}>
-      <Header summoner={summoner.state.data} matchMaking={matchMaking.state} />
-      <Switch>
-        <Route path="/" exact>
-          <SearchPage />
-        </Route>
-        <Route path="/summoner/profile/:summonerName">
-          <ProfilePage />
-        </Route>
-      </Switch>
-      <Legal />
+      <div className="App-scrollArea">
+        <Header
+          summoner={summoner.state.data}
+          matchMaking={matchMaking.state}
+        />
+        <Switch>
+          <Route path="/" exact>
+            <SearchPage />
+          </Route>
+          <Route path="/summoner/profile/:summonerName">
+            <ProfilePage />
+          </Route>
+        </Switch>
+        <Legal />
+      </div>
     </div>
   );
 };

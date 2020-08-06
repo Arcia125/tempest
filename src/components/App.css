@@ -4,24 +4,36 @@ body {
 }
 
 .App {
+  padding-top: var(--appHeaderHeight);
+  box-sizing: border-box;
+}
+
+.App-web {
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
-  padding-top: 75px;
+  height: 100vh;
+}
+
+.App-scrollArea {
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - var(--appHeaderHeight));
+  overflow-y: auto;
 }
 
 .App-logo {
   padding: 16px;
 }
 
-.App-header {}
+.App-header {
+}
 
 .App-link {
   color: #61dafb;
 }
 
 /* The storm texture background canvas that gets created by useStormScene in App.tsx */
-.App>canvas {
+.App > canvas {
   position: absolute;
   top: 0;
   left: 0;
