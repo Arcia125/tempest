@@ -1,7 +1,7 @@
 import React, { createContext, FC, useState } from 'react';
 import { getCssPropertyValue } from './utils';
 
-const initThemeProps = (propNames: string[]) => {
+const initThemeProps = (propNames: string[]): Record<string, string> => {
   return propNames.reduce((propsAcc, propName) => {
     const cssPropName = `--${propName}`;
     const cssPropValue = getCssPropertyValue(cssPropName);
