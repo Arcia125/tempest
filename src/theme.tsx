@@ -1,23 +1,29 @@
 import React, { createContext, FC, useState } from 'react';
 import { getCssPropertyValue } from './utils';
 
-const colors = {
-  background: getCssPropertyValue('--background'),
-  fg0: getCssPropertyValue('--fg0'),
-  fg1: getCssPropertyValue('--fg1'),
-  text: getCssPropertyValue('--text'),
-  accent0: getCssPropertyValue('--accent0'),
-  accent4: getCssPropertyValue('--accent4'),
-  important0: getCssPropertyValue('--important0'),
-  important4: getCssPropertyValue('--important4'),
-  success0: getCssPropertyValue('--success0'),
+const initThemeProps = (propNames: string[]) => {
+  return propNames.reduce((propsAcc, propName) => {
+    const cssPropName = `--${propName}`;
+    const cssPropValue = getCssPropertyValue(cssPropName);
+    if (!cssPropValue)
+      console.warn(`css property name ${cssPropName} is falsy`);
+    return { ...propsAcc, [propName]: cssPropValue };
+  }, {});
 };
 
-const vars = {
-  backdropFilter: getCssPropertyValue('--backdropFilter'),
-  appWidth: getCssPropertyValue('--appWidth'),
-  appMaxWidth: getCssPropertyValue('--appMaxWidth'),
-};
+const colors = initThemeProps([
+  'background',
+  'fg0',
+  'fg1',
+  'text',
+  'accent0',
+  'accent4',
+  'important0',
+  'important4',
+  'success0',
+]);
+
+const vars = initThemeProps(['backdropFilter', 'appWidth', 'appMaxWidth']);
 
 export enum ThemeMode {
   DARK_GPU = 'darkGPU',
