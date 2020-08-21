@@ -1,6 +1,6 @@
 .MatchHistoryPreview {
   height: 66px;
-  border-radius: 5px;
+  border-radius: 3px;
   overflow: hidden;
   display: flex;
   justify-content: flex-start;
@@ -9,7 +9,7 @@
 }
 
 .App.darkGPU .MatchHistoryPreview {
-  background-color: rgba(var(--fg0rgb), .1);
+  background-color: rgba(var(--fg0rgb), 0.1);
   backdrop-filter: var(--backdropFilter);
 }
 
@@ -43,7 +43,8 @@
   white-space: nowrap;
 }
 
-.MatchHistoryPreview-details_outcome {}
+.MatchHistoryPreview-details_outcome {
+}
 
 .MatchHistoryPreview-champion-image {
   width: 66px;

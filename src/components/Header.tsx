@@ -46,7 +46,9 @@ const Header: FC<Props> = ({ summoner, matchMaking }) => {
         </Link>
       )}
       <Switch>
-        <Route exact path="/"></Route>
+        <Route exact path="/">
+          <div />
+        </Route>
         <Route>
           <SearchInput
             variant={theme.mode === ThemeMode.DARK_GPU ? 'window' : 'opaque'}
