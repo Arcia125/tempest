@@ -3,6 +3,7 @@ import React, { FC, Suspense, useContext } from 'react';
 import { Route, Switch } from 'react-router';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { Header } from './Header';
+import { useAnalytics } from './useAnalytics';
 import { apolloClient } from '../../apolloClient';
 import AnimatedSpinner from '../../components/AnimatedSpinner';
 import '../../components/App.css';
@@ -18,6 +19,7 @@ const ProfilePage = React.lazy(() => import('../../components/ProfilePage'));
 const InnerApp = () => {
   const [elRef] = useStormScene();
   const themeCtx = useContext(themeContext);
+  useAnalytics();
   return (
     <div
       className={classNames('App', 'App-web', themeCtx.theme.mode)}
