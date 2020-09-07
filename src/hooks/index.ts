@@ -4,6 +4,7 @@ export { useMockQuery } from './useMockQuery';
 export { useSearch } from './useSearch';
 
 export { useStormScene } from './useStormScene';
+export { useAnalytics } from './useAnalytics';
 
 const isElectronEnv = typeof window.require === 'function';
 
