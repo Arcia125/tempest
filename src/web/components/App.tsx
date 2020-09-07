@@ -30,7 +30,7 @@ const InnerApp = () => {
           <SearchPage />
         </Route>
         <Route path="/summoner/profile/:summonerName">
-          <Suspense fallback={AnimatedSpinner}>
+          <Suspense fallback={<AnimatedSpinner />}>
             <ProfilePage />
           </Suspense>
         </Route>
