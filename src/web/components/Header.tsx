@@ -1,16 +1,10 @@
 import React, { FC } from 'react';
-import {
-  Link,
-  Route,
-  Switch,
-  useHistory
-  } from 'react-router-dom';
+import { Link, Route, Switch, useHistory } from 'react-router-dom';
 import { Button, ContainedButton } from '../../components/Button';
+import ControlledSearchInput from '../../components/ControlledSearchInput';
 import { HeaderContainer } from '../../components/HeaderContainer';
 import { Logo } from '../../components/Logo';
-import SearchInput from '../../components/SearchInput';
 import { TypographyVariants } from '../../components/Typography';
-import { useSearch } from '../../hooks';
 import { classNames } from '../../utils';
 
 // const LoginLinks: FC<{ className?: string }> = ({ className }) => {
@@ -35,8 +29,6 @@ import { classNames } from '../../utils';
 // };
 
 export const Header: FC = (props) => {
-  const { search, setter, handleSearch } = useSearch();
-
   return (
     <HeaderContainer className="HeaderContainer">
       <Link to="/" title="Home">
@@ -45,12 +37,7 @@ export const Header: FC = (props) => {
       <Switch>
         <Route exact path="/"></Route>
         <Route>
-          <SearchInput
-            variant="window"
-            value={search}
-            onChange={setter}
-            onSearch={handleSearch}
-          />
+          <ControlledSearchInput variant="window" />
         </Route>
       </Switch>
       {/* <LoginLinks /> */}

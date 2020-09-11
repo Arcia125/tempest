@@ -15,6 +15,8 @@ const colors = initThemeProps([
   'background',
   'fg0',
   'fg1',
+  'fg2',
+  'fg3',
   'text',
   'accent0',
   'accent4',

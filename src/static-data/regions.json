@@ -1,0 +1,13 @@
+{
+  "na": { "name": "North America" },
+  "euw": { "name": "Europe West" },
+  "kr": { "name": "Korea" },
+  "br": { "name": "Brazil" },
+  "eune": { "name": "Europe North & East" },
+  "lan": { "name": "Latin America North" },
+  "las": { "name": "Latin America South" },
+  "oce": { "name": "Oceania" },
+  "jp": { "name": "Japan" },
+  "ru": { "name": "Russia" },
+  "tr": { "name": "Turkey" }
+}

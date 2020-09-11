@@ -7,6 +7,10 @@
   --fg0: rgb(var(--fg0rgb));
   --fg1rgb: 68, 61, 143;
   --fg1: rgb(var(--fg1rgb));
+  --fg2rgb: 85, 77, 179;
+  --fg2: rgb(var(--fg2rgb));
+  --fg3rgb: 119, 112, 194;
+  --fg3: rgb(var(--fg3rgb));
   --text: #e5ebef;
   --accent0: #91c4f2;
   --accent4: #bfedfb;
