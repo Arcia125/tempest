@@ -6,7 +6,6 @@ import { Maybe } from '../operations';
 import { RiotImageType } from '../types';
 import { createClassNameGenerator } from '../utils';
 
-
 export interface Props {
   profileIconId: string;
   username?: Maybe<string>;

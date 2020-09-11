@@ -11,10 +11,11 @@ import {
 } from '../data';
 
 const ProfilePage: FC = () => {
-  const params = useParams<{ summonerName: string }>();
+  const params = useParams<{ summonerName: string; region: string }>();
   const { loading, error, data } = useSummonerQuery({
     variables: {
       username: params.summonerName,
+      region: params.region,
     },
   });
 

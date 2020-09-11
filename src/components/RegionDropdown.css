@@ -1,0 +1,47 @@
+.RegionDropdown {
+  font-family: 'Lato', sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  text-transform: uppercase;
+}
+
+.RegionDropdown .Dropdown-control {
+  background-color: var(--fg2);
+  border-radius: 3px;
+  padding: 2px 4px;
+  border: none;
+  color: var(--text);
+}
+
+.RegionDropdown .Dropdown-control > .Dropdown-arrow-wrapper {
+  margin-left: 3px;
+}
+
+.RegionDropdown .Dropdown-control > * {
+  display: inline;
+}
+
+.RegionDropdown .Dropdown-menu {
+  margin-top: 5px;
+  width: 60px;
+  max-height: none;
+  overflow-x: hidden;
+
+  background-color: var(--fg2);
+  border: none;
+  border-radius: 3px;
+}
+
+.RegionDropdown .Dropdown-menu .Dropdown-option {
+  color: var(--text);
+}
+
+.RegionDropdown .Dropdown-menu .Dropdown-option.is-selected,
+.RegionDropdown .Dropdown-menu .Dropdown-option:hover {
+  background-color: var(--fg3);
+}
+
+.RegionDropdown .Dropdown-menu .Dropdown-option.is-selected {
+  border: 1px solid var(--accent4);
+}

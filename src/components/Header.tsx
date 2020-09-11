@@ -4,15 +4,14 @@ import BadgeLayout from './BadgeLayout';
 import './Header.css';
 import { HeaderContainer } from './HeaderContainer';
 import { RiotImage } from './RiotImage';
-import SearchInput from './SearchInput';
 import StatusIndicator from './StatusIndicator';
 import Typography, { TypographyVariants } from './Typography';
-import { useSearch } from '../hooks';
 import { CurrentSummonerResponse } from '../shared/LCUResponses';
 import { themeContext, ThemeMode } from '../theme';
 import { RiotImageType } from '../types';
 import { MatchMaking } from '../types';
 import WindowControls from './WindowControls';
+import ControlledSearchInput from './ControlledSearchInput';
 
 interface Props {
   summoner?: CurrentSummonerResponse;
@@ -20,8 +19,6 @@ interface Props {
 }
 
 const Header: FC<Props> = ({ summoner, matchMaking }) => {
-  const { search, handleSearch, setter } = useSearch();
-
   const { theme } = useContext(themeContext);
 
   return (
@@ -50,11 +47,8 @@ const Header: FC<Props> = ({ summoner, matchMaking }) => {
           <div />
         </Route>
         <Route>
-          <SearchInput
+          <ControlledSearchInput
             variant={theme.mode === ThemeMode.DARK_GPU ? 'window' : 'opaque'}
-            value={search}
-            onChange={setter}
-            onSearch={handleSearch}
           />
         </Route>
       </Switch>

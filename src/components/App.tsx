@@ -48,7 +48,7 @@ const InnerApp = () => {
           <Route path="/" exact>
             <SearchPage />
           </Route>
-          <Route path="/summoner/profile/:summonerName">
+          <Route path="/summoner/profile/:region/:summonerName">
             <ProfilePage />
           </Route>
         </Switch>
