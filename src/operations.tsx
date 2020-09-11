@@ -587,6 +587,7 @@ export type ErrorMutation = { __typename?: 'Mutation' } & {
 
 export type SummonerQueryVariables = {
   username: Scalars['String'];
+  region?: Maybe<Scalars['String']>;
 };
 
 export type SummonerQuery = { __typename?: 'Query' } & {
@@ -817,8 +818,8 @@ export type ErrorMutationOptions = ApolloReactCommon.BaseMutationOptions<
   ErrorMutationVariables
 >;
 export const SummonerDocument = gql`
-  query Summoner($username: String!) {
-    summoner(username: $username) {
+  query Summoner($username: String!, $region: String) {
+    summoner(username: $username, region: $region) {
       id
       name
       profileIconId
@@ -875,6 +876,7 @@ export const SummonerDocument = gql`
  * const { data, loading, error } = useSummonerQuery({
  *   variables: {
  *      username: // value for 'username'
+ *      region: // value for 'region'
  *   },
  * });
  */
