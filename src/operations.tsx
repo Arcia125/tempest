@@ -15,7 +15,7 @@ export type Mutation = {
   __typename?: 'Mutation';
   signup?: Maybe<AuthPayload>;
   login?: Maybe<AuthPayload>;
-  error: Scalars['Boolean'];
+  error?: Maybe<ErrorResponse>;
 };
 
 export type MutationSignupArgs = {
@@ -29,7 +29,7 @@ export type MutationLoginArgs = {
 };
 
 export type MutationErrorArgs = {
-  error: Scalars['String'];
+  error?: Maybe<Scalars['String']>;
 };
 
 export type Query = {
@@ -40,11 +40,17 @@ export type Query = {
 };
 
 export type QuerySummonerArgs = {
-  username?: Maybe<Scalars['String']>;
+  username: Scalars['String'];
+  region?: Maybe<Scalars['String']>;
 };
 
 export type QueryCurrentGameArgs = {
-  summonerId?: Maybe<Scalars['ID']>;
+  summonerId: Scalars['ID'];
+};
+
+export type ErrorResponse = {
+  __typename?: 'ErrorResponse';
+  info?: Maybe<Scalars['String']>;
 };
 
 export type CurrentGameInfo = {
@@ -501,14 +507,83 @@ export type LeagueEntry = {
   hotStreak?: Maybe<Scalars['Boolean']>;
 };
 
-export type ErrorMutationVariables = {
-  error: Scalars['String'];
+export type CurrentGameQueryVariables = {
+  username: Scalars['String'];
 };
 
-export type ErrorMutation = { __typename?: 'Mutation' } & Pick<
-  Mutation,
-  'error'
->;
+export type CurrentGameQuery = { __typename?: 'Query' } & {
+  summoner?: Maybe<
+    { __typename?: 'Summoner' } & {
+      currentGame?: Maybe<
+        { __typename?: 'CurrentGameInfo' } & Pick<
+          CurrentGameInfo,
+          | 'gameId'
+          | 'gameStartTime'
+          | 'platformId'
+          | 'gameMode'
+          | 'mapId'
+          | 'gameType'
+          | 'gameLength'
+          | 'gameQueueConfigId'
+        > & {
+            bannedChampions?: Maybe<
+              Array<
+                Maybe<
+                  { __typename?: 'CurrentGameBannedChampion' } & Pick<
+                    CurrentGameBannedChampion,
+                    'pickTurn' | 'championId' | 'teamId'
+                  >
+                >
+              >
+            >;
+            participants?: Maybe<
+              Array<
+                Maybe<
+                  { __typename?: 'CurrentGameParticipant' } & Pick<
+                    CurrentGameParticipant,
+                    | 'profileIconId'
+                    | 'championId'
+                    | 'summonerName'
+                    | 'bot'
+                    | 'spell2Id'
+                    | 'teamId'
+                    | 'summonerId'
+                  > & {
+                      gameCustomizationObjects?: Maybe<
+                        Array<
+                          Maybe<
+                            {
+                              __typename?: 'CurrentGameCustomizationObject';
+                            } & Pick<
+                              CurrentGameCustomizationObject,
+                              'category' | 'content'
+                            >
+                          >
+                        >
+                      >;
+                      perks?: Maybe<
+                        { __typename?: 'SpectatorPerks' } & Pick<
+                          SpectatorPerks,
+                          'perkStyle' | 'perkIds' | 'perkSubStyle'
+                        >
+                      >;
+                    }
+                >
+              >
+            >;
+          }
+      >;
+    }
+  >;
+};
+
+export type ErrorMutationVariables = {
+  error?: Maybe<Scalars['String']>;
+};
+
+export type ErrorMutation = { __typename?: 'Mutation' } & {
+  error?: Maybe<{ __typename?: 'ErrorResponse' } & Pick<ErrorResponse, 'info'>>;
+};
 
 export type SummonerQueryVariables = {
   username: Scalars['String'];
@@ -607,9 +682,97 @@ export type SummonerQuery = { __typename?: 'Query' } & {
   >;
 };
 
+export const CurrentGameDocument = gql`
+  query CurrentGame($username: String!) {
+    summoner(username: $username) {
+      currentGame {
+        gameId
+        gameStartTime
+        platformId
+        gameMode
+        mapId
+        gameType
+        bannedChampions {
+          pickTurn
+          championId
+          teamId
+        }
+        participants {
+          profileIconId
+          championId
+          summonerName
+          gameCustomizationObjects {
+            category
+            content
+          }
+          bot
+          perks {
+            perkStyle
+            perkIds
+            perkSubStyle
+          }
+          spell2Id
+          teamId
+          summonerId
+        }
+        gameLength
+        gameQueueConfigId
+      }
+    }
+  }
+`;
+
+/**
+ * __useCurrentGameQuery__
+ *
+ * To run a query within a React component, call `useCurrentGameQuery` and pass it any options that fit your needs.
+ * When your component renders, `useCurrentGameQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useCurrentGameQuery({
+ *   variables: {
+ *      username: // value for 'username'
+ *   },
+ * });
+ */
+export function useCurrentGameQuery(
+  baseOptions?: ApolloReactHooks.QueryHookOptions<
+    CurrentGameQuery,
+    CurrentGameQueryVariables
+  >
+) {
+  return ApolloReactHooks.useQuery<CurrentGameQuery, CurrentGameQueryVariables>(
+    CurrentGameDocument,
+    baseOptions
+  );
+}
+export function useCurrentGameLazyQuery(
+  baseOptions?: ApolloReactHooks.LazyQueryHookOptions<
+    CurrentGameQuery,
+    CurrentGameQueryVariables
+  >
+) {
+  return ApolloReactHooks.useLazyQuery<
+    CurrentGameQuery,
+    CurrentGameQueryVariables
+  >(CurrentGameDocument, baseOptions);
+}
+export type CurrentGameQueryHookResult = ReturnType<typeof useCurrentGameQuery>;
+export type CurrentGameLazyQueryHookResult = ReturnType<
+  typeof useCurrentGameLazyQuery
+>;
+export type CurrentGameQueryResult = ApolloReactCommon.QueryResult<
+  CurrentGameQuery,
+  CurrentGameQueryVariables
+>;
 export const ErrorDocument = gql`
-  mutation Error($error: String!) {
-    error(error: $error)
+  mutation Error($error: String) {
+    error(error: $error) {
+      info
+    }
   }
 `;
 export type ErrorMutationFn = ApolloReactCommon.MutationFunction<
