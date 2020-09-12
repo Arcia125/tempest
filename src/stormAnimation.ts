@@ -1,5 +1,6 @@
 import * as THREE from 'three';
 import cloudsUrl from './assets/clouds.webp';
+import { storm } from './shaders';
 import { Animation } from './types';
 import { call, listen, onDOMChange } from './utils';
 import { loadTextures } from './utils/loadTextures';
@@ -24,21 +25,6 @@ export const initialSceneState: Animation.SceneState = {
   uniforms: null,
 };
 
-const vertexShaderEl = document.getElementById('vertexShader')!;
-
-const fragmentShaderEl = document.getElementById('fragmentShader')!;
-
-function calcMousePosUniforms(
-  x: number,
-  y: number,
-  width: number,
-  height: number
-) {
-  const ratio = height / width;
-
-  return [(x - width / 2) / width / ratio, ((y - height / 2) / height) * -1];
-}
-
 export function init(container: HTMLElement, sceneState: Animation.SceneState) {
   // container = document.getElementById('container');
   return loadTextures(loader, [cloudsUrl]).then(([clouds]) => {
@@ -61,10 +47,8 @@ export function init(container: HTMLElement, sceneState: Animation.SceneState) {
 
     const material = new THREE.ShaderMaterial({
       uniforms: sceneState.uniforms,
-      vertexShader: vertexShaderEl
-        .textContent as THREE.ShaderMaterialParameters['vertexShader'],
-      fragmentShader: fragmentShaderEl
-        .textContent as THREE.ShaderMaterialParameters['fragmentShader'],
+      vertexShader: storm.vertexShader,
+      fragmentShader: storm.fragmentShader,
     });
     material.extensions.derivatives = true;
 
