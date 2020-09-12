@@ -36,12 +36,12 @@
 }
 
 .App.darkGPU .App-header {
-  background: rgb(20, 9, 72);
+  background: var(--background);
   background: linear-gradient(
     180deg,
-    rgba(20, 9, 72, 0.6) 0%,
-    rgba(20, 9, 72, 0.2) 35%,
-    rgba(20, 9, 72, 0) 100%
+    rgba(var(--fg0rgb), 0.6) 0%,
+    rgba(var(--fg1rgb), 0.2) 35%,
+    rgba(var(--fg1rgb), 0) 100%
   );
   backdrop-filter: var(--backdropFilter);
 }
