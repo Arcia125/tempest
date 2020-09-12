@@ -26,8 +26,8 @@
       uniform sampler2D u_bg;
       uniform float u_scroll;
 
-      const vec3 cloudcolour = vec3(.06,0.05,.14);
-      const vec3 lightcolour = vec3(.25,0.6,1.);
+      const vec3 cloudcolor = vec3(.06,0.05,.14);
+      const vec3 lightcolor = vec3(.25,0.6,1.);
 
       float mod289(float x){return x - floor(x * (1.0 / 289.0)) * 289.0;}
       vec4 mod289(vec4 x){return x - floor(x * (1.0 / 289.0)) * 289.0;}
@@ -74,7 +74,7 @@
         uv.y -= u_scroll * .0001;
         vec3 tex2 = texture2D(u_bg, (uv * .8 + .5) * vec2(.5, 1.) - vec2(u_time * .1, 1.)).rgb;
 
-        vec3 fragcolour = tex;
+        vec3 outputcolor = tex;
 
         float shade = tex.r;
         shade *= clamp(noise1 * noise2 * sin(u_time * 3.), .2, 10.);
@@ -82,9 +82,9 @@
         shade -= (1. - clamp(tex1 * 4., 0., 1.).r) * .2;
         shade -= (1. - clamp(tex2 * 4., 0., 1.).r) * .1;
 
-        fragcolour = mix(cloudcolour, lightcolour, shade);
+        outputcolor = mix(cloudcolor, lightcolor, shade);
 
-        gl_FragColor = vec4(fragcolour, 1.);
+        gl_FragColor = vec4(outputcolor, 1.);
       }
     </script>
   </body>
