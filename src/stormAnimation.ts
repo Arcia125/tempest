@@ -1,6 +1,5 @@
 import * as THREE from 'three';
 import cloudsUrl from './assets/clouds.webp';
-import noiseUrl from './assets/noise.webp';
 import { Animation } from './types';
 import { call, listen, onDOMChange } from './utils';
 import { loadTextures } from './utils/loadTextures';
@@ -42,7 +41,7 @@ function calcMousePosUniforms(
 
 export function init(container: HTMLElement, sceneState: Animation.SceneState) {
   // container = document.getElementById('container');
-  return loadTextures(loader, [noiseUrl, cloudsUrl]).then(([noise, clouds]) => {
+  return loadTextures(loader, [cloudsUrl]).then(([clouds]) => {
     sceneState.camera = new THREE.Camera();
     sceneState.camera.position.z = 1;
 
@@ -56,12 +55,7 @@ export function init(container: HTMLElement, sceneState: Animation.SceneState) {
         type: 'v2',
         value: new THREE.Vector2(),
       } as THREE.IUniform,
-      u_noise: { type: 't', value: noise } as THREE.IUniform,
       u_bg: { type: 't', value: clouds } as THREE.IUniform,
-      u_mouse: {
-        type: 'v2',
-        value: new THREE.Vector2(),
-      } as THREE.IUniform,
       u_scroll: { type: 'f', value: 0 } as THREE.IUniform,
     };
 
@@ -82,17 +76,6 @@ export function init(container: HTMLElement, sceneState: Animation.SceneState) {
 
     container.appendChild(sceneState.renderer.domElement);
 
-    function updateMousePos(
-      x: number,
-      y: number,
-      width: number,
-      height: number
-    ) {
-      const [mouseX, mouseY] = calcMousePosUniforms(x, y, width, height);
-      sceneState.uniforms!.u_mouse.value.x = mouseX;
-      sceneState.uniforms!.u_mouse.value.y = mouseY;
-    }
-
     function updateSize() {
       const size: [number, number] = [
         container.clientWidth,
@@ -106,15 +89,6 @@ export function init(container: HTMLElement, sceneState: Animation.SceneState) {
     requestAnimationFrame(updateSize);
     const unlistens = [
       listen(window, 'resize', updateSize, false),
-      listen(container, 'pointermove', (e: any) => {
-        e.preventDefault();
-        updateMousePos(
-          e.clientX,
-          e.clientY,
-          window.innerWidth,
-          window.innerHeight
-        );
-      }),
       onDOMChange(window.document, (arg0) => {
         updateSize();
       })
