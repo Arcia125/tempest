@@ -2,7 +2,7 @@ import { championsByKey } from './championData';
 import { RiotImageType } from '../types';
 
 const CDN_BASE_URL = 'https://ddragon.leagueoflegends.com/cdn/'
-const PATCH_VERSION = '10.15.1';
+const PATCH_VERSION = '10.18.1';
 // const PATCH_VERSION = '10.14.1';
 // const PATCH_VERSION = '10.10.3216176';
 
