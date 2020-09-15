@@ -41,7 +41,7 @@ export const MatchHistoryPreview: FC<Props> = ({
         name={getImageNameByChampionKey(String(matchHistoryItem?.champion))}
         alt={
           matchHistoryItem?.champion
-            ? championsByKey[matchHistoryItem.champion].name
+            ? championsByKey[matchHistoryItem.champion]?.name
             : ''
         }
       />

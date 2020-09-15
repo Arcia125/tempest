@@ -41,4 +41,4 @@ export const getImageAssetUrl = (imageType: RiotImageType, imageName: string) =>
   }
 };
 
-export const getImageNameByChampionKey = (championKey: string, imageKey: 'full' | 'sprite' | 'group' = 'full') => championsByKey[championKey].image[imageKey];
+export const getImageNameByChampionKey = (championKey: string, imageKey: 'full' | 'sprite' | 'group' = 'full') => championsByKey[championKey]?.image[imageKey] || '';
