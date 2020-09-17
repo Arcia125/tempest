@@ -3,9 +3,10 @@
   border-radius: 5px;
   padding: 7px 7px 10px 7px;
   width: 100%;
+  box-sizing: border-box;
 }
 
 .App.darkGPU .MatchHistory {
-  background: rgba(var(--backgroundrgb), .1);
+  background: rgba(var(--backgroundrgb), 0.1);
   backdrop-filter: var(--backdropFilter);
 }

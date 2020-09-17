@@ -23,3 +23,26 @@
 .Profile-right {
   width: 70%;
 }
+
+@media screen and (max-width: 37.5em) {
+  .Profile {
+    flex-direction: column;
+    padding: 6px 6px;
+    margin: auto;
+    justify-content: center;
+  }
+
+  .Profile-left {
+    width: 100%;
+    padding-right: 0;
+    padding-bottom: 6px;
+  }
+
+  .Profile-UsernamePlate {
+    margin-bottom: 12px;
+  }
+
+  .Profile-right {
+    width: 100%;
+  }
+}
