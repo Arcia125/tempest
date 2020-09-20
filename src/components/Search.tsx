@@ -19,6 +19,7 @@ const Search: FC<Props> = (props) => {
         </Typography>
         <ControlledSearchInput
           variant={theme.mode === ThemeMode.DARK_GPU ? 'window' : 'opaque'}
+          autoFocus
         />
       </main>
     </div>
