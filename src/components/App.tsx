@@ -8,6 +8,7 @@ import SearchPage from './SearchPage';
 import { useCurrentSummoner, useMatchMaking, useStormScene } from '../hooks';
 import { themeContext } from '../theme';
 import { classNames, log } from '../utils';
+import Footer from './Footer';
 
 const logEvent = (sender: any, event: any) => log.info(event.uri, event);
 
@@ -52,7 +53,7 @@ const InnerApp = () => {
             <ProfilePage />
           </Route>
         </Switch>
-        <Legal />
+        <Footer />
       </div>
     </div>
   );

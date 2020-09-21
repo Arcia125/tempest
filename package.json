@@ -72,12 +72,12 @@
     "wait-on": "^5.0.0"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "start-web": "react-app-rewired start",
-    "build": "react-scripts build",
-    "build-web": "react-app-rewired build",
-    "build-main": "tsc --project ./app/tsconfig.json",
-    "build-main-prod": "npm run build-main -- --transpileOnly",
+    "start": "cross-env REACT_APP_VERSION=$npm_package_version react-scripts start",
+    "start-web": "cross-env REACT_APP_VERSION=$npm_package_version react-app-rewired start",
+    "build": "cross-env REACT_APP_VERSION=$npm_package_version react-scripts build",
+    "build-web": "cross-env REACT_APP_VERSION=$npm_package_version react-app-rewired build",
+    "build-main": "cross-env REACT_APP_VERSION=$npm_package_version tsc --project ./app/tsconfig.json",
+    "build-main-prod": "cross-env REACT_APP_VERSION=$npm_package_version npm run build-main -- --transpileOnly",
     "typecheck-main": "npm run build-main -- --noEmit --watch",
     "test": "react-scripts test",
     "eject": "react-scripts eject",

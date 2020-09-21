@@ -7,11 +7,11 @@ import { apolloClient } from '../../apolloClient';
 import AnimatedSpinner from '../../components/AnimatedSpinner';
 import '../../components/App.css';
 import ErrorReporter from '../../components/ErrorReporter';
-import { Legal } from '../../components/Legal';
 import SearchPage from '../../components/SearchPage';
 import { useStormScene, useAnalytics } from '../../hooks';
 import { Provider, themeContext, ThemeMode } from '../../theme';
 import { classNames } from '../../utils';
+import Footer from '../../components/Footer';
 
 const ProfilePage = React.lazy(() => import('../../components/ProfilePage'));
 
@@ -35,7 +35,7 @@ const InnerApp = () => {
           </Suspense>
         </Route>
       </Switch>
-      <Legal />
+      <Footer />
     </div>
   );
 };
