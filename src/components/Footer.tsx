@@ -16,6 +16,7 @@ const Footer: FC<Props> = ({ className }) => {
       <Typography
         className={classNames('Copyright', className)}
         variant={TypographyVariants.p}
+        fontWeight="600"
       >
         Tempest{VERSION && ` v${VERSION}`} © 2020
       </Typography>
