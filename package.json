@@ -12,7 +12,7 @@
   "license": "ISC",
   "main": "./build-main/app/electron.js",
   "build": {
-    "appId": "loltempest",
+    "appId": "com.electron.loltempest",
     "files": [
       "build-main/**/*",
       "build/**/*",
