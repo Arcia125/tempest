@@ -8,7 +8,7 @@
     "lol",
     "lcu"
   ],
-  "author": "",
+  "author": "Kevin Hallett",
   "license": "ISC",
   "main": "./build-main/app/electron.js",
   "build": {
@@ -38,6 +38,7 @@
   "dependencies": {
     "@apollo/react-common": "^3.1.4",
     "@apollo/react-hooks": "^3.1.5",
+    "@types/uuid": "^8.3.0",
     "apollo-boost": "^0.4.9",
     "apollo-link-error": "^1.1.13",
     "cross-env": "^7.0.2",
