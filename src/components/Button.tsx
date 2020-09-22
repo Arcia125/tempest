@@ -4,9 +4,8 @@ import Typography, { Props as TypographyProps } from './Typography';
 import { useStormScene } from '../hooks';
 import { classNames } from '../utils';
 
-
 export interface Props extends PropsWithChildren<TypographyProps> {
-  onClick: React.EventHandler<React.MouseEvent>;
+  onClick?: React.EventHandler<React.MouseEvent>;
 }
 
 export const Button = forwardRef<FC<Props>, Props>(

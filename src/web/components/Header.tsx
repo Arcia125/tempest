@@ -6,6 +6,7 @@ import { HeaderContainer } from '../../components/HeaderContainer';
 import { Logo } from '../../components/Logo';
 import { TypographyVariants } from '../../components/Typography';
 import { classNames } from '../../utils';
+import ReactGA from 'react-ga';
 
 // const LoginLinks: FC<{ className?: string }> = ({ className }) => {
 //   const history = useHistory();
@@ -41,13 +42,15 @@ export const Header: FC = (props) => {
         </Route>
       </Switch>
       {/* <LoginLinks /> */}
-      {/* <ContainedButton
-        variant={TypographyVariants.p}
-        color="important0"
-        onClick={console.log}
+      <ReactGA.OutboundLink
+        eventLabel="download"
+        to="https://github.com/Arcia125/tempest-release/releases/latest/download/tempest-setup.exe"
+        download
       >
-        Download
-      </ContainedButton> */}
+        <ContainedButton variant={TypographyVariants.p} color="important0">
+          Download
+        </ContainedButton>
+      </ReactGA.OutboundLink>
     </HeaderContainer>
   );
 };
