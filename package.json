@@ -31,7 +31,7 @@
     ],
     "win": {
       "target": "nsis",
-      "artifactName": "${productName} Setup.${ext}"
+      "artifactName": "tempest-setup.${ext}"
     },
     "extends": null
   },
