@@ -6,6 +6,7 @@ import {
 } from 'electron';
 import isDev from 'electron-is-dev';
 import log from 'electron-log';
+import { autoUpdater } from 'electron-updater';
 import LCUConnector from 'lcu-connector';
 import fetch from 'node-fetch';
 import path from 'path';
@@ -24,6 +25,8 @@ import { LCUPluginEvent } from '../src/shared/LCUPluginEvent';
 // if (isDev) {
 //   require('electron-reload')(__dirname);
 // }
+
+autoUpdater.checkForUpdatesAndNotify()
 
 const iconUrl = path.resolve(__dirname, '..', '..', 'public', 'favicon.ico');
 
