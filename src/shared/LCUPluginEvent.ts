@@ -21,20 +21,21 @@ export enum LCUPluginEvent {
   LOBBY_TEAM_BUILDER = 'lol-lobby-team-builder',
   CLASH = 'lol-clash',
   PERKS = 'lol-perks',
-  SUMMONER = 'lol-summoner'
+  SUMMONER = 'lol-summoner',
+  RIOTCLIENT = 'riotclient'
 }
 // interface LCUEndpoint {
 //   uri: string;
 //   method: ;
 // }
-// 
-// 
+//
+//
 // interface LCUPluginConfig {
 //   name: LCUPluginEvent;
 //   baseUri: string;
 //   endpoints: Record<string | 'currentSummoner', LCUEndpoint>;
 // }
-// 
+//
 // type PluginName = 'matchMaking' | 'champSelect' | 'gameflow' | 'patch' | 'patcher' | 'gameClientChat' | 'chat' | 'hovercard' | 'clubsPublic' | 'suggestedPlayers' | 'lobby' | 'lobbyTeamBuilder' | 'clash' | 'perks' | 'summoner';
 
 enum Method {
@@ -154,6 +155,15 @@ export const lcuPlugins = {
       }
     }
   },
+  riotClient: {
+    name: LCUPluginEvent.RIOTCLIENT,
+    baseUri: '/riotclient/', endpoints: {
+      regionLocale: {
+        uri: 'region-locale',
+        method: Method.GET
+      }
+    }
+  }
 };
 
 type LCUPluginsKeys = keyof typeof lcuPlugins;

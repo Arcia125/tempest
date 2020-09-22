@@ -20,6 +20,13 @@ export interface CurrentSummonerResponse {
   xpUntilNextLevel: number;
 }
 
+export interface CurrentRegionResponse {
+  locale: string;
+  region: string;
+  webLanguage: string;
+  webRegion: string;
+}
+
 export interface MatchMakingResponse {
   dodgeData: DodgeData;
   errors: any[];

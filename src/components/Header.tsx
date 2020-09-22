@@ -1,30 +1,35 @@
 import React, { FC, useContext } from 'react';
 import { Link, Route, Switch } from 'react-router-dom';
 import BadgeLayout from './BadgeLayout';
+import ControlledSearchInput from './ControlledSearchInput';
 import './Header.css';
 import { HeaderContainer } from './HeaderContainer';
 import { RiotImage } from './RiotImage';
 import StatusIndicator from './StatusIndicator';
 import Typography, { TypographyVariants } from './Typography';
-import { CurrentSummonerResponse } from '../shared/LCUResponses';
+import WindowControls from './WindowControls';
+import {
+  CurrentSummonerResponse,
+  CurrentRegionResponse,
+} from '../shared/LCUResponses';
 import { themeContext, ThemeMode } from '../theme';
 import { RiotImageType } from '../types';
 import { MatchMaking } from '../types';
-import WindowControls from './WindowControls';
-import ControlledSearchInput from './ControlledSearchInput';
 
 interface Props {
+  region?: CurrentRegionResponse;
   summoner?: CurrentSummonerResponse;
   matchMaking: MatchMaking.Data;
 }
 
-const Header: FC<Props> = ({ summoner, matchMaking }) => {
+const Header: FC<Props> = ({ summoner, matchMaking, region }) => {
   const { theme } = useContext(themeContext);
-
   return (
     <HeaderContainer className="HeaderContainer">
       {summoner && (
-        <Link to={`/summoner/profile/${summoner.displayName}`}>
+        <Link
+          to={`/summoner/profile/${region?.webRegion}/${summoner.displayName}`}
+        >
           <BadgeLayout>
             <RiotImage
               type={RiotImageType.PROFILEICON}

@@ -12,6 +12,8 @@ export const useChampSelect = isElectronEnv ? require('./useChampSelect').useCha
 
 export const useCurrentSummoner = isElectronEnv ? require('./useCurrentSummoner').useCurrentSummoner : null;
 
+export const useCurrentRegion = isElectronEnv ? require('./useCurrentRegion').useCurrentRegion : null;
+
 export const useMatchMaking = isElectronEnv ? require('./useMatchMaking').useMatchMaking : null;
 
 export const useLobby = isElectronEnv ? require('./useLobby').useLobby : null;

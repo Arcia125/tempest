@@ -84,12 +84,16 @@ app.on('browser-window-created', (event) => {
       fetch(getLcuUrl(lcuConnection.lcuData, eventData.endpoint, 'https'), {
         method: eventData.options.method,
       }).then(async (res: any) => {
-        const response = await res.json();
+        const data = await res.json();
+        const response = {
+          data,
+          requestId: eventData.id
+        };
         log.info(Channels.LCU_RESPONSE, response);
         event.reply(Channels.LCU_RESPONSE, response)
       }).catch(err => {
         log.error(err);
-        event.reply(Channels.LCU_RESPONSE, { error: err });
+        event.reply(Channels.LCU_RESPONSE, { error: err, id: eventData.id });
       })
     });
     socket = new LCUWebSocket(data as LCUData, '');
