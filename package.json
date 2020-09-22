@@ -13,6 +13,7 @@
   "main": "./build-main/app/electron.js",
   "build": {
     "appId": "com.electron.loltempest",
+    "productName": "Tempest",
     "files": [
       "build-main/**/*",
       "build/**/*",
@@ -28,6 +29,10 @@
         "repo": "tempest-release"
       }
     ],
+    "win": {
+      "target": "nsis",
+      "artifactName": "${productName} Setup.${ext}"
+    },
     "extends": null
   },
   "dependencies": {
