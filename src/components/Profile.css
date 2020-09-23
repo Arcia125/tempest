@@ -16,7 +16,7 @@
   box-sizing: border-box;
 }
 
-.Profile-UsernamePlate {
+.Profile-left > * {
   margin-bottom: 12px;
 }
 

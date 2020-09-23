@@ -25,7 +25,6 @@ const ProfilePage: FC = () => {
     return <p>Something went wrong</p>;
   }
   const summoner = data?.summoner;
-  const entry = summoner?.leagueEntries?.[0];
   return (
     <Profile
       summonerId={summoner?.id}
@@ -33,11 +32,13 @@ const ProfilePage: FC = () => {
       username={summoner?.name}
       summonerLevel={summoner?.summonerLevel}
       matchHistory={summoner?.matchHistory}
-      rankedBadgeProps={{
-        tier: entry?.tier?.toLowerCase(),
-        rank: romanNumeralToNumber(entry?.rank as RomanNumeral),
-        queue: entry?.queueType ? queueFromQueueType(entry.queueType) : null,
-      }}
+      rankedBadgeProps={[...(summoner?.leagueEntries || [])]
+        .sort((entry) => (entry?.queueType === 'RANKED_SOLO_5x5' ? -1 : 1))
+        .map((entry) => ({
+          tier: entry?.tier?.toLowerCase(),
+          rank: romanNumeralToNumber(entry?.rank as RomanNumeral),
+          queue: entry?.queueType ? queueFromQueueType(entry.queueType) : null,
+        }))}
     />
   );
 };

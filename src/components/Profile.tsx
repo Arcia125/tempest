@@ -5,14 +5,13 @@ import RankedBadge, { Props as RankedBadgeProps } from './RankedBadge';
 import UsernamePlate from './UsernamePlate';
 import { MatchHistory as IMatchHistory, Maybe } from '../operations';
 
-
 export interface Props {
   profileIconId?: Maybe<string | number>;
   username?: Maybe<string>;
   summonerLevel?: Maybe<string | number>;
   summonerId?: Maybe<string>;
   matchHistory?: Maybe<IMatchHistory>;
-  rankedBadgeProps?: RankedBadgeProps;
+  rankedBadgeProps?: RankedBadgeProps[];
 }
 
 const Profile: FC<Props> = ({
@@ -32,7 +31,10 @@ const Profile: FC<Props> = ({
           username={username}
           summonerLevel={summonerLevel}
         />
-        <RankedBadge {...rankedBadgeProps} />
+
+        {rankedBadgeProps?.map((rankedBadgeProp, i) => (
+          <RankedBadge key={i} {...rankedBadgeProp} />
+        ))}
       </div>
       <div className="Profile-right">
         <MatchHistory matchHistory={matchHistory} summonerId={summonerId} />
