@@ -1,5 +1,6 @@
 const queues: Record<string, string> = {
-  'RANKED_SOLO_5x5': 'Ranked Solo'
+  'RANKED_SOLO_5x5': 'Ranked Solo',
+  'RANKED_FLEX_SR': 'Ranked Flex'
 };
 
 export const queueFromQueueType = (queueType: string) => queues[queueType] || queueType;
@@ -15,4 +16,4 @@ export const romanNumeralToNumber = (romanNumeral: RomanNumeral): number => {
     case 'I': return 1;
     default: return romanNumeral;
   }
-};  
+};
