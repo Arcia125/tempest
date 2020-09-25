@@ -1,3 +1,4 @@
+import { MatchHistoryItem, Maybe } from '../operations';
 import queues from '../static-data/queues.json';
 
 interface Queue {
@@ -17,3 +18,9 @@ const queuesById = queues.reduce((acc, curr) => {
 }, {} as QueueMap)
 
 export const getQueueName = (queueId: number) => queuesById[queueId].description?.replace('5v5 ', '').replace(' games', '');
+
+export function getQueue(matchHistoryItem?: Maybe<MatchHistoryItem>): React.ReactNode {
+  return typeof matchHistoryItem?.queue === 'number'
+    ? getQueueName(matchHistoryItem?.queue)
+    : '-';
+}

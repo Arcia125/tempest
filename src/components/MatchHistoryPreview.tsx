@@ -2,18 +2,22 @@ import React, { FC } from 'react';
 import './MatchHistoryPreview.css';
 import { RiotImage } from './RiotImage';
 import Typography, { TypographyVariants } from './Typography';
-import { getImageNameByChampionKey } from '../data';
-import { championsByKey } from '../data';
-import { getQueueName } from '../data';
+import { MatchHistoryItem, Maybe } from '../operations';
 import { RiotImageType } from '../types';
-import { leftPad } from '../utils';
 import {
-  MatchHistoryItem,
-  Maybe,
-  GameOutcome,
-  MatchParticipant,
-  MatchParticipantIdentity,
-} from '../operations';
+  championsByKey,
+  getQueue,
+  getImageNameByChampionKey,
+  getParticipantIdentity,
+  getParticipant,
+  getGameOutcome,
+  getGameDuration,
+  won,
+  lost,
+  getKda,
+  getCs,
+  getTeam,
+} from '../data';
 
 export interface Props {
   matchHistoryItem?: Maybe<MatchHistoryItem>;
@@ -83,70 +87,3 @@ export const MatchHistoryPreview: FC<Props> = ({
     </div>
   );
 };
-
-function getQueue(matchHistoryItem?: Maybe<MatchHistoryItem>): React.ReactNode {
-  return typeof matchHistoryItem?.queue === 'number'
-    ? getQueueName(matchHistoryItem?.queue)
-    : '-';
-}
-
-function getGameDuration(
-  matchHistoryItem?: Maybe<MatchHistoryItem>
-): React.ReactNode {
-  const duration = matchHistoryItem?.details?.gameDuration ?? 0;
-  const format = (v: number) => leftPad(v, '0', 2);
-  return `${format(Math.floor(duration / 60))}:${format(duration % 60)}`;
-}
-
-function getCs(participant?: Maybe<MatchParticipant>): React.ReactNode {
-  const cs = participant?.stats?.totalMinionsKilled ?? 0;
-  return `${cs} CS`;
-}
-
-function getKda(participant?: Maybe<MatchParticipant>): React.ReactNode {
-  const kills = participant?.stats?.kills;
-  const deaths = participant?.stats?.deaths;
-  const assists = participant?.stats?.assists;
-  return typeof kills === 'undefined' || kills === null
-    ? '0/0/0'
-    : `${kills}/${deaths}/${assists}`;
-}
-
-function getGameOutcome(win?: Maybe<GameOutcome>): string {
-  return won(win) ? 'Victory' : lost(win) ? 'Defeat' : 'Draw';
-}
-
-function lost(win?: Maybe<GameOutcome>) {
-  return win === GameOutcome.Fail;
-}
-
-function won(win?: Maybe<GameOutcome>) {
-  return win === GameOutcome.Win;
-}
-
-function getTeam(
-  matchHistoryItem?: Maybe<MatchHistoryItem>,
-  participant?: Maybe<MatchParticipant>
-) {
-  return matchHistoryItem?.details?.teams?.find(
-    (t) => t?.teamId === participant?.teamId
-  );
-}
-
-function getParticipant(
-  matchHistoryItem?: Maybe<MatchHistoryItem>,
-  participantIdentity?: Maybe<MatchParticipantIdentity>
-) {
-  return matchHistoryItem?.details?.participants?.find(
-    (p) => p?.participantId === participantIdentity?.participantId
-  );
-}
-
-function getParticipantIdentity(
-  matchHistoryItem?: Maybe<MatchHistoryItem>,
-  summonerId?: Maybe<string>
-) {
-  return matchHistoryItem?.details?.participantIdentities?.find(
-    (pI) => pI?.player?.summonerId === summonerId
-  );
-}
