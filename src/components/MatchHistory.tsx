@@ -24,7 +24,7 @@ const MatchHistory: FC<Props> = ({ matchHistory, summonerId }) => {
   }
 
   const champRecords = Object.entries(matchHistoryData.recentChampionWinLoss)
-    .map(([key, val]: [string, any]) => ({ key, ...val }))
+    .map(([key, val]) => ({ key, ...val }))
     .sort((a, b) => {
       const aGames = a.win + a.loss;
       const bGames = b.win + b.loss;
@@ -49,12 +49,11 @@ const MatchHistory: FC<Props> = ({ matchHistory, summonerId }) => {
             games={matchHistory.matches.length}
           />
         </div>
-        {champRecords.map((champRecord) => {
-          console.log(champRecord);
-          return (
+        <div className="MatchHistory-recent-champions">
+          {champRecords.map((champRecord) => (
             <ChampionRecord key={champRecord.key} champRecord={champRecord} />
-          );
-        })}
+          ))}
+        </div>
       </div>
       <MatchHistoryList matchHistory={matchHistory} summonerId={summonerId} />
     </Container>

@@ -69,7 +69,7 @@ export function getParticipantIdentity(
   );
 }
 
-interface ChampionRecord {
+export interface ChampionRecord {
   [key: string]: {
     win: number;
     loss: number;

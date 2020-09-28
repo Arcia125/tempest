@@ -19,3 +19,5 @@ export { createRenderer } from './createRenderer';
 export { call } from './call';
 
 export { listen } from './listen';
+
+export { ColorRange } from './colorRange';

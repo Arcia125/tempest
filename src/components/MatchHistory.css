@@ -15,8 +15,17 @@
   display: flex;
 }
 
+.MatchHistory-recent-champions {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: 1fr;
+  column-gap: 28px;
+}
+
 .MatchHistory-win-loss {
   width: 90px;
+  margin-right: 32px;
+  flex-shrink: 0;
 }
 
 .MatchHistory-win-loss-record {
@@ -32,4 +41,11 @@
   position: absolute;
   top: 39%;
   left: 36%;
+}
+
+@media screen and (max-width: 56.25em) {
+  .MatchHistory-recent-champions {
+    grid-template-columns: 1fr;
+    margin: auto;
+  }
 }
