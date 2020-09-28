@@ -76,13 +76,13 @@ interface ChampionRecord {
   };
 }
 
-interface WinLossData {
-  x: string;
+interface WinLossData<T> {
+  x: T;
   y: number;
 }
 
 export interface MatchHistoryData {
-  winLoss: [WinLossData, WinLossData] | [WinLossData, WinLossData, WinLossData];
+  winLoss: [WinLossData<'L'>, WinLossData<'W'>] | [WinLossData<'L'>, WinLossData<'W'>, WinLossData<'D'>];
   recentChampionWinLoss: ChampionRecord;
 }
 
