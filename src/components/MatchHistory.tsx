@@ -15,6 +15,7 @@ import {
 import Typography, { TypographyVariants } from './Typography';
 import { RiotImage } from './RiotImage';
 import { RiotImageType } from '../types';
+import { WinLossRecord } from './WinLossRecord';
 
 export interface Props {
   matchHistory?: Maybe<IMatchHistory>;
@@ -31,12 +32,12 @@ const MatchHistory: FC<Props> = ({ matchHistory, summonerId }) => {
         <div className="MatchHistory-top">
           <div className="MatchHistory-win-loss">
             <div className="MatchHistory-win-loss-record">
-              <Typography variant={TypographyVariants.p}>
-                {matchHistory.matches.length}G {matchHistoryData.winLoss[1].y}W{' '}
-                {matchHistoryData.winLoss[0].y}L{' '}
-                {matchHistoryData.winLoss[2] &&
-                  `${matchHistoryData.winLoss[2].y}D`}
-              </Typography>
+              <WinLossRecord
+                games={matchHistory.matches.length}
+                wins={matchHistoryData.winLoss[1].y}
+                losses={matchHistoryData.winLoss[0].y}
+                draws={matchHistoryData.winLoss[2]?.y}
+              />
             </div>
             <div className="MatchHistory-win-loss-chart">
               <VictoryPie
