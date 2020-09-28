@@ -1,6 +1,6 @@
 export { getQueueName, getQueue } from './queueData';
 
-export { championJson, championsByKey } from './championData';
+export { championJson, championsByKey, getChampionName } from './championData';
 
 export { getImageAssetUrl, getImageNameByChampionKey } from './riotAsset';
 

@@ -11,6 +11,10 @@
   backdrop-filter: var(--backdropFilter);
 }
 
+.MatchHistory-top {
+  display: flex;
+}
+
 .MatchHistory-win-loss {
   width: 90px;
 }

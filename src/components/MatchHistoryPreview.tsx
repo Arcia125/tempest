@@ -17,6 +17,7 @@ import {
   getKda,
   getCs,
   getTeam,
+  getChampionName,
 } from '../data';
 
 export interface Props {
@@ -44,9 +45,7 @@ export const MatchHistoryPreview: FC<Props> = ({
         type={RiotImageType.CHAMPION}
         name={getImageNameByChampionKey(String(matchHistoryItem?.champion))}
         alt={
-          matchHistoryItem?.champion
-            ? championsByKey[matchHistoryItem.champion]?.name
-            : ''
+          matchHistoryItem?.champion ? getChampionName(matchHistoryItem) : ''
         }
       />
       <div className="MatchHistoryPreview-details">

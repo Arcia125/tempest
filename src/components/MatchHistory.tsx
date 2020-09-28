@@ -5,6 +5,7 @@ import { MatchHistoryList } from './MatchHistoryList';
 import { MatchHistory as IMatchHistory, Maybe } from '../operations';
 import { themeContext } from '../theme';
 import {
+  getImageNameByChampionKey,
   getParticipant,
   getParticipantIdentity,
   getTeam,
@@ -12,6 +13,8 @@ import {
   won,
 } from '../data';
 import Typography, { TypographyVariants } from './Typography';
+import { RiotImage } from './RiotImage';
+import { RiotImageType } from '../types';
 
 export interface Props {
   matchHistory?: Maybe<IMatchHistory>;
@@ -20,68 +23,78 @@ export interface Props {
 
 const MatchHistory: FC<Props> = ({ matchHistory, summonerId }) => {
   const themeCtx = useContext(themeContext);
-  const winLossData = matchHistory?.matches?.reduce(
-    (acc, matchHistoryItem) => {
-      const participantIdentity = getParticipantIdentity(
-        matchHistoryItem,
-        summonerId
-      );
-      const participant = getParticipant(matchHistoryItem, participantIdentity);
-      const team = getTeam(matchHistoryItem, participant);
-      const win = team?.win;
-      if (won(win)) {
-        acc[1].y += 1;
-      } else if (lost(win)) {
-        acc[0].y += 1;
-      } else {
-        if (!acc[2]) acc[2] = { x: 'D', y: 0 };
-        acc[2].y += 1;
-      }
-      return acc;
-    },
-    [
-      { x: 'L', y: 0 },
-      { x: 'W', y: 0 },
-    ]
-  );
+  const matchHistoryData = getMatchHistoryData(matchHistory, summonerId);
 
   return (
     <div className="MatchHistory">
-      {matchHistory && matchHistory.matches && winLossData && (
-        <div className="MatchHistory-win-loss">
-          <div className="MatchHistory-win-loss-record">
-            <Typography variant={TypographyVariants.p}>
-              {matchHistory.matches.length}G {winLossData[1].y}W{' '}
-              {winLossData[0].y}L {winLossData[2] && `${winLossData[2].y}D`}
-            </Typography>
+      {matchHistory && matchHistory.matches && matchHistoryData && (
+        <div className="MatchHistory-top">
+          <div className="MatchHistory-win-loss">
+            <div className="MatchHistory-win-loss-record">
+              <Typography variant={TypographyVariants.p}>
+                {matchHistory.matches.length}G {matchHistoryData.winLoss[1].y}W{' '}
+                {matchHistoryData.winLoss[0].y}L{' '}
+                {matchHistoryData.winLoss[2] &&
+                  `${matchHistoryData.winLoss[2].y}D`}
+              </Typography>
+            </div>
+            <div className="MatchHistory-win-loss-chart">
+              <VictoryPie
+                theme={VictoryTheme.material}
+                colorScale={[
+                  themeCtx.theme.colors.important4,
+                  themeCtx.theme.colors.accent0,
+                  themeCtx.theme.colors.text,
+                ]}
+                style={{
+                  parent: {},
+                  data: {
+                    stroke: 'none',
+                  },
+                  labels: {
+                    display: 'none',
+                  },
+                }}
+                innerRadius={86}
+                data={matchHistoryData.winLoss}
+              />
+              <Typography
+                className="win-loss-rate"
+                variant={TypographyVariants.p}
+              >
+                {(matchHistoryData.winLoss[1].y / matchHistory.matches.length) *
+                  100}
+                %
+              </Typography>
+            </div>
           </div>
-          <div className="MatchHistory-win-loss-chart">
-            <VictoryPie
-              theme={VictoryTheme.material}
-              colorScale={[
-                themeCtx.theme.colors.important4,
-                themeCtx.theme.colors.accent0,
-                themeCtx.theme.colors.text,
-              ]}
-              style={{
-                parent: {},
-                data: {
-                  stroke: 'none',
-                },
-                labels: {
-                  display: 'none',
-                },
-              }}
-              innerRadius={86}
-              data={winLossData}
-            />
-            <Typography
-              className="win-loss-rate"
-              variant={TypographyVariants.p}
-            >
-              {(winLossData[1].y / matchHistory.matches.length) * 100}%
-            </Typography>
-          </div>
+          {Object.entries(matchHistoryData.recentChampionWinLoss)
+            .map(([key, val]: [string, any]) => ({ key, ...val }))
+            .sort((a, b) => {
+              const aGames = a.win + a.loss;
+              const bGames = b.win + b.loss;
+              return aGames > bGames ? -1 : 1;
+            })
+            .slice(0, 3)
+            .map((champRecord) => {
+              console.log(champRecord);
+              return (
+                <div key={champRecord.key}>
+                  <RiotImage
+                    type={RiotImageType.CHAMPION}
+                    name={getImageNameByChampionKey(String(champRecord.key))}
+                  />
+                  <Typography variant={TypographyVariants.p}>
+                    {champRecord.win === 0
+                      ? 0
+                      : (champRecord.win /
+                          (champRecord.win + champRecord.loss)) *
+                        100}
+                    %
+                  </Typography>
+                </div>
+              );
+            })}
         </div>
       )}
       <MatchHistoryList matchHistory={matchHistory} summonerId={summonerId} />
@@ -90,3 +103,44 @@ const MatchHistory: FC<Props> = ({ matchHistory, summonerId }) => {
 };
 
 export default MatchHistory;
+function getMatchHistoryData(
+  matchHistory: IMatchHistory | null | undefined,
+  summonerId: string | null | undefined
+) {
+  return matchHistory?.matches?.reduce(
+    (data, matchHistoryItem) => {
+      const participantIdentity = getParticipantIdentity(
+        matchHistoryItem,
+        summonerId
+      );
+      const participant = getParticipant(matchHistoryItem, participantIdentity);
+      const team = getTeam(matchHistoryItem, participant);
+      const win = team?.win;
+      const championKey = (matchHistoryItem?.champion || '').toString();
+
+      if (!data.recentChampionWinLoss[championKey]) {
+        data.recentChampionWinLoss[championKey] = { win: 0, loss: 0 };
+      }
+
+      if (won(win)) {
+        data.winLoss[1].y += 1;
+        data.recentChampionWinLoss[championKey].win += 1;
+      } else if (lost(win)) {
+        data.winLoss[0].y += 1;
+        data.recentChampionWinLoss[championKey].loss += 1;
+      } else {
+        if (!data.winLoss[2]) data.winLoss[2] = { x: 'D', y: 0 };
+        data.winLoss[2].y += 1;
+      }
+
+      return data;
+    },
+    {
+      winLoss: [
+        { x: 'L', y: 0 },
+        { x: 'W', y: 0 },
+      ],
+      recentChampionWinLoss: {} as any,
+    }
+  );
+}

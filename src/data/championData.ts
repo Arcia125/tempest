@@ -1,3 +1,4 @@
+import { MatchHistoryItem } from '../operations';
 import championJson from '../static-data/champion.json';
 import { ChampionDTO } from '../types';
 import { mapBy } from '../utils';
@@ -11,4 +12,6 @@ const champions: ChampionDTO[] = Object.values(championJson.data);
  */
 const championsByKey = mapBy(champions, 'key');
 
-export { championJson, championsByKey };
+const getChampionName = (matchHistoryItem: MatchHistoryItem) => championsByKey[matchHistoryItem.champion || '']?.name
+
+export { championJson, championsByKey, getChampionName };
