@@ -3,18 +3,27 @@ import './MatchHistory.css';
 import { MatchHistoryList } from './MatchHistoryList';
 import { MatchHistory as IMatchHistory, Maybe } from '../operations';
 import {
-  getImageNameByChampionKey,
   getParticipant,
   getParticipantIdentity,
   getTeam,
   lost,
   won,
 } from '../data';
-import Typography, { TypographyVariants } from './Typography';
-import { RiotImage } from './RiotImage';
-import { RiotImageType } from '../types';
 import { WinLossRecord } from './WinLossRecord';
 import { WinLossChart, Props as WinLossChartProps } from './WinLossChart';
+import { ChampionRecord } from './ChampionRecord';
+
+interface ChampionRecord {
+  [key: string]: {
+    win: number;
+    loss: number;
+  };
+}
+
+interface MatchHistoryData {
+  winLoss: WinLossChartProps['data'];
+  recentChampionWinLoss: ChampionRecord;
+}
 
 export interface Props {
   matchHistory?: Maybe<IMatchHistory>;
@@ -53,20 +62,10 @@ const MatchHistory: FC<Props> = ({ matchHistory, summonerId }) => {
             .map((champRecord) => {
               console.log(champRecord);
               return (
-                <div key={champRecord.key}>
-                  <RiotImage
-                    type={RiotImageType.CHAMPION}
-                    name={getImageNameByChampionKey(String(champRecord.key))}
-                  />
-                  <Typography variant={TypographyVariants.p}>
-                    {champRecord.win === 0
-                      ? 0
-                      : (champRecord.win /
-                          (champRecord.win + champRecord.loss)) *
-                        100}
-                    %
-                  </Typography>
-                </div>
+                <ChampionRecord
+                  key={champRecord.key}
+                  champRecord={champRecord}
+                />
               );
             })}
         </div>
@@ -81,7 +80,7 @@ export default MatchHistory;
 function getMatchHistoryData(
   matchHistory: IMatchHistory | null | undefined,
   summonerId: string | null | undefined
-) {
+): MatchHistoryData | undefined {
   return matchHistory?.matches?.reduce(
     (data, matchHistoryItem) => {
       const participantIdentity = getParticipantIdentity(
@@ -116,9 +115,6 @@ function getMatchHistoryData(
         { x: 'W', y: 0 },
       ],
       recentChampionWinLoss: {},
-    } as {
-      winLoss: WinLossChartProps['data'];
-      recentChampionWinLoss: any;
-    }
+    } as MatchHistoryData
   );
 }
