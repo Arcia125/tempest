@@ -2,28 +2,10 @@ import React, { FC } from 'react';
 import './MatchHistory.css';
 import { MatchHistoryList } from './MatchHistoryList';
 import { MatchHistory as IMatchHistory, Maybe } from '../operations';
-import {
-  getParticipant,
-  getParticipantIdentity,
-  getTeam,
-  lost,
-  won,
-} from '../data';
+import { getMatchHistoryData } from '../data';
 import { WinLossRecord } from './WinLossRecord';
-import { WinLossChart, Props as WinLossChartProps } from './WinLossChart';
+import { WinLossChart } from './WinLossChart';
 import { ChampionRecord } from './ChampionRecord';
-
-interface ChampionRecord {
-  [key: string]: {
-    win: number;
-    loss: number;
-  };
-}
-
-interface MatchHistoryData {
-  winLoss: WinLossChartProps['data'];
-  recentChampionWinLoss: ChampionRecord;
-}
 
 export interface Props {
   matchHistory?: Maybe<IMatchHistory>;
@@ -76,45 +58,3 @@ const MatchHistory: FC<Props> = ({ matchHistory, summonerId }) => {
 };
 
 export default MatchHistory;
-
-function getMatchHistoryData(
-  matchHistory: IMatchHistory | null | undefined,
-  summonerId: string | null | undefined
-): MatchHistoryData | undefined {
-  return matchHistory?.matches?.reduce(
-    (data, matchHistoryItem) => {
-      const participantIdentity = getParticipantIdentity(
-        matchHistoryItem,
-        summonerId
-      );
-      const participant = getParticipant(matchHistoryItem, participantIdentity);
-      const team = getTeam(matchHistoryItem, participant);
-      const win = team?.win;
-      const championKey = (matchHistoryItem?.champion || '').toString();
-
-      if (!data.recentChampionWinLoss[championKey]) {
-        data.recentChampionWinLoss[championKey] = { win: 0, loss: 0 };
-      }
-
-      if (won(win)) {
-        data.winLoss[1].y += 1;
-        data.recentChampionWinLoss[championKey].win += 1;
-      } else if (lost(win)) {
-        data.winLoss[0].y += 1;
-        data.recentChampionWinLoss[championKey].loss += 1;
-      } else {
-        if (!data.winLoss[2]) data.winLoss[2] = { x: 'D', y: 0 };
-        data.winLoss[2].y += 1;
-      }
-
-      return data;
-    },
-    {
-      winLoss: [
-        { x: 'L', y: 0 },
-        { x: 'W', y: 0 },
-      ],
-      recentChampionWinLoss: {},
-    } as MatchHistoryData
-  );
-}

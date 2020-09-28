@@ -1,15 +1,11 @@
 import React, { useContext } from 'react';
 import { VictoryPie, VictoryTheme } from 'victory';
+import { MatchHistoryData } from '../data';
 import { themeContext } from '../theme';
 import Typography, { TypographyVariants } from './Typography';
 
-interface WinLossData {
-  x: string;
-  y: number;
-}
-
 export interface Props {
-  data: [WinLossData, WinLossData] | [WinLossData, WinLossData, WinLossData];
+  data: MatchHistoryData['winLoss'];
   games: number;
 }
 

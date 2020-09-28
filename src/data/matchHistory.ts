@@ -4,6 +4,7 @@ import {
   GameOutcome,
   MatchParticipant,
   MatchParticipantIdentity,
+  MatchHistory as IMatchHistory
 } from '../operations';
 import { leftPad } from '../utils';
 
@@ -66,4 +67,62 @@ export function getParticipantIdentity(
   return matchHistoryItem?.details?.participantIdentities?.find(
     (pI) => pI?.player?.summonerId === summonerId
   );
+}
+
+interface ChampionRecord {
+  [key: string]: {
+    win: number;
+    loss: number;
+  };
+}
+
+interface WinLossData {
+  x: string;
+  y: number;
+}
+
+export interface MatchHistoryData {
+  winLoss: [WinLossData, WinLossData] | [WinLossData, WinLossData, WinLossData];
+  recentChampionWinLoss: ChampionRecord;
+}
+
+export function getMatchHistoryData(
+  matchHistory: IMatchHistory | null | undefined,
+  summonerId: string | null | undefined
+): MatchHistoryData | undefined {
+  const initialMatchHistoryData: MatchHistoryData = {
+    winLoss: [
+      { x: 'L', y: 0 },
+      { x: 'W', y: 0 },
+    ],
+    recentChampionWinLoss: {},
+  };
+
+  return matchHistory?.matches?.reduce((data, matchHistoryItem) => {
+    const participantIdentity = getParticipantIdentity(
+      matchHistoryItem,
+      summonerId
+    );
+    const participant = getParticipant(matchHistoryItem, participantIdentity);
+    const team = getTeam(matchHistoryItem, participant);
+    const win = team?.win;
+    const championKey = (matchHistoryItem?.champion || '').toString();
+
+    if (!data.recentChampionWinLoss[championKey]) {
+      data.recentChampionWinLoss[championKey] = { win: 0, loss: 0 };
+    }
+
+    if (won(win)) {
+      data.winLoss[1].y += 1;
+      data.recentChampionWinLoss[championKey].win += 1;
+    } else if (lost(win)) {
+      data.winLoss[0].y += 1;
+      data.recentChampionWinLoss[championKey].loss += 1;
+    } else {
+      if (!data.winLoss[2]) data.winLoss[2] = { x: 'D', y: 0 };
+      data.winLoss[2].y += 1;
+    }
+
+    return data;
+  }, initialMatchHistoryData);
 }
