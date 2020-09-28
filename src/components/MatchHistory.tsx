@@ -12,48 +12,52 @@ export interface Props {
   summonerId?: Maybe<string>;
 }
 
+const Container: FC = ({ children }) => (
+  <div className="MatchHistory">{children}</div>
+);
+
 const MatchHistory: FC<Props> = ({ matchHistory, summonerId }) => {
   const matchHistoryData = getMatchHistoryData(matchHistory, summonerId);
 
+  if (!(matchHistory && matchHistory.matches && matchHistoryData)) {
+    return <Container />;
+  }
+
+  const champRecords = Object.entries(matchHistoryData.recentChampionWinLoss)
+    .map(([key, val]: [string, any]) => ({ key, ...val }))
+    .sort((a, b) => {
+      const aGames = a.win + a.loss;
+      const bGames = b.win + b.loss;
+      return aGames > bGames ? -1 : 1;
+    })
+    .slice(0, 3);
+
   return (
-    <div className="MatchHistory">
-      {matchHistory && matchHistory.matches && matchHistoryData && (
-        <div className="MatchHistory-top">
-          <div className="MatchHistory-win-loss">
-            <div className="MatchHistory-win-loss-record">
-              <WinLossRecord
-                games={matchHistory.matches.length}
-                wins={matchHistoryData.winLoss[1].y}
-                losses={matchHistoryData.winLoss[0].y}
-                draws={matchHistoryData.winLoss[2]?.y}
-              />
-            </div>
-            <WinLossChart
-              data={matchHistoryData.winLoss}
+    <Container>
+      <div className="MatchHistory-top">
+        <div className="MatchHistory-win-loss">
+          <div className="MatchHistory-win-loss-record">
+            <WinLossRecord
               games={matchHistory.matches.length}
+              wins={matchHistoryData.winLoss[1].y}
+              losses={matchHistoryData.winLoss[0].y}
+              draws={matchHistoryData.winLoss[2]?.y}
             />
           </div>
-          {Object.entries(matchHistoryData.recentChampionWinLoss)
-            .map(([key, val]: [string, any]) => ({ key, ...val }))
-            .sort((a, b) => {
-              const aGames = a.win + a.loss;
-              const bGames = b.win + b.loss;
-              return aGames > bGames ? -1 : 1;
-            })
-            .slice(0, 3)
-            .map((champRecord) => {
-              console.log(champRecord);
-              return (
-                <ChampionRecord
-                  key={champRecord.key}
-                  champRecord={champRecord}
-                />
-              );
-            })}
+          <WinLossChart
+            data={matchHistoryData.winLoss}
+            games={matchHistory.matches.length}
+          />
         </div>
-      )}
+        {champRecords.map((champRecord) => {
+          console.log(champRecord);
+          return (
+            <ChampionRecord key={champRecord.key} champRecord={champRecord} />
+          );
+        })}
+      </div>
       <MatchHistoryList matchHistory={matchHistory} summonerId={summonerId} />
-    </div>
+    </Container>
   );
 };
 
