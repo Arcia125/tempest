@@ -1,0 +1,31 @@
+.ChampionRecord {
+  display: flex;
+  align-items: center;
+}
+
+.ChampionRecord .ChampionRecord-champion-image {
+  width: 45px;
+  border-radius: 50%;
+  margin-right: 4px;
+}
+
+.ChampionRecord-info-bottom {
+  display: flex;
+  align-items: center;
+}
+
+.ChampionRecord-win-pct {
+  margin-right: 4px;
+}
+
+.ChampionRecord-win-count {
+  margin-right: 4px;
+}
+
+.ChampionRecord-divider {
+  margin-right: 4px;
+}
+
+.ChampionRecord-loss-count {
+  margin-right: 4px;
+}

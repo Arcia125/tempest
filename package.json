@@ -1,6 +1,6 @@
 {
   "name": "tempest",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "League of Legends companion app",
   "homepage": "./",
   "keywords": [
@@ -61,6 +61,7 @@
     "three": "^0.118.3",
     "typescript": "^3.9.3",
     "uuid": "^8.3.0",
+    "victory": "^35.0.9",
     "ws": "^7.3.0"
   },
   "devDependencies": {
