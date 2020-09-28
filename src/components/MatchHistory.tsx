@@ -1,9 +1,7 @@
-import React, { FC, useContext } from 'react';
-import { VictoryPie, VictoryTheme } from 'victory';
+import React, { FC } from 'react';
 import './MatchHistory.css';
 import { MatchHistoryList } from './MatchHistoryList';
 import { MatchHistory as IMatchHistory, Maybe } from '../operations';
-import { themeContext } from '../theme';
 import {
   getImageNameByChampionKey,
   getParticipant,
@@ -16,6 +14,7 @@ import Typography, { TypographyVariants } from './Typography';
 import { RiotImage } from './RiotImage';
 import { RiotImageType } from '../types';
 import { WinLossRecord } from './WinLossRecord';
+import { WinLossChart, Props as WinLossChartProps } from './WinLossChart';
 
 export interface Props {
   matchHistory?: Maybe<IMatchHistory>;
@@ -23,7 +22,6 @@ export interface Props {
 }
 
 const MatchHistory: FC<Props> = ({ matchHistory, summonerId }) => {
-  const themeCtx = useContext(themeContext);
   const matchHistoryData = getMatchHistoryData(matchHistory, summonerId);
 
   return (
@@ -39,35 +37,10 @@ const MatchHistory: FC<Props> = ({ matchHistory, summonerId }) => {
                 draws={matchHistoryData.winLoss[2]?.y}
               />
             </div>
-            <div className="MatchHistory-win-loss-chart">
-              <VictoryPie
-                theme={VictoryTheme.material}
-                colorScale={[
-                  themeCtx.theme.colors.important4,
-                  themeCtx.theme.colors.accent0,
-                  themeCtx.theme.colors.text,
-                ]}
-                style={{
-                  parent: {},
-                  data: {
-                    stroke: 'none',
-                  },
-                  labels: {
-                    display: 'none',
-                  },
-                }}
-                innerRadius={86}
-                data={matchHistoryData.winLoss}
-              />
-              <Typography
-                className="win-loss-rate"
-                variant={TypographyVariants.p}
-              >
-                {(matchHistoryData.winLoss[1].y / matchHistory.matches.length) *
-                  100}
-                %
-              </Typography>
-            </div>
+            <WinLossChart
+              data={matchHistoryData.winLoss}
+              games={matchHistory.matches.length}
+            />
           </div>
           {Object.entries(matchHistoryData.recentChampionWinLoss)
             .map(([key, val]: [string, any]) => ({ key, ...val }))
@@ -104,6 +77,7 @@ const MatchHistory: FC<Props> = ({ matchHistory, summonerId }) => {
 };
 
 export default MatchHistory;
+
 function getMatchHistoryData(
   matchHistory: IMatchHistory | null | undefined,
   summonerId: string | null | undefined
@@ -141,7 +115,10 @@ function getMatchHistoryData(
         { x: 'L', y: 0 },
         { x: 'W', y: 0 },
       ],
-      recentChampionWinLoss: {} as any,
+      recentChampionWinLoss: {},
+    } as {
+      winLoss: WinLossChartProps['data'];
+      recentChampionWinLoss: any;
     }
   );
 }
