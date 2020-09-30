@@ -10,7 +10,6 @@ export class ColorRange {
 
   interpolate(value: number) {
     const activeSpec = this.specs.find((spec) => value > spec.min);
-    console.log(activeSpec);
     return activeSpec?.color;
   }
 }
