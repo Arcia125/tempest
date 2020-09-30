@@ -8,7 +8,7 @@ import {
   ChampionRecord as IChampionRecord,
   getChampionName,
 } from '../data';
-import { ColorRange } from '../utils';
+import { ColorRange, pct } from '../utils';
 
 export interface Props {
   champRecord: IChampionRecord['any'] & { key: string };
@@ -46,7 +46,7 @@ export const ChampionRecord: FC<Props> = ({ champRecord }) => {
             variant={TypographyVariants.p}
             color={winPctColorRange.interpolate(winPct)}
           >
-            {winPct}%
+            {pct(winPct)}
           </Typography>
           <Typography
             className="ChampionRecord-win-count"

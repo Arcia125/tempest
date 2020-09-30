@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { VictoryPie, VictoryTheme } from 'victory';
 import { MatchHistoryData } from '../data';
 import { themeContext } from '../theme';
+import { pct } from '../utils';
 import Typography, { TypographyVariants } from './Typography';
 
 export interface Props {
@@ -34,7 +35,7 @@ export function WinLossChart({ data, games }: Props) {
         data={data}
       />
       <Typography className="win-loss-rate" variant={TypographyVariants.p}>
-        {(data[1].y / games) * 100}%
+        {pct((data[1].y / games) * 100)}
       </Typography>
     </div>
   );
