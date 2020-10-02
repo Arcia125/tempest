@@ -53,7 +53,7 @@ export interface ActiveTheme {
   vars: typeof vars;
 }
 
-interface ThemeContext {
+export interface ThemeContext {
   theme: ActiveTheme;
   setTheme: ((themeMode: ThemeMode) => void) | null;
 }

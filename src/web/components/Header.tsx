@@ -1,12 +1,13 @@
 import React, { FC } from 'react';
+import ReactGA from 'react-ga';
 import { Link, Route, Switch, useHistory } from 'react-router-dom';
+import './Header.css';
 import { Button, ContainedButton } from '../../components/Button';
 import ControlledSearchInput from '../../components/ControlledSearchInput';
 import { HeaderContainer } from '../../components/HeaderContainer';
 import { Logo } from '../../components/Logo';
 import { TypographyVariants } from '../../components/Typography';
 import { classNames } from '../../utils';
-import ReactGA from 'react-ga';
 
 // const LoginLinks: FC<{ className?: string }> = ({ className }) => {
 //   const history = useHistory();
@@ -43,6 +44,7 @@ export const Header: FC = (props) => {
       </Switch>
       {/* <LoginLinks /> */}
       <ReactGA.OutboundLink
+        className="Header-download-button"
         eventLabel="download"
         to="https://github.com/Arcia125/tempest-release/releases/latest/download/tempest-setup.exe"
         download

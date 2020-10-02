@@ -1,11 +1,86 @@
 import React, { FC, useContext } from 'react';
-import { themeContext } from '../theme';
+import { Switch, Route } from 'react-router';
+import { themeContext, ThemeContext } from '../theme';
+import { classNames } from '../utils';
+
+const LogoDesktop: FC<{
+  context: ThemeContext;
+}> = ({ context }) => {
+  return <TextLogo className="App-logo-desktop" context={context} />;
+};
 
 const Logo: FC<{}> = (props) => {
   const context = useContext(themeContext);
   return (
+    <>
+      <LogoMobile context={context} /> <LogoDesktop context={context} />
+    </>
+  );
+};
+
+Logo.propTypes = {};
+
+function LogoMobile({
+  context,
+}: {
+  context: ThemeContext;
+}): React.ReactElement<any, any> | null {
+  return (
+    <Switch>
+      <Route path="/" exact>
+        <TextLogo
+          className="App-logo-mobile App-logo-mobile_home"
+          context={context}
+        />
+      </Route>
+      <Route path="/">
+        <PlainLogo className="App-logo-mobile" context={context} />
+      </Route>
+    </Switch>
+  );
+}
+
+function PlainLogo({
+  context,
+  className,
+  ...restProps
+}: React.SVGProps<SVGSVGElement> & { context: ThemeContext }) {
+  return (
     <svg
-      className="App-logo"
+      className={classNames('App-logo', className)}
+      width={26}
+      height={26}
+      fill="none"
+      {...restProps}
+    >
+      <circle cx={13} cy={13} r={12.5} fill="#91C4F2" stroke="#332E6B" />
+      <path
+        d="M20.664 20.941L21.64 20l-1.354.084c-.94.057-1.543.025-1.903-.058a.867.867 0 01-.271-.097.504.504 0 01.032-.086 1.87 1.87 0 01.237-.355c.236-.294.59-.64 1.027-1.033.293-.265.625-.55.97-.849.65-.558 1.348-1.16 1.937-1.743.458-.454.879-.922 1.187-1.385.304-.456.535-.96.535-1.477 0-2.61-.907-5.009-2.421-6.898l-1.187-1.48.303 1.872c.117.724.123 1.148.082 1.368a1.348 1.348 0 01-.128-.069 3.774 3.774 0 01-.432-.314 17.744 17.744 0 01-1.168-1.09l-.569-.57c-.736-.743-1.556-1.57-2.365-2.255-.515-.436-1.043-.83-1.56-1.116-.513-.284-1.056-.485-1.592-.485-3.054 0-5.82 1.242-7.818 3.247l-.712.714 1 .134c.636.085.994.21 1.176.328a.346.346 0 01.123.114c.008.014.015.033.012.073-.01.107-.084.297-.302.588a8.88 8.88 0 01-.855.94c-.222.22-.47.454-.726.697-.532.504-1.106 1.047-1.585 1.58-.362.402-.694.823-.936 1.251-.242.426-.414.89-.414 1.371 0 3.342 1.487 6.338 3.832 8.36l.793-.559c-.4-1.029-.622-1.731-.712-2.182a3.339 3.339 0 01-.016-.086l.042.03c.296.209.678.542 1.125.959.303.282.635.603.982.938.652.629 1.358 1.31 2.027 1.891.517.45 1.035.86 1.517 1.16.465.29.971.526 1.447.526 2.977 0 5.68-1.18 7.664-3.096zm-2.577-1.036s.005.003.009.011c-.008-.007-.01-.01-.01-.011zM5.836 18.182v.002-.002zm-.28.184a.034.034 0 01-.008-.002l.008.002z"
+        fill="#7D5BA6"
+        stroke={context.theme.colors.fg0}
+      />
+      <path
+        d="M18.067 17.952l.975-.942-1.353.083c-.525.032-.865.018-1.072-.018l.038-.05c.138-.171.35-.38.622-.623.177-.16.38-.336.595-.52.409-.353.856-.738 1.228-1.107.29-.287.563-.59.766-.895.198-.297.366-.65.366-1.026a7.058 7.058 0 00-1.555-4.429l-1.186-1.48.303 1.873c.032.201.05.36.058.483a10.93 10.93 0 01-.77-.711c-.112-.112-.23-.23-.35-.354-.462-.464-.982-.989-1.495-1.423a6.404 6.404 0 00-1.005-.719c-.334-.184-.706-.326-1.086-.326-1.96 0-3.736.798-5.019 2.084l-.712.715 1 .134c.365.049.555.117.643.167a1.255 1.255 0 01-.137.224c-.122.163-.298.35-.516.567-.133.131-.285.274-.443.425-.336.317-.705.667-1.01 1.006-.23.256-.447.53-.608.814-.16.282-.283.605-.283.95a7.07 7.07 0 002.46 5.367l.792-.56c-.132-.34-.231-.618-.304-.846.086.076.178.16.276.252.185.172.39.37.605.578.41.396.86.829 1.28 1.195.327.283.66.547.973.743.297.184.65.356 1.003.356a7.064 7.064 0 004.92-1.987zm-1.627-.927l.009.005-.01-.005zm.083.206v.001-.001zm1.316-7.596l.001-.003v.003zm-9.395 6.753s0 0 0 0h0z"
+        fill="#8A6AAF"
+        stroke={context.theme.colors.fg0}
+      />
+      <circle cx={13.293} cy={13} r={2.549} fill="#B097C9" stroke="#332E6B" />
+      <path
+        d="M6.657 13.336l-.126.603H12.46L9.158 24.262l.888.436L20.29 9.77l.538-.783h-6.832l3.978-7.16.412-.743H9.228l-.083.398-2.488 11.853z"
+        fill="#CCFCCB"
+        stroke={context.theme.colors.fg0}
+      />
+    </svg>
+  );
+}
+
+const TextLogo: FC<{ context: ThemeContext; className?: string }> = ({
+  context,
+  className,
+}) => {
+  return (
+    <svg
+      className={classNames('App-logo', className)}
       width="153"
       height="38"
       viewBox="0 0 153 38"
@@ -48,7 +123,5 @@ const Logo: FC<{}> = (props) => {
     </svg>
   );
 };
-
-Logo.propTypes = {};
 
 export { Logo };

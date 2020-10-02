@@ -25,6 +25,14 @@ body {
   padding: 16px;
 }
 
+.App-logo-desktop {
+  display: none;
+}
+
+.App-logo-mobile {
+  display: block;
+}
+
 .App-header {
 }
 
@@ -59,4 +67,22 @@ body {
 
 ::-webkit-scrollbar-thumb:window-inactive {
   background: rgba(var(--fg0rgb), 0.6);
+}
+
+@media screen and (max-width: 37.5em) {
+  .App-logo {
+    padding: 0 12px 0 0;
+  }
+
+  .App-logo-desktop {
+    display: none;
+  }
+
+  .App-logo-mobile {
+    display: block;
+  }
+
+  .App-logo-text {
+    display: none;
+  }
 }
