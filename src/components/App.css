@@ -26,11 +26,11 @@ body {
 }
 
 .App-logo-desktop {
-  display: none;
+  display: block;
 }
 
 .App-logo-mobile {
-  display: block;
+  display: none;
 }
 
 .App-header {
