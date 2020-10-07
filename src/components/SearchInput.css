@@ -52,4 +52,15 @@
   margin-left: 8px;
   padding: 0 16px;
   height: 100%;
+  border-top-right-radius: 9px;
+  border-bottom-right-radius: 9px;
+}
+
+.SearchInput-submit:hover {
+  background-color: rgba(var(--fg0rgb), 0.4);
+}
+
+.SearchInput-submit:focus {
+  outline: none;
+  background-color: rgba(var(--fg0rgb), 0.5);
 }
