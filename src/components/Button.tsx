@@ -6,7 +6,7 @@ import { classNames } from '../utils';
 
 export interface Props extends PropsWithChildren<TypographyProps> {
   onClick?: React.EventHandler<React.MouseEvent>;
-  tabIndex: string;
+  tabIndex?: string;
 }
 
 export const Button = forwardRef<FC<Props>, Props>(
