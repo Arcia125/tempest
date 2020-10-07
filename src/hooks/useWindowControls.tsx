@@ -27,19 +27,19 @@ function useMaximized() {
 
 export function useWindowControls() {
   const { isMaximized } = useMaximized();
-  const handleMinimize = (e: React.MouseEvent) => {
-    e.target.blur();
+  const handleMinimize = (e: any) => {
+    e?.target?.blur?.();
     remote.BrowserWindow.getFocusedWindow().minimize();
   };
 
-  const handleMaximizeRestore = (e: React.MouseEvent) => {
-    e.target.blur();
+  const handleMaximizeRestore = (e: any) => {
+    e?.target?.blur?.();
     const win = remote.BrowserWindow.getFocusedWindow();
     win.isMaximized() ? win.restore() : win.maximize();
   };
 
-  const handleClose = (e: React.MouseEvent) => {
-    e.target.blur();
+  const handleClose = (e: any) => {
+    e?.target?.blur?.();
     remote.BrowserWindow.getFocusedWindow().close();
   };
 
