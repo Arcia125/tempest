@@ -17,7 +17,7 @@ export function getGameDuration(
 }
 
 export function getCs(participant?: Maybe<MatchParticipant>): React.ReactNode {
-  const cs = participant?.stats?.totalMinionsKilled ?? 0;
+  const cs = (participant?.stats?.totalMinionsKilled ?? 0) + (participant?.stats?.neutralMinionsKilled ?? 0);
   return `${cs} CS`;
 }
 

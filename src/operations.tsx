@@ -655,6 +655,7 @@ export type SummonerQuery = { __typename?: 'Query' } & {
                                           | 'deaths'
                                           | 'assists'
                                           | 'totalMinionsKilled'
+                                          | 'neutralMinionsKilled'
                                         >
                                       >;
                                     }
@@ -850,6 +851,7 @@ export const SummonerDocument = gql`
                 deaths
                 assists
                 totalMinionsKilled
+                neutralMinionsKilled
               }
             }
             teams {
