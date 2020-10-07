@@ -19,13 +19,25 @@ const WindowControls: FC<Props> = ({ className }) => {
 
   return (
     <div className={classNames('WindowControls', className)}>
-      <Button onClick={handleMinimize} variant={TypographyVariants.p}>
+      <Button
+        tabIndex="-1"
+        onClick={handleMinimize}
+        variant={TypographyVariants.p}
+      >
         <FiMinus />
       </Button>
-      <Button onClick={handleMaximizeRestore} variant={TypographyVariants.p}>
+      <Button
+        tabIndex="-1"
+        onClick={handleMaximizeRestore}
+        variant={TypographyVariants.p}
+      >
         {isMaximized ? <FiCopy /> : <FiMaximize />}
       </Button>
-      <Button onClick={handleClose} variant={TypographyVariants.p}>
+      <Button
+        tabIndex="-1"
+        onClick={handleClose}
+        variant={TypographyVariants.p}
+      >
         <FiX />
       </Button>
     </div>

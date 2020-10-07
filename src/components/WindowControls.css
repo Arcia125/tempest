@@ -1,1 +1,10 @@
 .WindowControls {}
+
+.WindowControls .AppButton:focus {
+  outline: none;
+  background: #aaf1;
+}
+
+.WindowControls .AppButton:hover {
+  background: #aaf1;
+}
