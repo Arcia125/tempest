@@ -7,18 +7,23 @@
 }
 
 .RegionDropdown .Dropdown-control {
-  background-color: var(--fg2);
+  background-color: transparent;
   border-radius: 3px;
   padding: 2px 4px;
   border: none;
   color: var(--text);
+  transition: all 100ms ease-in-out;
 }
 
-.RegionDropdown .Dropdown-control > .Dropdown-arrow-wrapper {
+.RegionDropdown.is-open .Dropdown-control {
+  background-color: var(--fg2);
+}
+
+.RegionDropdown .Dropdown-control>.Dropdown-arrow-wrapper {
   margin-left: 3px;
 }
 
-.RegionDropdown .Dropdown-control > * {
+.RegionDropdown .Dropdown-control>* {
   display: inline;
 }
 
