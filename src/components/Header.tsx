@@ -53,6 +53,7 @@ const Header: FC<Props> = ({ summoner, matchMaking, region }) => {
         </Route>
         <Route>
           <ControlledSearchInput
+            className="Header-SearchInput"
             variant={theme.mode === ThemeMode.DARK_GPU ? 'window' : 'opaque'}
           />
         </Route>

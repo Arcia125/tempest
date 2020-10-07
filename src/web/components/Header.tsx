@@ -39,7 +39,10 @@ export const Header: FC = (props) => {
       <Switch>
         <Route exact path="/"></Route>
         <Route>
-          <ControlledSearchInput variant="window" />
+          <ControlledSearchInput
+            className="Header-SearchInput"
+            variant="window"
+          />
         </Route>
       </Switch>
       {/* <LoginLinks /> */}

@@ -1,7 +1,11 @@
 .SearchInput {
   display: flex;
   align-items: center;
-  height: 100%;
+  height: 60px;
+}
+
+.Header-SearchInput {
+  height: 48px;
 }
 
 .SearchInput .SearchInput.variant-opaque {
@@ -33,6 +37,8 @@
   padding: 16px;
   color: var(--text);
   width: 100%;
+  font-size: 16px;
+  font-family: 'Lato', sans-serif;
 }
 
 .SearchInput-input:focus {
