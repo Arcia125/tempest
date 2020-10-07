@@ -10,11 +10,12 @@ export interface Props extends PropsWithChildren<TypographyProps> {
 }
 
 export const Button = forwardRef<FC<Props>, Props>(
-  ({ children, className, color, onClick, ...restProps }, ref) => {
+  ({ children, className, color, onClick, tabIndex, ...restProps }, ref) => {
     return (
       <button
         onClick={onClick}
         ref={ref as any}
+        tabIndex={tabIndex as any}
         className={classNames('AppButton', className, color)}
       >
         <Typography {...restProps}>{children}</Typography>
