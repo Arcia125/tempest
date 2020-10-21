@@ -15,6 +15,7 @@ import {
 import { themeContext, ThemeMode } from '../theme';
 import { RiotImageType } from '../types';
 import { MatchMaking } from '../types';
+import { Logo } from './Logo';
 
 interface Props {
   region?: CurrentRegionResponse;
@@ -26,7 +27,7 @@ const Header: FC<Props> = ({ summoner, matchMaking, region }) => {
   const { theme } = useContext(themeContext);
   return (
     <HeaderContainer className="HeaderContainer">
-      {summoner && (
+      {summoner ? (
         <Link
           to={`/summoner/profile/${region?.webRegion}/${summoner.displayName}`}
         >
@@ -45,6 +46,10 @@ const Header: FC<Props> = ({ summoner, matchMaking, region }) => {
           <Typography variant={TypographyVariants.h2}>
             {summoner.displayName}
           </Typography>
+        </Link>
+      ) : (
+        <Link to="/" title="Home">
+          <Logo />
         </Link>
       )}
       <Switch>
