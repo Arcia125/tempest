@@ -38,6 +38,7 @@ const ProfilePage: FC = () => {
           tier: entry?.tier?.toLowerCase(),
           rank: romanNumeralToNumber(entry?.rank as RomanNumeral),
           queue: entry?.queueType ? queueFromQueueType(entry.queueType) : null,
+          leaguePoints: entry?.leaguePoints,
         }))}
     />
   );

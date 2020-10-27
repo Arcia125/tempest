@@ -601,7 +601,7 @@ export type SummonerQuery = { __typename?: 'Query' } & {
             Maybe<
               { __typename?: 'LeagueEntry' } & Pick<
                 LeagueEntry,
-                'tier' | 'rank' | 'queueType'
+                'tier' | 'rank' | 'queueType' | 'leaguePoints'
               >
             >
           >
@@ -829,6 +829,7 @@ export const SummonerDocument = gql`
         tier
         rank
         queueType
+        leaguePoints
       }
       matchHistory {
         matches {
